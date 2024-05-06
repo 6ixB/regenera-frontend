@@ -20,7 +20,7 @@ export default function HomeLayout({
   return (
     <html lang="en">
       <body
-        className={`${inter.className} w-full min-h-screen bg-light-background-200 flex flex-col items-center gap-8`}
+        className={`${inter.className} w-full min-h-screen bg-light-background-100 flex flex-col items-center`}
       >
         <Navbar />
         {children}

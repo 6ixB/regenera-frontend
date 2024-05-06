@@ -7,7 +7,7 @@ export default function Navbar() {
   return (
     <header
       className={
-        "z-50 sticky top-0 w-full flex justify-center items-center bg-light-background-100 shadow-sm"
+        "z-50 sticky top-0 w-full flex justify-center items-center bg-light-background-100 shadow select-none"
       }
     >
       <nav
@@ -23,23 +23,26 @@ export default function Navbar() {
             </div>
           </Link>
           <Link href={"/about"}>
-            <div className={"text-sm text-light-text-100"}>How it works</div>
+            <div className={"text-base text-light-text-100"}>How it works</div>
           </Link>
         </div>
         <InputGroup
-          width={"80rem"}
           icon={<Search className={"text-light-text-100"} />}
           placeholder={"Search projects, creators, and categories"}
         />
         <div className={"w-[16rem] flex items-center justify-end gap-x-4"}>
           <Link href={"/signin"}>
-            <div className={"text-sm text-light-text-100"}>Sign in</div>
+            <div className={"text-base text-light-text-100"}>Sign in</div>
           </Link>
           <Link
-            href={"/project/create"}
-            className={"px-4 py-2 rounded-full border border-light-accent-100"}
+            href={"/projects/create"}
+            className={
+              "px-4 py-2 rounded-full border-2 border-light-accent-100"
+            }
           >
-            <div className={"text-sm text-light-text-100"}>Start a project</div>
+            <div className={"text-base text-light-text-100"}>
+              Start a project
+            </div>
           </Link>
         </div>
       </nav>

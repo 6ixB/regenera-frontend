@@ -17,7 +17,7 @@ export default function SignIn() {
         </Link>
         <form
           className={
-            "bg-light-background-100 rounded border border-light-background-200 md:shadow-sm flex flex-col"
+            "bg-light-background-100 rounded border border-light-background-300 md:shadow-sm flex flex-col"
           }
         >
           <div className={"p-8 flex flex-col gap-4"}>
@@ -36,7 +36,7 @@ export default function SignIn() {
             </Link>
             <Button variant={"solid"}>Sign in</Button>
             <Checkbox label={"Remember me"} />
-            <div className="flex items-center text-sm text-gray-800 before:flex-1 before:border-t before:border-light-background-200 before:me-2 after:flex-1 after:border-t after:border-light-background-200 after:ms-2">
+            <div className="flex items-center text-sm text-gray-800 before:flex-1 before:border-t before:border-light-background-300 before:me-2 after:flex-1 after:border-t after:border-light-background-300 after:ms-2">
               or
             </div>
             <Button variant={"outline"}>
@@ -50,7 +50,7 @@ export default function SignIn() {
               Service and acknowledge the Privacy Notice.
             </div>
           </div>
-          <hr className={"border-light-background-200"} />
+          <hr className={"border-light-background-300"} />
           <div
             className={"px-8 py-4 md:justify-center flex items-center gap-2"}
           >

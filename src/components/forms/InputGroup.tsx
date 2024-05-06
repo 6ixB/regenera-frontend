@@ -1,18 +1,11 @@
 interface InputGroupProps {
   icon: React.ReactNode;
   placeholder: string;
-  width?: string;
 }
 
-export default function InputGroup({
-  icon,
-  placeholder,
-  width,
-}: InputGroupProps) {
-  const widthClass = width ? `w-[${width}]` : "w-full";
-
+export default function InputGroup({ icon, placeholder }: InputGroupProps) {
   return (
-    <div className={`${widthClass}  relative`}>
+    <div className={`max-w-[354px] w-full relative`}>
       <input
         type={"text"}
         id={"hs-leading-icon"}

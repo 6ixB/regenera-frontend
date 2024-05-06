@@ -8,17 +8,15 @@ export default function SignUp() {
   return (
     <main className={"w-full flex justify-center"}>
       <div className={"w-[418px] flex flex-col gap-4"}>
-        <div className={"px-8 md:px-0 flex items-center gap-2"}>
-          <Link href={"/"} className={"px-8 md:px-0 flex items-center gap-2"}>
-            <Regenera className={"fill-light-text-100"} />
-            <div className={"text-2xl font-medium text-light-text-100"}>
-              Regenera
-            </div>
-          </Link>
-        </div>
+        <Link href={"/"} className={"px-8 md:px-0 flex items-center gap-2"}>
+          <Regenera className={"fill-light-text-100"} />
+          <div className={"text-2xl font-medium text-light-text-100"}>
+            Regenera
+          </div>
+        </Link>
         <form
           className={
-            "bg-light-background-100 rounded border border-light-background-200 md:shadow-sm flex flex-col"
+            "bg-light-background-100 rounded border border-light-background-300 md:shadow-sm flex flex-col"
           }
         >
           <div
@@ -34,7 +32,7 @@ export default function SignUp() {
               Sign in
             </Link>
           </div>
-          <hr className={"border-light-background-200"} />
+          <hr className={"border-light-background-300"} />
           <div className={"p-8 flex flex-col gap-4"}>
             <div className={"text-2xl font-medium text-light-text-100"}>
               Sign up
@@ -48,7 +46,7 @@ export default function SignUp() {
               By signing up, you agree to our Privacy Policy, Cookie Policy and
               Terms of Use.
             </div>
-            <div className="flex items-center text-sm text-gray-800 before:flex-1 before:border-t before:border-light-background-200 before:me-2 after:flex-1 after:border-t after:border-light-background-200 after:ms-2">
+            <div className="flex items-center text-sm text-gray-800 before:flex-1 before:border-t before:border-light-background-3200 before:me-2 after:flex-1 after:border-t after:border-light-background-300 after:ms-2">
               or
             </div>
             <Button variant={"outline"}>
