@@ -4,6 +4,7 @@ import "../globals.css";
 import PrelineScript from "@/components/preline/PrelineScript";
 import Navbar from "@/components/navigations/Navbar";
 import Footer from "@/components/navigations/Footer";
+import NavbarPill from "@/components/navigations/NavbarPil";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,7 +23,7 @@ export default function HomeLayout({
       <body
         className={`${inter.className} w-full min-h-screen bg-light-background-100 flex flex-col items-center`}
       >
-        <Navbar />
+        <NavbarPill />
         {children}
         <Footer />
       </body>
