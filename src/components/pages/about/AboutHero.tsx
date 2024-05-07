@@ -4,7 +4,7 @@ export default function AboutHero() {
   return (
     <div
       className={
-        "w-full bg-dark-primary-300 flex flex-col items-center gap-y-10 pt-8"
+        "w-full bg-dark-primary-300 flex flex-col items-center gap-y-10 pt-32"
       }
     >
       <div className={"flex flex-col items-center gap-y-2 text-light-text-100"}>

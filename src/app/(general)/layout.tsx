@@ -4,7 +4,7 @@ import "../globals.css";
 import PrelineScript from "@/components/preline/PrelineScript";
 import Navbar from "@/components/navigations/Navbar";
 import Footer from "@/components/navigations/Footer";
-import NavbarPill from "@/components/navigations/NavbarPil";
+import NavbarPill from "@/components/navigations/NavbarPill";
 
 const inter = Inter({ subsets: ["latin"] });
 

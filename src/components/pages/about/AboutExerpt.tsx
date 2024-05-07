@@ -1,5 +1,3 @@
-import AboutExpectationsIllustrations from "../../vector-graphics/AboutExpectationsIllustration";
-
 export default function AboutExerpt() {
   return (
     <div
