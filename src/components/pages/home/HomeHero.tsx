@@ -5,11 +5,11 @@ export default function HomeHero() {
     <div
       className={"w-full flex justify-center items-center bg-dark-primary-300"}
     >
-      <div className="w-full max-w-[67rem] flex justify-center items-center">
-        <HomeHeroIllustration className={"w-[32rem]"} />
+      <div className="w-full max-w-[67rem] flex items-center relative">
+        <HomeHeroIllustration className={"h-full max-w-[40rem] "} />
         <div
           className={
-            "flex-1 flex flex-col justify-center items-center gap-y-4 p-8 text-light-text-100"
+            "absolute top-2/3 -translate-y-2/3 right-0 flex flex-col w-[32rem] justify-center items-center gap-y-4 text-light-text-100"
           }
         >
           <div className={"text-4xl font-medium"}>

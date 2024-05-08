@@ -4,10 +4,9 @@ export default function HomeHeroIllustration(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width={512}
-      height={332}
       fill="none"
       {...props}
+      viewBox="0 0 512 332"
     >
       <g clipPath="url(#a)">
         <path
