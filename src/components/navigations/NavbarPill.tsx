@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import Regenera from "../vector-graphics/Regenera";
 import Link from "next/link";
@@ -7,34 +7,32 @@ import { Search } from "lucide-react";
 import { useEffect, useState } from "react";
 
 export default function NavbarPill() {
-
-  const [isExpanded, setIsExpanded] = useState(false)
+  const [isExpanded, setIsExpanded] = useState(false);
 
   useEffect(() => {
-    
     const handleScroll = () => {
-      const scrollTop = window.scrollY
-  
-      setIsExpanded(scrollTop > 0)
-    }
+      const scrollTop = window.scrollY;
 
-    window.addEventListener('scroll', handleScroll)
+      setIsExpanded(scrollTop > 0);
+    };
+
+    window.addEventListener("scroll", handleScroll);
 
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener("scroll", handleScroll);
     };
-  })
+  });
 
   return (
     <header
-      className={
-        `z-50 fixed w-full flex justify-center items-center select-none transition-all duration-200  ${!isExpanded ? 'top-4' : 'top-0 bg-light-background-100'}`
-      }
+      className={`z-50 fixed w-full flex justify-center items-center select-none transition-all duration-200  ${
+        !isExpanded ? "top-4" : "top-0 bg-light-background-100 shadow"
+      }`}
     >
-      <nav 
-        className={
-          `max-w-[67rem] w-full py-3 px-8 flex items-center justify-between ${!isExpanded ? 'bg-light-background-100 shadow rounded-full' : '' }`
-        }
+      <nav
+        className={`max-w-[67rem] w-full py-3 px-8 flex items-center justify-between ${
+          !isExpanded ? "bg-light-background-100 shadow rounded-full" : ""
+        }`}
       >
         <div className={"w-[16rem] flex items-center justify-start gap-x-4"}>
           <Link href={"/"} className={"flex items-center gap-2"}>
