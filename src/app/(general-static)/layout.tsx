@@ -22,7 +22,7 @@ export default function HomeLayout({
       <body
         className={`${inter.className} w-full min-h-screen bg-light-background-100 flex flex-col items-center`}
       >
-        <NavbarPill />
+        <NavbarPill pill={true}/>
         {children}
         <Footer />
       </body>
