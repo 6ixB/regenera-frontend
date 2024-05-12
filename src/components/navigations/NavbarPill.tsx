@@ -5,7 +5,7 @@ import Link from "next/link";
 import InputGroup from "../forms/InputGroup";
 import { Search, Menu } from "lucide-react";
 import { useEffect, useState } from "react";
-import '../css/navigations/NavbarPill.css'
+//import '../css/navigations/NavbarPill.css'
 import Sidebar from "./Sidebar";
 
 interface NavbarPillProps{
@@ -43,11 +43,12 @@ export default function NavbarPill({pill}: NavbarPillProps) {
 
   return (
     <header
-      className={`navbar-pill__header 
-      ${isExpanded ? 'navbar-pill__header--expanded' : ''}`}
+      className={`flex z-50 fixed justify-center items-center user-select-none transition-all duration-200 bg-light-background-100
+      shadow px-8
+      ${isExpanded ? 'top-0 w-full rounded-none md:w-3/4 md:top-4 md:rounded-full md:px-8' : 'top-0 w-full'}`}
     >
       <nav
-        className={`max-w-[67rem] w-full py-3 flex items-center justify-between gap-x-4 navbar-pill--desktop
+        className={`max-w-[67rem] w-full py-3 items-center justify-between gap-x-4 hidden md:flex
         `}
       >
         <div className={"w-[16rem] flex items-center justify-start gap-x-4"}>
@@ -83,7 +84,7 @@ export default function NavbarPill({pill}: NavbarPillProps) {
       </nav>
 
       <nav
-        className={`max-w-[67rem] w-full py-3 flex items-center justify-evenly navbar-pill--mobile
+        className={`max-w-[67rem] w-full py-3 flex items-center justify-evenly md:hidden
         `}
       >
         <Search className={"text-light-text-100"} />
