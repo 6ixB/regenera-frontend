@@ -16,7 +16,7 @@ export default function Sidebar({isSidebarOpen, toggleSidebar}: SidebarProps){
             <div className={`flex flex-col w-3/5 h-full bg-light-background-100 shadow py-3 px-6 gap-y-4 text-end
             transition-transform duration-200 ${isSidebarOpen ? 'translate-x-0' : 'translate-x-full'} md:translate-x-0`}>
 
-                <div className="flex w-full justify-between flex-row-reverse items-center ">
+                <div className="flex w-full justify-between flex-row-reverse items-center">
                     <Menu className={"text-light-text-100 cursor-pointer"} onClick={toggleSidebar}/>
                     <div className="flex gap-x-2">
                         <Regenera className={"fill-light-text-100"} />
