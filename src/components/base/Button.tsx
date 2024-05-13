@@ -2,6 +2,7 @@ interface ButtonProps {
   variant: "solid" | "outline";
   children: React.ReactNode;
   className?: string;
+  onClick?: () => void;
 }
 
 const variantStyles = {
@@ -11,9 +12,15 @@ const variantStyles = {
     "py-3 px-4 inline-flex items-center justify-center gap-x-2 text-base font-medium rounded-lg border border-light-text-100 text-light-text-100 hover:border-blue-600 hover:text-blue-600 focus:outline-light-primary-200",
 };
 
-export default function Button({ variant, children, className }: ButtonProps) {
+export default function Button({
+  variant,
+  children,
+  className,
+  onClick,
+}: ButtonProps) {
   return (
     <button
+      onClick={onClick}
       type={"button"}
       className={`${variantStyles[variant]} ${className ?? ""}`}
     >

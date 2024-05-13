@@ -1,9 +1,9 @@
-import Google from "@/components/vector-graphics/Google";
 import Regenera from "@/components/vector-graphics/Regenera";
 import Button from "@/components/base/Button";
 import Checkbox from "@/components/forms/Checbox";
 import Input from "@/components/forms/Input";
 import Link from "next/link";
+import GoogleSignInButton from "@/components/forms/GoogleSignInButton";
 
 export default function SignIn() {
   return (
@@ -39,12 +39,7 @@ export default function SignIn() {
             <div className="flex items-center text-sm text-gray-800 before:flex-1 before:border-t before:border-light-background-300 before:me-2 after:flex-1 after:border-t after:border-light-background-300 after:ms-2">
               or
             </div>
-            <Button variant={"outline"}>
-              <div className={"inline-flex gap-x-2"}>
-                <Google />
-                <span>Continue with Google</span>
-              </div>
-            </Button>
+            <GoogleSignInButton />
             <div className={"light-text-100 text-sm"}>
               By clicking the Sign In button, you agree to the Regenera Terms of
               Service and acknowledge the Privacy Notice.
