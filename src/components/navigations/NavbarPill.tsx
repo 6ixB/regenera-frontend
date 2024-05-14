@@ -14,7 +14,7 @@ interface NavbarPillProps{
 
 export default function NavbarPill({pill}: NavbarPillProps) {
 
-  const [isExpanded, setIsExpanded] = useState(false)
+  const [isPill, setIsPill] = useState(false)
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
 
   useEffect(() => {
@@ -24,7 +24,7 @@ export default function NavbarPill({pill}: NavbarPillProps) {
       const handleScroll = () => {
         const scrollTop = window.scrollY;
   
-        setIsExpanded(scrollTop > 0);
+        setIsPill(scrollTop > 0);
       };
   
       window.addEventListener("scroll", handleScroll);
@@ -45,7 +45,7 @@ export default function NavbarPill({pill}: NavbarPillProps) {
     <header
       className={`flex z-50 fixed justify-center items-center user-select-none transition-all duration-200 bg-light-background-100
       shadow px-8 
-      ${isExpanded ? 'top-0 w-full max-w-[67rem] rounded-none md:w-3/4 md:top-4 md:rounded-full md:px-8' : 'top-0 w-full'}`}
+      ${isPill ? 'top-0 w-full rounded-none md:w-3/4 md:max-w-[67rem] md:top-4 md:rounded-full md:px-8' : 'top-0 w-full'}`}
     >
       <nav
         className={`w-full py-3 items-center justify-between gap-x-4 hidden md:flex 
