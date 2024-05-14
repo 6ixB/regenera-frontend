@@ -43,7 +43,7 @@ export default function ProfileTabs(){
                 <hr className={"border-light-background-300"} />
             </div>
 
-            <div className="w-3/4 flex flex-col gap-4 m-auto py-2">
+            <div className="w-3/4 flex flex-col gap-4 m-auto py-4">
                 <ActiveTabComponent />
             </div>
         </div>

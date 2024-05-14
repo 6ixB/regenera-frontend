@@ -1,11 +1,35 @@
+import Card from "@/components/base/Card";
+import { ProfileTabEnum } from "./ProfileTabs"
+
 interface ProfileInformationCardsProps{
-    header: string
+    type: ProfileTabEnum
+    date: Date,
+    header: string,
 }
 
-export default function ProfileInformationCards(){
+export default function ProfileInformationCards({type, date, header}: ProfileInformationCardsProps){
+
+    if(type === ProfileTabEnum.ABOUT) return
+
     return (
-        <div>
-            
+        <div className="w-full py-4">
+            <h2 className="text-lg font-semibold text-light-text-100 py-4">{FormatDateToMonthYear(date)} - {header}</h2>
+
+            <div className="w-full grid grid-cols-4 gap-6">
+                <Card/>
+                <Card/>
+                <Card/>
+                <Card/>
+                <Card/>
+            </div>
         </div>
     )
+}
+
+export function FormatDateToMonthYear(date: Date){
+
+    const months = ["January", "February", "March", "April", "May", "June", 
+    "July", "August", "September", "October", "November", "December"];    
+
+    return `${months[date.getMonth()]} ${date.getFullYear()}`
 }
