@@ -1,5 +1,6 @@
 import * as React from "react";
 import { SVGProps } from "react";
+
 export default function HomeHeroIllustration(props: SVGProps<SVGSVGElement>) {
   return (
     <svg

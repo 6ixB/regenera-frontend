@@ -1,7 +1,9 @@
-interface ButtonProps {
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant: "solid" | "outline";
   children: React.ReactNode;
   className?: string;
+  type?: "button" | "submit" | "reset";
+  onClick?: () => void;
 }
 
 const variantStyles = {
@@ -11,11 +13,18 @@ const variantStyles = {
     "py-3 px-4 inline-flex items-center justify-center gap-x-2 text-base font-medium rounded-lg border border-light-text-100 text-light-text-100 hover:border-blue-600 hover:text-blue-600 focus:outline-light-primary-200",
 };
 
-export default function Button({ variant, children, className }: ButtonProps) {
+export default function Button({
+  variant,
+  children,
+  className,
+  type = "button",
+  onClick,
+}: ButtonProps) {
   return (
     <button
-      type={"button"}
-      className={`${variantStyles[variant]} ${className ?? ""}`}
+      onClick={onClick}
+      type={type}
+      className={`${variantStyles[variant]} ${className ?? ""} disabled:opacity-50 disabled:pointer-events-none disabled:cursor-not-allowed`}
     >
       {children}
     </button>

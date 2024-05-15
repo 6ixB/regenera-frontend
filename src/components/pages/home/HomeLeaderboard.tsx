@@ -7,7 +7,7 @@ export default function HomeLeaderboard() {
     <div className={"w-full bg-light-primary-100 flex justify-center py-16"}>
       <div
         className={
-          "max-w-[67rem] w-full text-light-background-100 flex flex-col gap-y-8"
+          "container w-full text-light-background-100 flex flex-col gap-y-8"
         }
       >
         <div className={"flex justify-between items-end"}>

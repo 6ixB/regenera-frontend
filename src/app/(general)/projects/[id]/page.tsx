@@ -8,7 +8,7 @@ import Image from "next/image";
 
 export default function Project() {
   return (
-    <main className={"w-full py-8 flex justify-center"}>
+    <main className={"w-full pt-24 pb-8 flex justify-center"}>
       <div className={"w-full max-w-[67rem] flex flex-col gap-y-4"}>
         <div className={"text-light-text-100 font-medium text-2xl"}>
           Project MK Ultra
