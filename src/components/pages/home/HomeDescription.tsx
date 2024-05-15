@@ -5,7 +5,7 @@ import HomeDescriptionTwoIllustration from "../../vector-graphics/HomeDescriptio
 export default function HomeDescription() {
   return (
     <div className={"w-full py-16 bg-light-accent-200 flex justify-center"}>
-      <div className={"max-w-[67rem] flex gap-x-32"}>
+      <div className={"container flex gap-x-32"}>
         <div
           className={
             "max-w-[240px] flex flex-col items-center gap-y-3 text-light-text-100"

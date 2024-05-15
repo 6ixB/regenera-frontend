@@ -12,7 +12,7 @@ export default function Footer() {
           "w-full flex flex-col gap-8 items-center text-light-text-100"
         }
       >
-        <div className={"w-full max-w-[67rem] flex justify-between"}>
+        <div className={"w-full container flex justify-between"}>
           <div className={"text-lg font-medium"}>Regenera</div>
           <div className={"flex flex-col gap-4 text-sm"}>
             <div className={"font-semibold"}>Clean for</div>
@@ -63,7 +63,7 @@ export default function Footer() {
         <hr className={"w-full border-light-background-300"}></hr>
         <div
           className={
-            "w-full max-w-[67rem] flex justify-between text-sm text-light-text-100"
+            "w-full container flex justify-between text-sm text-light-text-100"
           }
         >
           <div>© 2024 SROOMY</div>

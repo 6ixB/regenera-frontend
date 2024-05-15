@@ -1,7 +1,8 @@
-interface ButtonProps {
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant: "solid" | "outline";
   children: React.ReactNode;
   className?: string;
+  type?: "button" | "submit" | "reset";
   onClick?: () => void;
 }
 
@@ -16,13 +17,14 @@ export default function Button({
   variant,
   children,
   className,
+  type = "button",
   onClick,
 }: ButtonProps) {
   return (
     <button
       onClick={onClick}
-      type={"button"}
-      className={`${variantStyles[variant]} ${className ?? ""}`}
+      type={type}
+      className={`${variantStyles[variant]} ${className ?? ""} disabled:opacity-50 disabled:pointer-events-none disabled:cursor-not-allowed`}
     >
       {children}
     </button>

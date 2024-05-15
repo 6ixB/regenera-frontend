@@ -11,6 +11,7 @@ const auth = getAuth(firebaseApp);
 
 export default function GoogleSignInButton() {
   const router = useRouter();
+
   const [signInWithGoogle, user, loading, error] = useSignInWithGoogle(auth);
 
   if (error) {
