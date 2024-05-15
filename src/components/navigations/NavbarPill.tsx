@@ -44,11 +44,11 @@ export default function NavbarPill({pill}: NavbarPillProps) {
   return (
     <header
       className={`flex z-50 fixed justify-center items-center user-select-none transition-all duration-200 bg-light-background-100
-      shadow px-8 
-      ${isPill ? 'top-0 w-full rounded-none md:w-3/4 md:max-w-[67rem] md:top-4 md:rounded-full md:px-8' : 'top-0 w-full'}`}
+      shadow px-8
+      ${isPill ? 'top-0 w-full rounded-none  md:w-3/4 md:top-4 md:rounded-full md:px-8 xl:w-[67rem]': 'top-0 w-full'}`}
     >
       <nav
-        className={`w-full py-3 items-center justify-between gap-x-4 hidden md:flex 
+        className={`${pill ? 'max-w-[67rem]' : 'w-full'} w-full py-3 items-center justify-between gap-x-4 hidden md:flex
         `}
       >
         <div className={"w-[16rem] flex items-center justify-start gap-x-4"}>
