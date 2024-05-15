@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Card from "../../base/Card";
 import { ChevronRight } from "lucide-react";
+import { ProjectPhaseEnum } from "@/app/(general)/projects/[id]/page";
 
 export default function HomeFeatured() {
   return (
@@ -20,13 +21,13 @@ export default function HomeFeatured() {
         </div>
         <div className={"w-full h-[40rem] flex gap-4"}>
           <div className={"w-1/2"}>
-            <Card variant={"no-outlined"} />
+            <Card phase={ProjectPhaseEnum.COMPLETED} variant={"no-outlined"} />
           </div>
-          <div className={"w-full flex-1 grid grid-cols-2 gap-4"}>
-            <Card variant={"no-outlined"} includeFooter={false} />
-            <Card variant={"no-outlined"} includeFooter={false} />
-            <Card variant={"no-outlined"} includeFooter={false} />
-            <Card variant={"no-outlined"} includeFooter={false} />
+          <div className={"w-full flex-1 grid grid-cols-2 gap-4 relative"}>
+            <Card phase={ProjectPhaseEnum.DONATING} variant={"no-outlined"} />
+            <Card phase={ProjectPhaseEnum.VOLUNTEERING} variant={"no-outlined"} />
+            <Card phase={ProjectPhaseEnum.COMPLETED} variant={"no-outlined"}/>
+            <Card phase={ProjectPhaseEnum.COMPLETED} variant={"no-outlined"} />
           </div>
         </div>
       </div>

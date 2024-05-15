@@ -1,6 +1,7 @@
 import { ChevronRight } from "lucide-react";
 import Link from "next/link";
 import Card from "../../base/Card";
+import { ProjectPhaseEnum } from "@/app/(general)/projects/[id]/page";
 
 export default function HomeFreshFavorites() {
   return (
@@ -19,9 +20,9 @@ export default function HomeFreshFavorites() {
           </Link>
         </div>
         <div className={"w-full h-[24rem] grid grid-cols-3 gap-4"}>
-          <Card variant={"outlined"} includeFooter={false} />
-          <Card variant={"outlined"} includeFooter={false} />
-          <Card variant={"outlined"} includeFooter={false} />
+          <Card phase={ProjectPhaseEnum.DONATING} variant={"outlined"} />
+          <Card phase={ProjectPhaseEnum.DONATING} variant={"outlined"} />
+          <Card phase={ProjectPhaseEnum.DONATING} variant={"outlined"}  />
         </div>
       </div>
     </div>
