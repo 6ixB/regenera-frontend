@@ -5,7 +5,7 @@ interface InputGroupProps {
 
 export default function InputGroup({ icon, placeholder }: InputGroupProps) {
   return (
-    <div className={`max-w-[354px] w-full relative`}>
+    <div className={`w-64 max-w-[354px] lg:w-full relative`}>
       <input
         type={"text"}
         id={"hs-leading-icon"}

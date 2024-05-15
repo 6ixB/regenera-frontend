@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 import "../globals.css";
 import PrelineScript from "@/components/preline/PrelineScript";
 import Footer from "@/components/navigations/Footer";
-import Navbar from "@/components/navigations/Navbar";
+import Navbar from "@/components/navigations/navbar/Navbar";
 import ReactQueryProvider from "@/components/react-query/ReactQueryProvider";
 import { getSession } from "@/lib/session";
 import { SessionEntity } from "@/lib/model/session/session.entity";

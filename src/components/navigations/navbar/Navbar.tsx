@@ -1,10 +1,10 @@
 "use client";
 
-import Regenera from "../vector-graphics/Regenera";
+import Regenera from "../../vector-graphics/Regenera";
 import Link from "next/link";
 import { Search, Menu } from "lucide-react";
 import { useEffect, useState } from "react";
-import Sidebar from "./Sidebar";
+import NavbarCollapsed from "./NavbarCollapsed";
 import NavbarNotAuthenticated from "./NavbarNotAuthenticated";
 import { SessionEntity } from "@/lib/model/session/session.entity";
 import NavbarAuthenticated from "./NavbarAuthenticated";
@@ -69,7 +69,10 @@ export default function Navbar({ pill, session = null }: Navbar) {
         />
       </nav>
 
-      <Sidebar isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
+      <NavbarCollapsed
+        isSidebarOpen={isSidebarOpen}
+        toggleSidebar={toggleSidebar}
+      />
     </header>
   );
 }

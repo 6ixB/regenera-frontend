@@ -1,6 +1,6 @@
 import { Search } from "lucide-react";
-import InputGroup from "../forms/InputGroup";
-import Regenera from "../vector-graphics/Regenera";
+import InputGroup from "../../forms/InputGroup";
+import Regenera from "../../vector-graphics/Regenera";
 import Link from "next/link";
 
 export default function NavbarNotAuthenticated() {

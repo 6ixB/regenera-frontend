@@ -1,14 +1,14 @@
 import { ChevronRight, Menu } from "lucide-react";
-import Regenera from "../vector-graphics/Regenera";
+import Regenera from "../../vector-graphics/Regenera";
 import Link from "next/link";
-import SidebarNavLink from "./SidebarNavLink";
+import NavbarCollapsedNavLink from "./NavbarCollapsedNavLink";
 
 interface SidebarProps {
   isSidebarOpen: Boolean;
   toggleSidebar: () => void;
 }
 
-export default function Sidebar({
+export default function NavbarCollapsed({
   isSidebarOpen,
   toggleSidebar,
 }: SidebarProps) {
@@ -26,21 +26,21 @@ export default function Sidebar({
             className={"text-light-text-100 cursor-pointer"}
             onClick={toggleSidebar}
           />
-          <div className="flex gap-x-2">
+          <Link href={"/"} className={"flex items-center gap-2"}>
             <Regenera className={"fill-light-text-100"} />
             <div className={"text-lg font-medium text-light-text-100"}>
               Regenera
             </div>
-          </div>
+          </Link>
         </div>
 
         <div className={"flex flex-col"}>
-          <SidebarNavLink
+          <NavbarCollapsedNavLink
             link={"/about"}
             title={"About"}
             description={"How it works"}
           />
-          <SidebarNavLink
+          <NavbarCollapsedNavLink
             link={"/help"}
             title={"Help Center"}
             description={"Technical support and help"}

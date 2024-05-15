@@ -7,7 +7,7 @@ interface SidebarNavLinkProps {
   description: string;
 }
 
-export default function SidebarNavLink({
+export default function NavbarCollapsedNavLink({
   link,
   title,
   description,
