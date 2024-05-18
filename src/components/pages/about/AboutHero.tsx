@@ -9,7 +9,7 @@ export default function AboutHero() {
     >
       <div className={"flex flex-col items-center gap-y-2 text-light-text-100"}>
         <div className={"text-4xl font-medium"}>How Regenera Works</div>
-        <div className={"text-base w-[32rem] text-center"}>
+        <div className={"text-base w-3/4 md:w-5/12 text-center"}>
           Our platform offers an innovative approach to tackling pollution and
           waste by inviting individuals and communities to compete for a cleaner
           tomorrow.
