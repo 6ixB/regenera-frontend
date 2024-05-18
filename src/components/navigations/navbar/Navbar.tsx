@@ -44,7 +44,7 @@ export default function Navbar({ pill, session = null }: Navbar) {
     <header
       className={`flex z-50 fixed justify-center items-center user-select-none transition-all duration-200 bg-light-background-100
       shadow px-8
-      ${isShrinked ? 'top-0 w-full rounded-none md:w-10/12 md:top-4 md:rounded-full lg:container': 'top-0 w-full'}`}
+      ${isShrinked ? 'top-0 w-full rounded-none md:w-10/12 md:top-4 md:rounded-full lg:container lg:px-8 lg:py-0': 'top-0 w-full'}`}
     >
       {session === null ? (
         <NavbarNotAuthenticated />
