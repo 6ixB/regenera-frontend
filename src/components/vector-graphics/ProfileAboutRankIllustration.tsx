@@ -4,9 +4,8 @@ export default function ProfileAboutRankIllustration (props: SVGProps<SVGSVGElem
  return (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    width={221}
-    height={193}
     fill="none"
+    viewBox="0 0 221 193"
     {...props}
   >
     <g clipPath="url(#a)">

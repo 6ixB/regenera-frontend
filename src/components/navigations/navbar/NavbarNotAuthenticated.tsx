@@ -6,7 +6,7 @@ import Link from "next/link";
 export default function NavbarNotAuthenticated() {
   return (
     <nav
-      className={`container w-full py-3 items-center justify-between gap-x-4 hidden md:flex
+      className={`container w-full px-0 py-3 items-center justify-between gap-x-4 hidden md:flex
         `}
     >
       <div className={"w-[16rem] flex items-center justify-start gap-x-4"}>
