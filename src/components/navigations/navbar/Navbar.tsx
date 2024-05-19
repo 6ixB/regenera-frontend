@@ -8,6 +8,8 @@ import NavbarCollapsed from "./NavbarCollapsed";
 import NavbarNotAuthenticated from "./NavbarNotAuthenticated";
 import { SessionEntity } from "@/lib/model/session/session.entity";
 import NavbarAuthenticated from "./NavbarAuthenticated";
+import InputGroup from "@/components/forms/InputGroup";
+import CollapsedInputGroup from "@/components/forms/CollapsedInputGroup";
 
 interface Navbar {
   pill: Boolean;
@@ -42,7 +44,7 @@ export default function Navbar({ pill, session = null }: Navbar) {
     <header
       className={`flex z-50 fixed justify-center items-center user-select-none transition-all duration-200 bg-light-background-100
       shadow px-8
-      ${isShrinked ? "top-0 w-full rounded-none md:container md:top-4 md:rounded-full md:px-8" : "top-0 w-full"}`}
+      ${isShrinked ? 'top-0 w-full rounded-none md:w-10/12 md:top-4 md:rounded-full lg:container lg:px-8 lg:py-0': 'top-0 w-full'}`}
     >
       {session === null ? (
         <NavbarNotAuthenticated />
@@ -51,11 +53,14 @@ export default function Navbar({ pill, session = null }: Navbar) {
       )}
 
       <nav
-        className={`max-w-[67rem] w-full py-3 flex items-center justify-between md:hidden
+        className={`max-w-[67rem] w-full py-3 flex items-center justify-between gap-6 md:hidden
+          group
         `}
       >
-        <Search className={"text-light-text-100"} />
-        <div className={"w-[16rem] flex items-center justify-center gap-x-4"}>
+        <CollapsedInputGroup icon={<Search className={"text-light-text-100"} />} placeholder={'Search projects, creators, and categories'} variant={'no-outlined'}
+          className={'flex w-0 max-w-full group-focus-within:w-full transition-all ease-out duration-500'}
+        />
+        <div className={"w-[16rem] flex items-center justify-center gap-x-4 group-focus-within:hidden"}>
           <Link href={"/"} className={"flex items-center gap-2"}>
             <Regenera className={"fill-light-text-100"} />
             <div className={"text-lg font-medium text-light-text-100"}>

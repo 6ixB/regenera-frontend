@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default function AboutPhase() {
   return (
-    <div className={"w-full max-w-[67rem] py-8"}>
+    <div className={"container py-8"}>
       <div className={"flex flex-col gap-y-4"}>
         <div className={" flex items-center gap-x-4"}>
           <div
@@ -22,7 +22,7 @@ export default function AboutPhase() {
             "flex flex-col gap-y-2 border-l-4 border-light-primary-200 ms-[21px] ps-10 py-4"
           }
         >
-          <div className={"text-light-text-100 text-base w-[30rem]"}>
+          <div className={"text-light-text-100 text-base  lg:w-1/2"}>
             Select your cleaning location, snap some before pictures, and
             complete the required information. Then, simply relax and watch your
             environment getting cleaned

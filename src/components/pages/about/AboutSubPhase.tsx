@@ -1,6 +1,6 @@
 export default function AboutSubPhase() {
   return (
-    <div className={"flex flex-col gap-y-4"}>
+    <div className={"flex flex-col gap-y-4 "}>
       <div className={" flex items-center gap-x-4"}>
         <div
           className={
@@ -18,9 +18,9 @@ export default function AboutSubPhase() {
           "flex flex-col gap-y-2 border-l-4 border-light-accent-200 ms-[14px] ps-8"
         }
       >
-        <div className={"text-light-text-100 text-base w-[30rem] py-4"}>
+        <div className={"text-light-text-100 text-base py-4"}>
           Browse through a variety of cleanup projects and choose one that
-          resonates with you.
+          resonates with you. 
         </div>
       </div>
     </div>

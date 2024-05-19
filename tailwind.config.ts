@@ -8,6 +8,16 @@ const config: Config = {
     "./node_modules/preline/preline.js",
   ],
   theme: {
+    container: {
+      padding: {
+        DEFAULT: '2rem',
+        sm: '2rem',
+        md: '3rem',
+        lg: '3rem',
+        xl: '8rem',
+        '2xl': '14rem',
+      }
+    },
     extend: {
       colors: {
         white: "#ffffff",
