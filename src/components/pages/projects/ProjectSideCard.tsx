@@ -7,13 +7,13 @@ export default function ProjectSideCard() {
   return (
     <div
       className={
-        "sticky top-24 right-0 w-[368px] h-fit bg-light-background-200 rounded p-4"
+        "flex mt-4 top-24 right-0 h-fit bg-light-background-200 rounded p-4 w-full lg:w-1/3 lg:sticky"
       }
     >
       <div className={"w-full text-light-text-100 flex flex-col gap-y-4"}>
-        <div className={"flex gap-x-2 items-end"}>
-          <div className={"text-xl font-medium"}>$188,571</div>
-          <div className={"text-base"}>raised of $100,000 goal</div>
+        <div className={"flex gap-y-1 items-start flex-col"}>
+          <div className={"text-xl font-medium my-auto"}>$188,571</div>
+          <div className={"text-sm"}>raised of $100,000 goal</div>
         </div>
         <Progress />
         <div className={"flex flex-col text-light-text-100"}>

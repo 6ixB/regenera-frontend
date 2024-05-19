@@ -17,11 +17,11 @@ export default function HomeLeaderboardItem({
         <div className={"w-8 h-6 flex justify-center items-center"}>1</div>
         <div className={"flex gap-x-4"}>
           <div
-            className={"w-10 h-10 rounded-full bg-light-background-300"}
+            className={"w-10 h-10 aspect-square rounded-full bg-light-background-300 m-auto"}
           ></div>
-          <div className={"flex flex-col"}>
+          <div className={"flex flex-col justify-center"}>
             <div className={"text-base font-medium"}>Example User</div>
-            <div className={"text-sm"}>
+            <div className={"text-sm hidden sm:block"}>
               51 projects donated, 21 events participated
             </div>
           </div>

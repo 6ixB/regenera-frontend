@@ -28,7 +28,7 @@ export default async function GeneralStaticLayout({
         className={`${inter.className} w-full min-h-screen bg-light-background-100 flex flex-col items-center`}
       >
         <ReactQueryProvider>
-          <Navbar pill={false} session={session} />
+          <Navbar pill={true} session={session} />
           {children}
           <Footer />
         </ReactQueryProvider>

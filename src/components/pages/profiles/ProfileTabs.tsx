@@ -34,7 +34,7 @@ export default function ProfileTabs(){
             <div className="w-full sticky top-12 md:top-[4.15rem] bg-light-background-100 ">
                 <hr className={"border-light-background-300"} />
 
-                <div className="w-3/4 flex flex-row items-center gap-6 m-auto">
+                <div className="container flex flex-row items-center gap-6 m-auto">
                     <ProfileTabsText menu={ProfileTabEnum.ABOUT} activeTab={activeTab} onClick={handleActiveTab}/>
                     <ProfileTabsText menu={ProfileTabEnum.DONATED} activeTab={activeTab} onClick={handleActiveTab}/>
                     <ProfileTabsText menu={ProfileTabEnum.VOLUNTEERED} activeTab={activeTab} onClick={handleActiveTab}/>
@@ -43,7 +43,7 @@ export default function ProfileTabs(){
                 <hr className={"border-light-background-300"} />
             </div>
 
-            <div className="w-3/4 flex flex-col gap-4 m-auto py-4">
+            <div className="container flex flex-col gap-4 m-auto py-4">
                 <ActiveTabComponent />
             </div>
         </div>
