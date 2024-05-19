@@ -1,6 +1,7 @@
 import { ChevronRight } from "lucide-react";
 import Link from "next/link";
 import Card from "../../base/Card";
+import { ProjectPhaseEnum } from "@/app/(general)/projects/[id]/page";
 
 export default function HomeFreshFavorites() {
   return (

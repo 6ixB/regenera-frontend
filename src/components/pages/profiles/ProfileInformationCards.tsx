@@ -1,5 +1,6 @@
 import Card from "@/components/base/Card";
 import { ProfileTabEnum } from "./ProfileTabs"
+import { ProjectPhaseEnum } from "@/app/(general)/projects/[id]/page";
 
 interface ProfileInformationCardsProps{
     type: ProfileTabEnum

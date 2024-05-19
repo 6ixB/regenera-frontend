@@ -6,6 +6,12 @@ import ProjectSideCard from "@/components/pages/projects/ProjectSideCard";
 import { Flag } from "lucide-react";
 import Image from "next/image";
 
+export enum ProjectPhaseEnum {
+  DONATING = 'Donating Phase',
+  VOLUNTEERING = 'Volunteering Phase',
+  COMPLETED = 'Completed'
+}
+
 export default function Project() {
   return (
     <main className={"w-full pt-24 pb-8 flex justify-center"}>
