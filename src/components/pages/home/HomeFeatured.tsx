@@ -19,10 +19,7 @@ export default function HomeFeatured() {
             <ChevronRight />
           </Link>
         </div>
-        <div className={"w-full h-[40rem] flex gap-4"}>
-          <div className={"w-1/2"}>
-            <Card phase={ProjectPhaseEnum.COMPLETED} variant={"no-outlined"} />
-          </div>
+        <div className={"w-full h-[40rem] flex gap-4 md:flex-row"}>
           <div className={"w-full flex-1 grid grid-cols-2 gap-4 relative"}>
             <Card phase={ProjectPhaseEnum.DONATING} variant={"no-outlined"} />
             <Card phase={ProjectPhaseEnum.VOLUNTEERING} variant={"no-outlined"} />

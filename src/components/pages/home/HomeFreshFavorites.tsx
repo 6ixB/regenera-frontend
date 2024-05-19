@@ -19,10 +19,8 @@ export default function HomeFreshFavorites() {
             <ChevronRight />
           </Link>
         </div>
-        <div className={"w-full h-[24rem] grid grid-cols-3 gap-4"}>
-          <Card phase={ProjectPhaseEnum.DONATING} variant={"outlined"} />
-          <Card phase={ProjectPhaseEnum.DONATING} variant={"outlined"} />
-          <Card phase={ProjectPhaseEnum.DONATING} variant={"outlined"}  />
+        <div className={"w-full h-[24rem] grid grid-cols-1 md:grid-cols-3 gap-4"}>
+          
         </div>
       </div>
     </div>
