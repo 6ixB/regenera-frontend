@@ -9,7 +9,7 @@ export default function DiscoverProjects(){
 
                 <p className="text-lg font-medium text-light-text-200  pt-4">Discover projects</p>
 
-                <div className="w-full h-fit grid grid-cols-3">
+                <div className="w-full h-fit grid grid-cols-3 gap-4">
 
                     <Card phase={ProjectPhaseEnum.VOLUNTEERING} />
                     <Card phase={ProjectPhaseEnum.VOLUNTEERING} />
