@@ -1,14 +1,14 @@
 import cn from "@/lib/utils/cn"
 import Image from "next/image"
 
-interface DiscoverPopularProjectProps{
+interface DiscoverPopularProjectSlideProps{
     number: number,
     activeNumber: number,
     className?: string,
     onClick: (number: number) => void
 }
 
-export default function DiscoverPopularProject({number, activeNumber, className, onClick}: DiscoverPopularProjectProps){
+export default function DiscoverPopularProjectSlide({number, activeNumber, className, onClick}: DiscoverPopularProjectSlideProps){
     
     return (
         <div className={cn('w-full h-[30rem] relative rounded-3xl cursor-pointer transition-transform duration-200 shadow'

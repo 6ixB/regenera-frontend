@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from "react";
-import DiscoverPopularProject from "./DiscoverPopularProject";
+import DiscoverPopularProjectSlide from "./DiscoverPopularProjectSlide";
 
 export default function DiscoverPopularProjects(){
 
@@ -13,11 +13,11 @@ export default function DiscoverPopularProjects(){
 
     return (
         <div className="w-full h-fit flex flex-row gap-1 ">
-            <DiscoverPopularProject number={1} activeNumber={activeNumber} onClick={handleExpandSlide} />
-            <DiscoverPopularProject number={2} activeNumber={activeNumber} onClick={handleExpandSlide} />
-            <DiscoverPopularProject number={3} activeNumber={activeNumber} onClick={handleExpandSlide} />
-            <DiscoverPopularProject number={4} activeNumber={activeNumber} onClick={handleExpandSlide}  />
-            <DiscoverPopularProject number={5} activeNumber={activeNumber} onClick={handleExpandSlide} />
+            <DiscoverPopularProjectSlide number={1} activeNumber={activeNumber} onClick={handleExpandSlide} />
+            <DiscoverPopularProjectSlide number={2} activeNumber={activeNumber} onClick={handleExpandSlide} />
+            <DiscoverPopularProjectSlide number={3} activeNumber={activeNumber} onClick={handleExpandSlide} />
+            <DiscoverPopularProjectSlide number={4} activeNumber={activeNumber} onClick={handleExpandSlide}  />
+            <DiscoverPopularProjectSlide number={5} activeNumber={activeNumber} onClick={handleExpandSlide} />
         </div>
     )
 }

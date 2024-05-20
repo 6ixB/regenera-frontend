@@ -3,9 +3,9 @@ import Card from "@/components/base/Card";
 
 export default function DiscoverProjects(){
     return (
-        <div className="w-full h-fit">
+        <div className="w-full h-fit ">
 
-            <div className="container flex flex-col">
+            <div className="container flex flex-col m-auto">
 
                 <p className="text-lg font-medium text-light-text-200  pt-4">Discover projects</p>
 
