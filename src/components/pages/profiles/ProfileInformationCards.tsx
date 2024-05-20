@@ -17,11 +17,11 @@ export default function ProfileInformationCards({type, date, header}: ProfileInf
             <h2 className="text-lg font-semibold text-light-text-100 py-4">{FormatDateToMonthYear(date)} - {header}</h2>
 
             <div className="w-full grid gap-6 grid-cols-2 md:grid-cols-3 ">
-                <Card/>
-                <Card/>
-                <Card/>
-                <Card/>
-                <Card/>
+                <Card phase={ProjectPhaseEnum.COMPLETED} />
+                <Card phase={ProjectPhaseEnum.COMPLETED}/>
+                <Card phase={ProjectPhaseEnum.COMPLETED}/>
+                <Card phase={ProjectPhaseEnum.COMPLETED}/>
+                <Card phase={ProjectPhaseEnum.COMPLETED}/>
             </div>
         </div>
     )

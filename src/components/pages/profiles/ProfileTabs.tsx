@@ -31,7 +31,7 @@ export default function ProfileTabs(){
     return(
         <div className="w-full h-fit">
 
-            <div className="w-full sticky top-12 md:top-[4.15rem] bg-light-background-100 ">
+            <div className="w-full sticky top-12 md:top-[4.15rem] bg-light-background-100 z-50">
                 <hr className={"border-light-background-300"} />
 
                 <div className="container flex flex-row items-center gap-6 m-auto">
