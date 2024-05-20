@@ -23,7 +23,7 @@ export default function HomeFeatured() {
            <div className={"w-full lg:w-1/2 "}>
             <Card phase={ProjectPhaseEnum.DONATING} variant={"big"} />
           </div>
-          <div className={"w-full flex-1 grid grid-cols-2 gap-4 relative lg:grid-cols-2"}>
+          <div className={"w-full flex-1 grid grid-cols-2 gap-4 lg:grid-cols-2"}>
             <Card phase={ProjectPhaseEnum.DONATING} variant={"no-outlined"} />
             <Card phase={ProjectPhaseEnum.VOLUNTEERING} variant={"no-outlined"} />
             <Card phase={ProjectPhaseEnum.COMPLETED} variant={"no-outlined"}/>
