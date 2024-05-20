@@ -22,7 +22,7 @@ export default function Card({
     <Link href="/projects/mk-ultra">
       <div className="w-full h-full relative ">
         <div className={cn(
-              "w-full h-fit p-4 rounded-t-xl rounded-b-md group duration-200 -translate-x-4",
+              "w-full h-fit p-4 rounded-t-xl rounded-b-md group duration-200 -translate-x-4 box-content",
               {
                 "hover:ring-1 hover:ring-light-primary-200 hover:absolute hover:z-40 hover:shadow-xl hover:bg-light-background-100": variant !== "big",
               }
