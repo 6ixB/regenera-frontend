@@ -20,9 +20,9 @@ export default function HomeFreshFavorites() {
           </Link>
         </div>
         <div className={"w-full grid grid-cols-1 gap-4 md:grid-cols-3"}>
-          <Card phase={ProjectPhaseEnum.DONATING} variant={"outlined"} />
-          <Card phase={ProjectPhaseEnum.DONATING} variant={"outlined"} />
-          <Card phase={ProjectPhaseEnum.DONATING} variant={"outlined"}  />
+          <Card phase={ProjectPhaseEnum.DONATING} />
+          <Card phase={ProjectPhaseEnum.DONATING} />
+          <Card phase={ProjectPhaseEnum.DONATING} />
         </div>
       </div>
     </div>
