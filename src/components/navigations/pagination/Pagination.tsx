@@ -22,18 +22,22 @@ export default function Pagination({ endPage, activePage, batch, onClick }: Pagi
         };
 
     const handleExceedingPageInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+
+        if(e.target.value.trim() === '') return
+
         let value = Number(e.target.value);
-        if (value < 1) value = 1;
-        if (value > endPage) value = endPage;
-        onClick(value);
+        if (value < 1) e.target.valueAsNumber = 1;
+        if (value > endPage) e.target.valueAsNumber = endPage;
     };
     
     const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key === 'Enter') {
+            
             let value = Number((e.target as HTMLInputElement).value);
-            if (value < 1) value = 1;
-            if (value > endPage) value = endPage;
             onClick(value);
+
+            (e.target as HTMLInputElement).value = ''
+
         }
     };
 
@@ -101,7 +105,7 @@ export default function Pagination({ endPage, activePage, batch, onClick }: Pagi
                         <path d="m13 17 5-5-5-5"></path>
                     </svg>
                     <span
-                        className="hs-tooltip-content hs-tooltip-shown:opacity-100 hs-tooltip-shown:visible opacity-0 transition-opacity inline-block absolute invisible z-10 py-1 px-2 bg-gray-900 text-xs font-medium text-white rounded shadow-sm dark:bg-neutral-700"
+                        className="hs-tooltip-content group-hover:opacity-100 group-hover:visible opacity-0 transition-opacity inline-block absolute -translate-y-8 invisible z-10 py-1 px-2 bg-gray-900 text-xs font-medium text-white rounded shadow-sm dark:bg-neutral-700"
                         role="tooltip"
                     >
                         Next {endPage - activePage - 1} pages
@@ -144,7 +148,6 @@ export default function Pagination({ endPage, activePage, batch, onClick }: Pagi
             className="min-h-[38px] py-2 px-2.5 block w-12 border-gray-200 rounded-lg text-sm text-center focus:border-blue-500 focus:ring-blue-500 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
             style={{ MozAppearance: "textfield" }}
             onChange={handleExceedingPageInput}
-            onBlur={handleBlur}
             onKeyDown={handleKeyDown}
             />
             <span className="text-sm text-gray-800 whitespace-nowrap dark:text-white">page</span>

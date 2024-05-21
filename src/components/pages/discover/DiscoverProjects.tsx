@@ -26,7 +26,7 @@ export default function DiscoverProjects(){
 
 
     return (
-        <div className="w-full h-fit ">
+        <div className="w-full h-fit">
 
             <div className="container flex flex-col m-auto">
 
