@@ -11,7 +11,7 @@ interface DiscoverPopularProjectSlideProps{
 export default function DiscoverPopularProjectSlide({number, activeNumber, className, onClick}: DiscoverPopularProjectSlideProps){
     
     return (
-        <div className={cn('w-full h-[30rem] relative rounded-3xl cursor-pointer transition-transform duration-200 shadow'
+        <div className={cn('w-full h-[30rem] relative rounded-3xl cursor-pointer transition-transform duration-200 shadow overflow-hidden'
             , {'flex-shrink-0 w-3/4': number === activeNumber}
             , className
         )} onClick={() => onClick(number)}>
@@ -19,7 +19,9 @@ export default function DiscoverPopularProjectSlide({number, activeNumber, class
                 width={0}
                 height={0}
                 sizes={"100vw"}
-                className={`w-full h-full rounded-2xl object-cover transition-all`}
+                className={cn(`w-full h-full rounded-2xl object-cover transition-all duration-300`
+                    ,{'scale-110 hover:scale-100': number === activeNumber}
+                )}
                 src={
                   "https://images.unsplash.com/photo-1680868543815-b8666dba60f7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2532&q=80"
                 }
