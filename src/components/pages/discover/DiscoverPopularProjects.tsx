@@ -12,7 +12,7 @@ export default function DiscoverPopularProjects(){
     }
 
     return (
-        <div className="w-full h-fit flex flex-row gap-1 ">
+        <div className="w-full h-[40rem] md:h-full flex flex-col gap-2 md:flex-row">
             <DiscoverPopularProjectSlide number={1} activeNumber={activeNumber} onClick={handleExpandSlide} />
             <DiscoverPopularProjectSlide number={2} activeNumber={activeNumber} onClick={handleExpandSlide} />
             <DiscoverPopularProjectSlide number={3} activeNumber={activeNumber} onClick={handleExpandSlide} />

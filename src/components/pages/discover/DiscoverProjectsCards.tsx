@@ -9,7 +9,7 @@ export default function DiscoverProjectsCards({activePage}: DiscoverProjectsCard
     
     return(
 
-        <div className="w-full h-fit grid grid-cols-3 gap-4">
+        <div className="w-full h-fit grid gap-4 grid-cols-2 md:grid-cols-3">
 
             <Card phase={ProjectPhaseEnum.VOLUNTEERING} />
             <Card phase={ProjectPhaseEnum.VOLUNTEERING} />
