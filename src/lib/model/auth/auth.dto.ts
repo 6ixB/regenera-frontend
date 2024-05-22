@@ -5,4 +5,9 @@ export const SignInDtoSchema = z.object({
   password: z.string().min(8).max(32),
 });
 
+export const SignInWithGoogleDtoSchema = z.object({
+  idToken: z.string(),
+});
+
 export type SignInDto = z.infer<typeof SignInDtoSchema>;
+export type SignInWithGoogleDto = z.infer<typeof SignInWithGoogleDtoSchema>;

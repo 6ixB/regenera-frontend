@@ -2,6 +2,7 @@ import { ChevronRight, Menu } from "lucide-react";
 import Regenera from "../../vector-graphics/Regenera";
 import Link from "next/link";
 import NavbarCollapsedNavLink from "./NavbarCollapsedNavLink";
+import { FrontendRoutesEnum } from "@/lib/routes";
 
 interface SidebarProps {
   isSidebarOpen: Boolean;
@@ -26,7 +27,10 @@ export default function NavbarCollapsed({
             className={"text-light-text-100 cursor-pointer"}
             onClick={toggleSidebar}
           />
-          <Link href={"/"} className={"flex items-center gap-2"}>
+          <Link
+            href={FrontendRoutesEnum.HOME.toString()}
+            className={"flex items-center gap-2"}
+          >
             <Regenera className={"fill-light-text-100"} />
             <div className={"text-lg font-medium text-light-text-100"}>
               Regenera
@@ -36,7 +40,7 @@ export default function NavbarCollapsed({
 
         <div className={"flex flex-col"}>
           <NavbarCollapsedNavLink
-            link={"/about"}
+            link={FrontendRoutesEnum.ABOUT.toString()}
             title={"About"}
             description={"How it works"}
           />

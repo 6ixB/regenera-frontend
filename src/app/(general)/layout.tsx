@@ -5,8 +5,8 @@ import PrelineScript from "@/components/preline/PrelineScript";
 import Footer from "@/components/navigations/Footer";
 import Navbar from "@/components/navigations/navbar/Navbar";
 import ReactQueryProvider from "@/components/react-query/ReactQueryProvider";
-import { getSession } from "@/lib/session";
-import { SessionEntity } from "@/lib/model/session/session.entity";
+import { SessionProvider } from "next-auth/react";
+import { auth } from "@/lib/next-auth/auth";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,18 +20,20 @@ export default async function GeneralLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const session = (await getSession()) as SessionEntity | null;
+  const session = await auth();
 
   return (
     <html lang="en">
       <body
         className={`${inter.className} w-full min-h-screen bg-light-background-100 flex flex-col items-center`}
       >
-        <ReactQueryProvider>
-          <Navbar pill={false} session={session} />
-          {children}
-          <Footer />
-        </ReactQueryProvider>
+        <SessionProvider session={session}>
+          <ReactQueryProvider>
+            <Navbar pill={true} />
+            {children}
+            <Footer />
+          </ReactQueryProvider>
+        </SessionProvider>
       </body>
       <PrelineScript />
     </html>
