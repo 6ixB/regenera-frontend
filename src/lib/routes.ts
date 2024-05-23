@@ -7,6 +7,6 @@ export enum FrontendRoutesEnum {
 }
 
 export enum BackendRoutesEnum {
-  AUTH = "/auth",
-  USERS = "/users",
+  AUTH = "auth",
+  USERS = "users",
 }
