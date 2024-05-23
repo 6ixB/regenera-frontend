@@ -6,4 +6,7 @@ export enum FrontendRoutesEnum {
   DASHBOARD = "/dashboard",
 }
 
-export enum BackendRoutesEnum {}
+export enum BackendRoutesEnum {
+  AUTH = "/auth",
+  USERS = "/users",
+}
