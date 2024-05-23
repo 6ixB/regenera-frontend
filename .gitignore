@@ -35,4 +35,5 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
+# Ignore the service account key file
 serviceAccountKey.json
