@@ -9,6 +9,8 @@ import { JWT } from "next-auth/jwt";
 
 export const pages = {
   signIn: "/auth/signin",
+  signOut: "/auth/signout",
+  error: "/auth/error",
 };
 
 export const providers: Provider[] = [

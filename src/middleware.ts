@@ -2,7 +2,7 @@ import { auth } from "@/lib/next-auth/auth";
 import { NextResponse } from "next/server";
 import { FrontendRoutesEnum } from "./lib/routes";
 
-const protectedRoutes = ["/dashboard"];
+const protectedRoutes = ["/dashboard", "/auth/signout"];
 const publicRoutes = ["/auth/signin", "/auth/signup"];
 
 export default auth((req) => {

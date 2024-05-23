@@ -1,3 +1,4 @@
+import AuthErrorMessage from "@/components/pages/auth/error/AuthErrorMessage";
 import Regenera from "@/components/vector-graphics/Regenera";
 import { FrontendRoutesEnum } from "@/lib/routes";
 import { CircleAlert } from "lucide-react";
@@ -22,9 +23,14 @@ export default function AuthError() {
           }
         >
           <CircleAlert size={32} className={"text-light-accent-100"} />
-          <div className="flex flex-col justify-center items-center">
-            <div className={"text-base text-light-text-100"}>
-              Oops, something went wrong!
+          <div className="flex flex-col justify-center gap-y-2">
+            <div
+              className={"flex flex-col gap-y-4 text-base text-light-text-100"}
+            >
+              <div className="text-light-accent-100">
+                Oops something went wrong!
+              </div>
+              <AuthErrorMessage />
             </div>
             <Link
               href={FrontendRoutesEnum.SIGNIN}
