@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "../globals.css";
 import PrelineScript from "@/components/preline/PrelineScript";
-import ReactQueryProvider from "@/components/react-query/ReactQueryProvider";
+import Providers from "@/components/Providers";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,7 +21,7 @@ export default function AuthLayout({
       <body
         className={`${inter.className} bg-light-background-100 py-8 md:bg-light-background-200 md:py-16`}
       >
-        <ReactQueryProvider>{children}</ReactQueryProvider>
+        <Providers>{children}</Providers>
       </body>
       <PrelineScript />
     </html>

@@ -2,23 +2,27 @@
 
 import Regenera from "../../vector-graphics/Regenera";
 import Link from "next/link";
-import { Search, Menu } from "lucide-react";
+import { Search, MessageCircleMore, Bell } from "lucide-react";
 import { useEffect, useState } from "react";
 import NavbarCollapsed from "./NavbarCollapsed";
-import NavbarNotAuthenticated from "./NavbarNotAuthenticated";
-import { SessionEntity } from "@/lib/model/session/session.entity";
-import NavbarAuthenticated from "./NavbarAuthenticated";
+import NavbarMobile from "./NavbarMobile";
 import InputGroup from "@/components/forms/InputGroup";
-import CollapsedInputGroup from "@/components/forms/CollapsedInputGroup";
+import { FrontendRoutesEnum } from "@/lib/routes";
+import { useSession } from "next-auth/react";
+import NavbarUserDropdown from "./NavbarUserDropdown";
 
 interface Navbar {
   pill: Boolean;
-  session?: SessionEntity | null;
 }
 
-export default function Navbar({ pill, session = null }: Navbar) {
+export default function Navbar({ pill }: Navbar) {
+  const { data, status } = useSession();
   const [isShrinked, setIsShrinked] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
 
   useEffect(() => {
     if (pill) {
@@ -36,43 +40,113 @@ export default function Navbar({ pill, session = null }: Navbar) {
     }
   });
 
-  const toggleSidebar = () => {
-    setIsSidebarOpen(!isSidebarOpen);
-  };
-
   return (
     <header
       className={`flex z-50 fixed justify-center items-center user-select-none transition-all duration-200 bg-light-background-100
       shadow px-8
-      ${isShrinked ? 'top-0 w-full rounded-none md:w-10/12 md:top-4 md:rounded-full lg:container lg:px-8 lg:py-0': 'top-0 w-full'}`}
+      ${isShrinked ? "top-0 w-full rounded-none md:w-10/12 md:top-4 md:rounded-full md:px-8 lg:container" : "top-0 w-full"}`}
     >
-      {session === null ? (
-        <NavbarNotAuthenticated />
-      ) : (
-        <NavbarAuthenticated session={session} />
-      )}
-
       <nav
-        className={`max-w-[67rem] w-full py-3 flex items-center justify-between gap-6 md:hidden
-          group
+        className={`container w-full py-3 items-center justify-between gap-x-4 hidden md:flex
         `}
       >
-        <CollapsedInputGroup icon={<Search className={"text-light-text-100"} />} placeholder={'Search projects, creators, and categories'} variant={'no-outlined'}
-          className={'flex w-0 max-w-full group-focus-within:w-full transition-all ease-out duration-500'}
-        />
-        <div className={"w-[16rem] flex items-center justify-center gap-x-4 group-focus-within:hidden"}>
-          <Link href={"/"} className={"flex items-center gap-2"}>
+        {/* Left Section */}
+        <div className={"w-[16rem] flex items-center justify-start gap-x-4"}>
+          <Link
+            href={FrontendRoutesEnum.HOME.toString()}
+            className={"flex items-center gap-2"}
+          >
             <Regenera className={"fill-light-text-100"} />
             <div className={"text-lg font-medium text-light-text-100"}>
               Regenera
             </div>
           </Link>
+          <Link
+            href={
+              status === "authenticated"
+                ? FrontendRoutesEnum.DASHBOARD.toString()
+                : FrontendRoutesEnum.ABOUT.toString()
+            }
+          >
+            <div className={"text-base text-light-text-100 whitespace-nowrap"}>
+              {status === "authenticated" ? "Dashboard" : "How it works"}
+            </div>
+          </Link>
         </div>
-        <Menu
-          className={"text-light-text-100 cursor-pointer"}
-          onClick={toggleSidebar}
+
+        {/* Search Bar */}
+        <InputGroup
+          icon={<Search className={"text-light-text-100"} />}
+          placeholder={"Search projects, creators, and categories"}
         />
+
+        {/* Right Section */}
+        <div className={"w-[16rem] flex items-center justify-end gap-x-4"}>
+          {status === "authenticated" ? (
+            // Authenticated
+            <>
+              <div
+                className={
+                  "flex justify-center items-center p-2 rounded-md cursor-pointer hover:bg-light-background-200"
+                }
+              >
+                <div className={"relative inline-block"}>
+                  <MessageCircleMore
+                    className={"text-light-text-100"}
+                    size={20}
+                  />
+                  <span
+                    className={
+                      "absolute top-0 end-0 block size-1.5 rounded-full ring-2 ring-white bg-light-accent-100"
+                    }
+                  ></span>
+                </div>
+              </div>
+              <div
+                className={
+                  "flex justify-center items-center p-2 rounded-md cursor-pointer hover:bg-light-background-200"
+                }
+              >
+                <div className={"relative inline-block"}>
+                  <Bell className={"text-light-text-100"} size={20} />
+                  <span
+                    className={
+                      "absolute top-0 end-0 block size-1.5 rounded-full ring-2 ring-white bg-light-accent-100"
+                    }
+                  ></span>
+                </div>
+              </div>
+              <NavbarUserDropdown />
+            </>
+          ) : (
+            // Unauthenticated
+            <>
+              <Link href={FrontendRoutesEnum.SIGNIN.toString()}>
+                <div
+                  className={"text-base text-light-text-100 whitespace-nowrap"}
+                >
+                  Sign in
+                </div>
+              </Link>
+              <Link
+                href={"/projects/create"}
+                className={
+                  "px-4 py-2 rounded-full border-2 border-light-accent-100"
+                }
+              >
+                <div
+                  className={"text-base text-light-text-100 whitespace-nowrap"}
+                >
+                  Start a project
+                </div>
+              </Link>
+            </>
+          )}
+        </div>
       </nav>
+
+      {/* Mobile Nav */}
+      <NavbarMobile toggleSidebar={toggleSidebar} />
 
       <NavbarCollapsed
         isSidebarOpen={isSidebarOpen}
