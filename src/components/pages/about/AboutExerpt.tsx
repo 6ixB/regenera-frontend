@@ -5,7 +5,7 @@ export default function AboutExerpt() {
         "w-full py-12 bg-gradient-to-r from-light-primary-200 to-light-primary-100 flex justify-center"
       }
     >
-      <div className={"w-[67rem] flex justify-center items-center gap-x-4"}>
+      <div className={"container flex justify-center items-center gap-x-4"}>
         <div
           className={
             "flex flex-col w-[32rem] gap-y-2 text-light-background-100 text-center"
