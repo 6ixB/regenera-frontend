@@ -1,3 +1,4 @@
+import CollapsedInputGroup from "@/components/forms/CollapsedInputGroup";
 import Regenera from "@/components/vector-graphics/Regenera";
 import { FrontendRoutesEnum } from "@/lib/routes";
 import { Menu, Search } from "lucide-react";
@@ -13,7 +14,14 @@ export default function NavbarMobile({ toggleSidebar }: NavbarMobileProps) {
       className={`max-w-[67rem] w-full py-3 flex items-center justify-between md:hidden
         `}
     >
-      <Search className={"text-light-text-100"} />
+      <CollapsedInputGroup
+        icon={<Search className={"text-light-text-100"} />}
+        placeholder={"Search projects, creators, and categories"}
+        variant={"no-outlined"}
+        className={
+          "flex w-0 max-w-full group-focus-within:w-full transition-all ease-out duration-500"
+        }
+      />
       <div className={"w-[16rem] flex items-center justify-center gap-x-4"}>
         <Link
           href={FrontendRoutesEnum.HOME.toString()}

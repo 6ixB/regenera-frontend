@@ -10,15 +10,24 @@ import InputGroup from "@/components/forms/InputGroup";
 import { FrontendRoutesEnum } from "@/lib/routes";
 import { useSession } from "next-auth/react";
 import NavbarUserDropdown from "./NavbarUserDropdown";
+import { usePathname } from "next/navigation";
 
-interface Navbar {
-  pill: Boolean;
+function isStaticPage(pathname: string) {
+  const staticPages = [
+    FrontendRoutesEnum.HOME.toString(),
+    FrontendRoutesEnum.ABOUT.toString(),
+  ];
+
+  return staticPages.includes(pathname);
 }
 
-export default function Navbar({ pill }: Navbar) {
-  const { data, status } = useSession();
+export default function Navbar() {
+  const pathname = usePathname();
+  const { status } = useSession();
   const [isShrinked, setIsShrinked] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  const pill = isStaticPage(pathname);
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
@@ -43,11 +52,11 @@ export default function Navbar({ pill }: Navbar) {
   return (
     <header
       className={`flex z-50 fixed justify-center items-center user-select-none transition-all duration-200 bg-light-background-100
-      shadow px-8
-      ${isShrinked ? "top-0 w-full rounded-none md:w-10/12 md:top-4 md:rounded-full md:px-8 lg:container" : "top-0 w-full"}`}
+    shadow px-8
+    ${isShrinked ? "top-0 w-full rounded-none md:w-10/12 md:top-4 md:rounded-full lg:container lg:px-8 lg:py-0" : "top-0 w-full"}`}
     >
       <nav
-        className={`container w-full py-3 items-center justify-between gap-x-4 hidden md:flex
+        className={`container w-full px-0 py-3 items-center justify-between gap-x-4 hidden md:flex
         `}
       >
         {/* Left Section */}
