@@ -28,6 +28,7 @@ export default function Navbar() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const pill = isStaticPage(pathname);
+  const centered = !pathname.includes(FrontendRoutesEnum.DASHBOARD.toString());
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
@@ -56,7 +57,7 @@ export default function Navbar() {
     ${isShrinked ? "top-0 w-full rounded-none md:w-10/12 md:top-4 md:rounded-full lg:container lg:px-8 lg:py-0" : "top-0 w-full"}`}
     >
       <nav
-        className={`container w-full px-0 py-3 items-center justify-between gap-x-4 hidden md:flex
+        className={`${centered && "container"} w-full px-0 py-3 items-center justify-between gap-x-4 hidden md:flex
         `}
       >
         {/* Left Section */}

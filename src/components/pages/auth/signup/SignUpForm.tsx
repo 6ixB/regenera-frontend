@@ -32,7 +32,7 @@ export default function SignUpForm() {
     mutationFn: createUserMutationFn,
     onSuccess: () => {
       router.push(
-        `${FrontendRoutesEnum.SIGNIN.toString()}?signIn=SignUpSuccess`
+        `${FrontendRoutesEnum.SIGNIN.toString()}?signin=SignUpSuccess`
       );
     },
     onError: (error) => {
