@@ -31,7 +31,9 @@ export default function SignUpForm() {
   const createUser = useMutation({
     mutationFn: createUserMutationFn,
     onSuccess: () => {
-      router.push(FrontendRoutesEnum.SIGNIN.toString());
+      router.push(
+        `${FrontendRoutesEnum.SIGNIN.toString()}?signIn=SignUpSuccess`
+      );
     },
     onError: (error) => {
       console.log(error);

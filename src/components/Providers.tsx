@@ -1,6 +1,7 @@
 import ReactQueryProvider from "@/components/react-query/ReactQueryProvider";
 import { SessionProvider } from "next-auth/react";
 import { auth } from "@/lib/next-auth/auth";
+import { Toaster } from "react-hot-toast";
 
 interface ProvidersProps {
   children: React.ReactNode;
@@ -11,7 +12,10 @@ export default async function Providers({ children }: ProvidersProps) {
 
   return (
     <SessionProvider session={session}>
-      <ReactQueryProvider>{children}</ReactQueryProvider>
+      <ReactQueryProvider>
+        <Toaster position={"top-center"} />
+        {children}
+      </ReactQueryProvider>
     </SessionProvider>
   );
 }

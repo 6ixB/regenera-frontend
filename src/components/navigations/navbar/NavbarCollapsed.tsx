@@ -16,7 +16,7 @@ export default function NavbarCollapsed({
   return (
     <div
       className={`fixed flex top-0 left-0 w-screen h-screen bg-black bg-opacity-40 
-        ${isSidebarOpen ? "opacity-100" : "opacity-0 pointer-events-none"} justify-end z-50 transition-opacity ease-in-out duration-300 md:opacity-0 md:pointer-events-none`}
+        ${isSidebarOpen ? "opacity-100" : "opacity-0 pointer-events-none"} justify-end z-50 ttion-oransipacity ease-in-out duration-300 md:opacity-0 md:pointer-events-none`}
     >
       <div
         className={`flex flex-col w-5/6 h-full bg-light-background-100 shadow py-3 px-6 gap-y-4 text-end
