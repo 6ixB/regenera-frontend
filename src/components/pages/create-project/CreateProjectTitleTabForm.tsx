@@ -10,14 +10,14 @@ import {
   CreateProjectTitleDto,
   CreateProjectTitleDtoSchema,
 } from "@/lib/model/project/project.dto";
-import { useRef } from "react";
-import { error } from "console";
+import { CreateProjectTabEnum } from "./CreateProjectTab";
 
-type ImageRef = {
-  getImage: () => string;
-};
+interface CreateProjectTitleTabFormProps{
+  handleActiveTab: (tab: CreateProjectTabEnum) => void,
+}
 
-export default function CreateProjectTitleTabForm() {
+
+export default function CreateProjectTitleTabForm({handleActiveTab} : CreateProjectTitleTabFormProps) {
   const {
     register,
     handleSubmit,
@@ -31,6 +31,8 @@ export default function CreateProjectTitleTabForm() {
 
   const onSubmit: SubmitHandler<CreateProjectTitleDto> = async (data) => {
     console.log("Data: ", data);
+
+    handleActiveTab(CreateProjectTabEnum.DETAILS)
   };
 
   return (
@@ -55,7 +57,7 @@ export default function CreateProjectTitleTabForm() {
         <p className="text-sm text-light-accent-100">{errors.title?.message}</p>
       )}
 
-      <Button variant={"solid"} className="w-full" type="submit">
+      <Button variant={"solid"} className={"w-full"} type={"submit"}>
         Finish Your Setup
       </Button>
     </form>

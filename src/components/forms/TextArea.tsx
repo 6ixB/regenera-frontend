@@ -1,14 +1,14 @@
 import cn from "@/lib/utils/cn";
 import React from "react";
 
-interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+interface TextAreaProps extends React.InputHTMLAttributes<HTMLTextAreaElement> {
   icon?: React.ReactNode;
   label?: string;
   desc?: string;
   className?: string;
 }
 
-const Input = React.forwardRef<HTMLInputElement, InputProps>(
+const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
   ({ icon, label, desc, className, ...props }, ref) => {
     return (
       <div className="flex flex-col gap-y-2 w-full">
@@ -20,7 +20,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           <p className="font-medium text-xs text-gray-500">{desc}</p>
         </div>
 
-        <input
+        <textarea
           className={cn(
             `py-3 px-4 w-full rounded-lg text-base border border-light-background-300 focus:border-light-primary-100 focus:ring-light-primary-100 ${className}`,
             className
@@ -33,6 +33,6 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
   }
 );
 
-Input.displayName = "Input";
+TextArea.displayName = "TextArea";
 
-export default Input;
+export default TextArea;
