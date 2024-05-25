@@ -116,11 +116,11 @@ export default function Pagination({ endPage, activePage, batch, onClick }: Pagi
                 )}
                 </div>
                 <button
-                type="button"
-                className="min-h-[38px] min-w-[38px] py-2 px-2.5 inline-flex justify-center items-center gap-x-2 text-sm rounded-lg text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100
-                disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:hover:bg-white/10 dark:focus:bg-white/10"
-                onClick={() => onClick(activePage + 1)}
-                disabled={activePage >= endPage}
+                    type="button"
+                    className="min-h-[38px] min-w-[38px] py-2 px-2.5 inline-flex justify-center items-center gap-x-2 text-sm rounded-lg text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100
+                    disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:hover:bg-white/10 dark:focus:bg-white/10"
+                    onClick={() => onClick(activePage + 1)}
+                    disabled={activePage >= endPage}
                 >
                 <span aria-hidden="true" className="sr-only">Next</span>
                 <svg
@@ -139,6 +139,7 @@ export default function Pagination({ endPage, activePage, batch, onClick }: Pagi
                 </svg>
                 </button>
             </nav>
+            
             <div className="flex justify-center sm:justify-start items-center gap-x-2">
                 <span className="text-sm text-gray-800 whitespace-nowrap dark:text-white">Go to</span>
                 <input
