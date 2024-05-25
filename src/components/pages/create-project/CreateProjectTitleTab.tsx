@@ -16,7 +16,7 @@ interface CreateProjectTitleTabProps{
 
 export default function CreateProjectTitleTab({handleActiveTab, className} : CreateProjectTitleTabProps) {
   return (
-    <div className={cn(`w-full h-fit flex flex-col items-center gap-10 py-4`, className)}>
+    <div className={cn(`container h-fit flex flex-col items-center gap-10 py-4 m-auto `, className)}>
         <div className="w-full flex flex-col items-center text-center gap-2">
             <h3 className="font-medium text-3xl text-light-text-100">
             Initiate a Cleaner Tomorrow

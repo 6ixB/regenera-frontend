@@ -5,11 +5,12 @@ interface TextAreaProps extends React.InputHTMLAttributes<HTMLTextAreaElement> {
   icon?: React.ReactNode;
   label?: string;
   desc?: string;
+  error?: string | undefined
   className?: string;
 }
 
 const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
-  ({ icon, label, desc, className, ...props }, ref) => {
+  ({ icon, label, desc, className, error, ...props }, ref) => {
     return (
       <div className="flex flex-col gap-y-2 w-full">
         <div className="flex flex-col gap-y-1">
@@ -28,6 +29,7 @@ const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
           {...props}
           ref={ref}
         />
+        {error && <p className="text-sm text-light-accent-100">{error}</p>}
       </div>
     );
   }

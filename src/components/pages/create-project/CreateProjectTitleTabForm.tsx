@@ -51,11 +51,9 @@ export default function CreateProjectTitleTabForm({handleActiveTab} : CreateProj
         desc={"Give a captivating title to inspire support"}
         className={"border-light-primary-100 placeholder-light-background-300"}
         placeholder={"e.g. Cleaning Up Binus Anggrek"}
+        error={errors.title?.message}
         {...register("title")}
       />
-      {errors.title && (
-        <p className="text-sm text-light-accent-100">{errors.title?.message}</p>
-      )}
 
       <Button variant={"solid"} className={"w-full"} type={"submit"}>
         Finish Your Setup

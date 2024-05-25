@@ -11,7 +11,7 @@ interface CreateProjectDetailsTabProps{
 export default function CreateProjectDetailsTab({handleActiveTab, className} : CreateProjectDetailsTabProps){
 
     return (
-        <div className={cn(`w-full h-fit flex flex-col items-center gap-4 py-4`, className)}>
+        <div className={cn(`container h-fit flex flex-col items-center gap-4 py-4 m-auto`, className)}>
 
 
             <div className="w-full flex flex-col items-center text-center gap-2 relative">

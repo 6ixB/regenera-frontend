@@ -12,8 +12,9 @@ export const CreateProjectTitleDtoSchema = z.object({
 
 export const CreateProjectDetailsDtoSchema = z.object({
     objectives: z
-      .instanceof(FileList)
-      .refine((files) => files.length === 1, "Image is required"),
+    .instanceof(FileList)
+    .refine((files) => files.length === 1, "Image is required")
+    .transform((files) => files[0]),
     address: z
       .string()
       .min(8, { message: "Address must be at least 8 characters long" }),
