@@ -12,12 +12,12 @@ import {
 } from "@/lib/model/project/project.dto";
 import { CreateProjectTabEnum } from "./CreateProjectTab";
 
-interface CreateProjectTitleTabFormProps{
+interface CreateProjectTitleTabFormProps {
   handleActiveTab: (tab: CreateProjectTabEnum) => void,
 }
 
 
-export default function CreateProjectTitleTabForm({handleActiveTab} : CreateProjectTitleTabFormProps) {
+export default function CreateProjectTitleTabForm({ handleActiveTab }: CreateProjectTitleTabFormProps) {
   const {
     register,
     handleSubmit,
@@ -38,12 +38,18 @@ export default function CreateProjectTitleTabForm({handleActiveTab} : CreateProj
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="w-full flex flex-col items-center gap-y-8 max-w-sm"
+      className="w-full flex flex-col items-center gap-y-10 max-w-sm"
     >
-      <CreateProjectTitleTabImage {...register("image")} images={imageValue} />
-      {errors.image && (
-        <p className="text-sm text-light-accent-100">{errors.image?.message}</p>
-      )}
+
+      <div className="w-full h-full relative">
+
+        <CreateProjectTitleTabImage {...register("image")} images={imageValue} />
+        {errors.image && (
+          <p className="text-sm text-light-accent-100 absolute bottom-0 translate-y-full">
+            {errors.image?.message}
+          </p>
+        )}
+      </div>
 
       <Input
         icon={<PenLine className="text-light-text-100" />}

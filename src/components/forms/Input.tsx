@@ -13,7 +13,7 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
   ({ icon, label, desc, className, error, ...props }, ref) => {
     return (
-      <div className="flex flex-col gap-y-2 w-full">
+      <div className="flex flex-col gap-y-2 w-full relative">
         <div className="flex flex-col gap-y-1">
           <div className="flex gap-x-2 items-center">
             {icon}
@@ -30,7 +30,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           {...props}
           ref={ref}
         />
-        {error && <p className="text-sm text-light-accent-100">{error}</p>}
+        {error && <p className="text-sm text-light-accent-100 absolute bottom-0 translate-y-full">{error}</p>}
       </div>
     );
   }
