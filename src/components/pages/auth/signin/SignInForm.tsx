@@ -7,12 +7,10 @@ import GoogleSignInButton from "@/components/forms/GoogleSignInButton";
 import { SubmitHandler, useForm } from "react-hook-form";
 import Link from "next/link";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { SignInDto, SignInDtoSchema } from "@/lib/model/auth/signin.dto";
-import { useMutation } from "@tanstack/react-query";
-import { AxiosError } from "axios";
+import { SignInDto, SignInDtoSchema } from "@/lib/model/auth/auth.dto";
+import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { createSession } from "@/lib/session";
-import { signInMutationFn } from "@/lib/api/authApi";
+import { FrontendRoutesEnum } from "@/lib/routes";
 
 export default function SignInForm() {
   const router = useRouter();
@@ -24,30 +22,18 @@ export default function SignInForm() {
     formState: { errors, isSubmitting },
   } = useForm<SignInDto>({ resolver: zodResolver(SignInDtoSchema) });
 
-  const signInMutation = useMutation({
-    mutationFn: signInMutationFn,
-    onSuccess: (data) => {
-      const accessToken = data.data.accessToken;
-      createSession(accessToken);
-      router.push("/");
-    },
-    onError: (error) => {
-      if (error instanceof AxiosError) {
-        setError("password", {
-          type: "manual",
-          message: error.response?.data.message,
-        });
-      } else {
-        setError("password", {
-          type: "manual",
-          message: "An error occurred.",
-        });
-      }
-    },
-  });
-
   const onSubmit: SubmitHandler<SignInDto> = async (data) => {
-    signInMutation.mutate(data);
+    const result = await signIn("credentials", { ...data, redirect: false });
+
+    if (result?.error) {
+      setError("password", {
+        type: "manual",
+        message: "Invalid credentials.",
+      });
+    } else {
+      router.push("/dashboard");
+      router.refresh();
+    }
   };
 
   return (
@@ -114,7 +100,7 @@ export default function SignInForm() {
       <div className={"px-8 py-4 md:justify-center flex items-center gap-2"}>
         <span>New to Regenera?</span>
         <Link
-          href={"/signup"}
+          href={FrontendRoutesEnum.SIGNUP.toString()}
           className={
             "py-2 text-base text-hyperlink focus:outline-light-primary-100 hover:opacity-75"
           }
