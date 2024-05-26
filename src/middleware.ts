@@ -1,33 +1,34 @@
-import { NextRequest, NextResponse } from "next/server";
-import { cookies } from "next/headers";
-import { decrypt } from "@/lib/session";
+import { auth } from "@/lib/next-auth/auth";
+import { NextResponse } from "next/server";
+import { FrontendRoutesEnum } from "./lib/routes";
 
-const protectedRoutes = ["/dashboard", "/projects/create", "/chats"];
-const publicRoutes = ["/signin", "/signup", "/"];
+const protectedRoutes = ["/dashboard", "/auth/signout" "/projects/create", "/chats"];
+const publicRoutes = ["/auth/signin", "/auth/signup"];
 
-export default async function middleware(req: NextRequest) {
+export default auth((req) => {
   const path = req.nextUrl.pathname;
   const isProtectedRoute = protectedRoutes.includes(path);
   const isPublicRoute = publicRoutes.includes(path);
 
-  const cookie = cookies().get("session")?.value;
-  const session = await decrypt(cookie);
-
-  if (isProtectedRoute && !session?.userId) {
-    return NextResponse.redirect(new URL("/signin", req.nextUrl));
+  if (isProtectedRoute && !req.auth) {
+    return NextResponse.redirect(
+      new URL(FrontendRoutesEnum.SIGNIN.toString(), req.nextUrl)
+    );
   }
 
   if (
     isPublicRoute &&
-    session?.userId &&
-    !req.nextUrl.pathname.startsWith(protectedRoutes[0])
+    req.auth &&
+    !req.nextUrl.pathname.startsWith(FrontendRoutesEnum.DASHBOARD.toString())
   ) {
-    return NextResponse.redirect(new URL("/dashboard", req.nextUrl));
+    return NextResponse.redirect(
+      new URL(FrontendRoutesEnum.DASHBOARD.toString(), req.nextUrl)
+    );
   }
 
   return NextResponse.next();
-}
+});
 
 export const config = {
-  matcher: ["/((?!api|_next/static|_next/image|.*\\.png$).*)"],
+  matcher: ["/((?!api|_next/static|_next/image|favicon.ico).*)"],
 };

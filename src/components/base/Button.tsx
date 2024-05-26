@@ -1,3 +1,5 @@
+import cn from "@/lib/utils/cn";
+
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant: "solid" | "outline";
   children: React.ReactNode;
@@ -24,7 +26,7 @@ export default function Button({
     <button
       onClick={onClick}
       type={type}
-      className={`${variantStyles[variant]} ${className ?? ""} disabled:opacity-50 disabled:pointer-events-none disabled:cursor-not-allowed`}
+      className={cn(`${variantStyles[variant]} disabled:opacity-50 disabled:pointer-events-none disabled:cursor-not-allowed `, className )}
     >
       {children}
     </button>
