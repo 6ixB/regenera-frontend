@@ -4,6 +4,8 @@ export enum FrontendRoutesEnum {
   HOME = "/",
   ABOUT = "/about",
   DASHBOARD = "/dashboard",
+  LEADERBOARD = "/leaderboard",
+  ACHIEVEMENTS = "/achievements",
 }
 
 export enum BackendRoutesEnum {

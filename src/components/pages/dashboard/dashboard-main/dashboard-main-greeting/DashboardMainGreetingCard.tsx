@@ -48,7 +48,6 @@ export default function DashboardMainGreetingCard() {
     >
       <div className={"text-xl font-semibold"}>
         Welcome back,
-        {/* Cuma test-test aja ya ges ya WKWKWKWKWKK */}
         <Typewriter
           words={[` ${data?.user.username}!`, ` ${data?.user.email}!`]}
           loop={0}
@@ -66,12 +65,12 @@ export default function DashboardMainGreetingCard() {
       </div>
       <div
         className={
-          "flex-1 grid grid-cols-4 rounded-md border border-light-background-300 divide-light-background-300 divide-x  text-base font-semibold text-center"
+          "flex-1 grid grid-cols-4 rounded-md border border-light-background-300 divide-light-background-300 divide-x  text-base 3xl:text-xl font-semibold text-center"
         }
       >
         <div className={"w-full flex flex-col items-center justify-center"}>
           <div>2120</div>
-          <Star size={20} />
+          <div>Rating</div>
         </div>
         <div className={"w-full flex flex-col items-center justify-center"}>
           <div>2</div>

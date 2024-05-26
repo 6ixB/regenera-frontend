@@ -109,7 +109,7 @@ export default function Navbar() {
                 <div
                   className={"relative inline-block"}
                   onClick={() => {
-                    router.push("/chats/1/1");
+                    router.push("/chats");
                     router.refresh();
                   }}
                 >

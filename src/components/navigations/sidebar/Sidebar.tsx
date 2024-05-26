@@ -1,4 +1,4 @@
-import { LeafyGreen, Target, Trophy } from "lucide-react";
+import { Award, LeafyGreen, Target, Trophy } from "lucide-react";
 import SidebarNavLink from "./SidebarNavLink";
 import Link from "next/link";
 import { FrontendRoutesEnum } from "@/lib/routes";
@@ -65,9 +65,14 @@ export default function Sidebar() {
             text={"Joined projects"}
           />
           <SidebarNavLink
-            link={FrontendRoutesEnum.DASHBOARD.toString()}
+            link={FrontendRoutesEnum.ACHIEVEMENTS.toString()}
+            icon={<Award size={20} className={"text-light-text-100"} />}
+            text={"Achievements"}
+          />
+          <SidebarNavLink
+            link={FrontendRoutesEnum.LEADERBOARD.toString()}
             icon={<Trophy size={20} className={"text-light-text-100"} />}
-            text={"Scoreboard"}
+            text={"Leaderboard"}
           />
         </div>
       </div>
