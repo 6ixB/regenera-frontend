@@ -33,6 +33,14 @@ export default function CreateProjectDetailsTabForm() {
 
     }
 
+    const handleRemoveObjectives = (idx: number) => {
+        
+        const updatedObjectives = objectives.filter((_, index) => index !== idx);
+
+        setValue('objectives', updatedObjectives);
+    
+    }
+
     const handleAddRequirements = (item: ProjectRequirement) => {
 
         const currentItems = getValues('requirements')
@@ -41,8 +49,14 @@ export default function CreateProjectDetailsTabForm() {
 
         setValue('requirements', [...currentItems, item])
 
-        console.log(getValues('requirements'));
+    }
 
+    const handleRemoveRequirements = (idx: number) => {
+        
+        const updatedRequirements = requirements.filter((_, index) => index !== idx);
+
+        setValue('requirements', updatedRequirements);
+    
     }
 
     const onSubmit: SubmitHandler<CreateProjectDetailsDto> = async (data) => {
@@ -57,7 +71,7 @@ export default function CreateProjectDetailsTabForm() {
 
             <div className="w-full h-full relative">
 
-                <CreateProjectDetailsTabFormObjectives {...register('objectives')} objectives={objectives} handleAddObjectives={handleAddObjectives} />
+                <CreateProjectDetailsTabFormObjectives {...register('objectives')} objectives={objectives} handleAddObjectives={handleAddObjectives} handleRemoveObjectives={handleRemoveObjectives} />
                 {errors.objectives && <p className="text-sm text-light-accent-100 absolute bottom-0 translate-y-full ">{errors.objectives.message}</p>}
             </div>
 
@@ -108,7 +122,7 @@ export default function CreateProjectDetailsTabForm() {
             />
             <div className="w-full h-full relative">
 
-                <CreateProjectDetailsTabRequirements requirements={requirements} handleAddRequirements={handleAddRequirements} />
+                <CreateProjectDetailsTabRequirements requirements={requirements} handleAddRequirements={handleAddRequirements} handleRemoveRequirements={handleRemoveRequirements}/>
                 {errors.requirements && <p className="text-sm text-light-accent-100 absolute bottom-0 translate-y-full">{errors.requirements.message}</p>}
 
             </div>

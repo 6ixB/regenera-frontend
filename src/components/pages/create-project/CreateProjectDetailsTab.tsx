@@ -26,6 +26,7 @@ export default function CreateProjectDetailsTab({handleActiveTab, className} : C
             </div>
 
             <CreateProjectDetailsTabForm />
+            
         </div>
     )
 }

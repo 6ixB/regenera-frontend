@@ -8,10 +8,11 @@ import CreateProjectDetailsTabRequirementsInput from "./CreateProjectDetailsTabR
 
 interface CreateProjectDetailsTabRequirementsProps {
     requirements: ProjectRequirement[],
-    handleAddRequirements: (item: ProjectRequirement) => void
+    handleAddRequirements: (item: ProjectRequirement) => void,
+    handleRemoveRequirements: (idx: number) => void
 }
 
-export default function CreateProjectDetailsTabRequirements({ requirements, handleAddRequirements }: CreateProjectDetailsTabRequirementsProps) {
+export default function CreateProjectDetailsTabRequirements({ requirements, handleAddRequirements, handleRemoveRequirements }: CreateProjectDetailsTabRequirementsProps) {
 
     const [isAddingItem, setIsAddingItem] = useState(false)
 
@@ -55,7 +56,7 @@ export default function CreateProjectDetailsTabRequirements({ requirements, hand
                                     }
                                     {
                                         requirements?.map((item, idx) => (
-                                            <CreateProjectDetailsTabRequirementsItem item={item} idx={idx} key={idx} />
+                                            <CreateProjectDetailsTabRequirementsItem item={item} idx={idx} key={idx} handleRemoveRequirements={handleRemoveRequirements} />
                                         ))
                                     }
                                 </tbody>

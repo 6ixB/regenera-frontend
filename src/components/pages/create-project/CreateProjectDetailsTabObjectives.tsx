@@ -1,18 +1,25 @@
+'use client'
+
 import Button from "@/components/base/Button";
 import { Aperture, Eye, Goal, ImagePlus, Images } from "lucide-react";
 import Image from "next/image";
-import { forwardRef, useImperativeHandle, useRef } from "react";
+import { forwardRef, useEffect, useImperativeHandle, useRef, useState } from "react";
+import { createPortal } from "react-dom";
+import CreateProjectDetailsTabObjectivesModal from "./CreateProjectDetailsTabObjectivesModal";
 
 interface CreateProjectDetailsTabObjectivesProps
     extends React.InputHTMLAttributes<HTMLInputElement> {
     objectives: File[];
-    handleAddObjectives: (newObjectives: FileList) => void
+    handleAddObjectives: (newObjectives: FileList) => void,
+    handleRemoveObjectives: (idx: number) => void
 }
 
 const CreateProjectDetailsTabObjectives = forwardRef<
     HTMLInputElement,
     CreateProjectDetailsTabObjectivesProps
->(({ objectives, handleAddObjectives, ...props }, ref) => {
+>(({ objectives, handleAddObjectives, handleRemoveObjectives, ...props }, ref) => {
+
+    const [isOpenModal, setIsOpenModel] = useState(false)
 
     const inputRef = useRef<HTMLInputElement>(null)
 
@@ -24,9 +31,30 @@ const CreateProjectDetailsTabObjectives = forwardRef<
         }
     };
 
+    const handleOpenModel = () => {
+        setIsOpenModel(!isOpenModal)
+    }
+
+    useEffect(() => {
+        if(objectives?.length <= 0) setIsOpenModel(false)
+
+    }, [objectives])
+
+    useEffect(() => {
+        if (isOpenModal) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = '';
+        }
+
+        return () => {
+            document.body.style.overflow = '';
+        };
+    }, [isOpenModal])
 
     return (
         <div className="flex flex-col gap-y-2">
+
             <div className="flex flex-col gap-y-1">
                 <div className="flex gap-x-2 items-center">
                     <Goal className="text-light-text-100" />
@@ -46,8 +74,8 @@ const CreateProjectDetailsTabObjectives = forwardRef<
                         <div className="w-full h-full grid grid-rows-2 grid-cols-4 gap-2 rounded-md">
                             {
                                 objectives.slice(0, 5).map((objective, idx) => {
-                                    return idx == 4 ? (
-                                        <div className="h-full w-full rounded-md border relative">
+                                    return idx === 4 ? (
+                                        <div key={idx} className="h-full w-full rounded-md border relative">
                                             <Image
                                                 width={0}
                                                 height={0}
@@ -57,9 +85,12 @@ const CreateProjectDetailsTabObjectives = forwardRef<
                                                 key={idx}
                                                 className={`h-full w-full object-cover rounded-md border`}
                                             />
-                                            <div className="w-full h-full absolute top-0 left-0 z-10 bg-black bg-opacity-40 flex items-center justify-center">
-                                                <p className="font-medium text-4xl text-light-background-100">+{objectives.length - 5}</p>
-                                            </div>
+                                            {
+                                                (objectives.length - 5) > 0 &&
+                                                <div className="w-full h-full absolute top-0 left-0 z-10 bg-black bg-opacity-40 flex items-center justify-center">
+                                                    <p className="font-medium text-4xl text-light-background-100">+{objectives.length - 5}</p>
+                                                </div>
+                                            }
                                         </div>
                                     ) :
                                         (
@@ -79,19 +110,19 @@ const CreateProjectDetailsTabObjectives = forwardRef<
 
                         </div>
 
-                        <div className="w-full h-full absolute top-0 left-0 z-10 bg-black bg-opacity-40 transition-opacity duration-300 opacity-0 user-select-none  group-hover:opacity-100">
-                            <div className="flex w-fit items-center gap-x-2 absolute top-2 left-2">
-                                <Button variant={'solid'} className="py-2 px-2">
-                                    <div className="flex h-full gap-x-2 items-center">
-                                        <Eye className="h-4 w-auto text-light-background-100" />
-                                        <p className="font-medium text-sm text-light-background-100">View Photos</p>
-                                    </div>
-                                </Button>
-
+                        <div className="w-full h-full absolute top-0 left-0 z-10 bg-black bg-opacity-40 transition-opacity duration-300 opacity-0 group-hover:opacity-100">
+                            <div className="flex w-fit items-center gap-x-2 absolute top-2 left-2 " >
                                 <Button variant={'solid'} className="py-2 px-2">
                                     <div className="flex h-full gap-x-2 items-center">
                                         <ImagePlus className="h-4 w-auto text-light-background-100" />
                                         <p className="font-medium text-sm text-light-background-100" onClick={handleClick}>Add Photos</p>
+                                    </div>
+                                </Button>
+
+                                <Button variant={'solid'} className="py-2 px-2" data-hs-overlay="#hs-scroll-inside-body-modal" onClick={handleOpenModel}>
+                                    <div className="flex h-full gap-x-2 items-center">
+                                        <Eye className="h-4 w-auto text-light-background-100" />
+                                        <p className="font-medium text-sm text-light-background-100">View / Edit Photos</p>
                                     </div>
                                 </Button>
 
@@ -108,6 +139,9 @@ const CreateProjectDetailsTabObjectives = forwardRef<
                 multiple
                 onChange={(e) => handleAddObjectives(e.target.files!)}
             />
+            {
+                isOpenModal && <CreateProjectDetailsTabObjectivesModal objectives={objectives} handleAddObjectives={handleClick} handleRemoveObjectives={handleRemoveObjectives} handleOpenModel={handleOpenModel} />
+            }
         </div>
     )
 })
