@@ -2,7 +2,7 @@
 
 import Regenera from "../../vector-graphics/Regenera";
 import Link from "next/link";
-import { Search, MessageCircleMore, Bell } from "lucide-react";
+import { Search, MessageCircleMore, Bell, Router } from "lucide-react";
 import { useEffect, useState } from "react";
 import NavbarCollapsed from "./NavbarCollapsed";
 import NavbarMobile from "./NavbarMobile";
@@ -10,7 +10,7 @@ import InputGroup from "@/components/forms/InputGroup";
 import { FrontendRoutesEnum } from "@/lib/routes";
 import { useSession } from "next-auth/react";
 import NavbarUserDropdown from "./NavbarUserDropdown";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 function isStaticPage(pathname: string) {
   const staticPages = [
@@ -22,6 +22,7 @@ function isStaticPage(pathname: string) {
 }
 
 export default function Navbar() {
+  const router = useRouter();
   const pathname = usePathname();
   const { status } = useSession();
   const [isShrinked, setIsShrinked] = useState(false);
@@ -105,7 +106,13 @@ export default function Navbar() {
                   "flex justify-center items-center p-2 rounded-md cursor-pointer hover:bg-light-background-200"
                 }
               >
-                <div className={"relative inline-block"}>
+                <div
+                  className={"relative inline-block"}
+                  onClick={() => {
+                    router.push("/chats/1/1");
+                    router.refresh();
+                  }}
+                >
                   <MessageCircleMore
                     className={"text-light-text-100"}
                     size={20}
