@@ -1,7 +1,16 @@
-import { ChevronRight } from "lucide-react";
-import Link from "next/link";
+interface AboutPhaseProps {
+  step: string;
+  title: string;
+  description: string;
+  addon: React.ReactNode;
+}
 
-export default function AboutPhase() {
+export default function AboutPhase({
+  step,
+  title,
+  description,
+  addon,
+}: AboutPhaseProps) {
   return (
     <div className={"container py-8"}>
       <div className={"flex flex-col gap-y-4"}>
@@ -11,10 +20,10 @@ export default function AboutPhase() {
               "bg-light-primary-200 w-12 h-12 flex justify-center items-center rounded-full text-light-background-100 font-medium text-2xl"
             }
           >
-            0
+            {step}
           </div>
           <div className={"text-light-text-200 text-2xl font-medium"}>
-            Start a project
+            {title}
           </div>
         </div>
         <div
@@ -23,17 +32,9 @@ export default function AboutPhase() {
           }
         >
           <div className={"text-light-text-100 text-base  lg:w-1/2"}>
-            Select your cleaning location, snap some before pictures, and
-            complete the required information. Then, simply relax and watch your
-            environment getting cleaned
+            {description}
           </div>
-          <Link
-            href={"/projects/create"}
-            className={"flex items-center text-hyperlink"}
-          >
-            <div>Start a project now</div>
-            <ChevronRight />
-          </Link>
+          {addon}
         </div>
       </div>
     </div>

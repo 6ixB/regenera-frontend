@@ -103,7 +103,7 @@ export default function Navbar() {
             <>
               <div
                 className={
-                  "flex justify-center items-center p-2 rounded-md cursor-pointer hover:bg-light-background-200"
+                  "flex justify-center items-center p-2 rounded-md cursor-pointer hover:bg-light-background-200 select-none"
                 }
               >
                 <div

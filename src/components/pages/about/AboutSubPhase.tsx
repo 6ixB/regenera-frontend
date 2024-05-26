@@ -1,4 +1,14 @@
-export default function AboutSubPhase() {
+interface AboutSubPhaseProps {
+  substep: string;
+  title: string;
+  description: string;
+}
+
+export default function AboutSubPhase({
+  substep,
+  title,
+  description,
+}: AboutSubPhaseProps) {
   return (
     <div className={"flex flex-col gap-y-4 "}>
       <div className={" flex items-center gap-x-4"}>
@@ -7,10 +17,10 @@ export default function AboutSubPhase() {
             "bg-light-accent-200 w-8 h-8 flex justify-center items-center rounded-full text-light-background-100 font-medium text-base"
           }
         >
-          a
+          {substep}
         </div>
         <div className={"text-light-text-200 text-base font-medium"}>
-          Find a cause you care about
+          {title}
         </div>
       </div>
       <div
@@ -19,8 +29,7 @@ export default function AboutSubPhase() {
         }
       >
         <div className={"text-light-text-100 text-base py-4"}>
-          Browse through a variety of cleanup projects and choose one that
-          resonates with you. 
+          {description}
         </div>
       </div>
     </div>

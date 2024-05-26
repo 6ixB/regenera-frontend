@@ -44,7 +44,7 @@ export default function CreateProjectDetailsTabRequirementsInput({
 
   return (
     <tr>
-      <td className=" px-6 pt-2 pb-6 whitespace-nowrap text-sm font-medium text-light-text-100 dark:text-neutral-200">
+      <td className="px-6 pt-2 pb-6 whitespace-nowrap text-sm font-medium text-light-text-100">
         <Input
           value={itemName}
           onChange={(e) => setItemName(e.target.value)}
@@ -53,7 +53,7 @@ export default function CreateProjectDetailsTabRequirementsInput({
           error={errors.name}
         />
       </td>
-      <td className="px-6 pt-2 pb-6 whitespace-nowrap text-sm text-light-text-100 dark:text-neutral-200">
+      <td className="px-6 pt-2 pb-6 whitespace-nowrap text-sm text-light-text-100 ">
         <Input
           type="number"
           min={0}
@@ -68,7 +68,7 @@ export default function CreateProjectDetailsTabRequirementsInput({
         <button
           type="button"
           className="inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-blue-600 
-                hover:text-blue-800 disabled:opacity-50 disabled:pointer-events-none dark:text-blue-500 dark:hover:text-blue-400"
+                hover:text-blue-800 disabled:opacity-50 disabled:pointer-events-none "
           onClick={handleAddClick}
         >
           Add

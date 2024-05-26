@@ -20,7 +20,7 @@ const SingleChatBox: React.FC<SingleChatListProps> = ({ message, id, idFromURL }
     }
 
     return (
-        <div className={`w-full flex gap-3 p-2 justify-center rounded-md ${id === idFromURL ? 'bg-light-background-200' : 'bg-light-background-100'}`} onClick={()=>handleOnClick(id)}>
+        <div className={`w-full flex gap-3 p-2 justify-center rounded-md ${id === idFromURL ? 'bg-light-background-200' : 'bg-light-background-100'} hover:bg-light-background-200 cursor-pointer`} onClick={()=>handleOnClick(id)}>
             <div className={"flex w-1/6"}>
                 <UserCircle strokeWidth={1.5} className={"w-full h-full text-light-text-100"}/>
             </div>
