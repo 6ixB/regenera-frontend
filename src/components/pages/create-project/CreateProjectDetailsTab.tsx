@@ -34,12 +34,8 @@ export default function CreateProjectDetailsTab({
           Lay the groundwork by providing details about your project
         </p>
 
-        <div
-          className="w-fit flex items-center justify-center absolute top-2 left-0 cursor-pointer"
-          onClick={() => handleActiveTab(CreateProjectTabEnum.TITLE)}
-        >
-          <ChevronLeft className=" text-light-text-100 " />
-          <p className="font-medium text-base text-light-text-100">Back</p>
+            <CreateProjectDetailsTabForm />
+
         </div>
       </div>
 
