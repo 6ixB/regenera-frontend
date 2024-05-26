@@ -39,7 +39,7 @@ export default function NavbarMobile({ toggleSidebar }: NavbarMobileProps) {
       </div>
       <Menu
         className={
-          "text-light-text-100 cursor-pointer group-focus-within:block"
+          "min-w-6 text-light-text-100 cursor-pointer group-focus-within:block"
         }
         onClick={toggleSidebar}
       />

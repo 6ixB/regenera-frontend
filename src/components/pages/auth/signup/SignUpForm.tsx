@@ -34,6 +34,7 @@ export default function SignUpForm() {
       router.push(
         `${FrontendRoutesEnum.SIGNIN.toString()}?signin=SignUpSuccess`
       );
+      router.refresh();
     },
     onError: (error) => {
       console.log(error);
