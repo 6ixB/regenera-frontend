@@ -69,7 +69,7 @@ export default function Footer() {
           <div>© 2024 SROOMY</div>
           <div className={"flex items-center gap-8"}>
             <Link href={"/"}>
-              <div >Terms</div>
+              <div>Terms</div>
             </Link>
             <Link href={"/"}>
               <div>Privacy Notice</div>

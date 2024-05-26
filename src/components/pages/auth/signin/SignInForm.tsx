@@ -32,6 +32,7 @@ export default function SignInForm() {
       });
     } else {
       router.push("/dashboard");
+      router.refresh();
     }
   };
 

@@ -15,14 +15,18 @@ export default function NavbarMobile({ toggleSidebar }: NavbarMobileProps) {
         `}
     >
       <CollapsedInputGroup
-        icon={<Search className={"text-light-text-100"} />}
+        icon={<Search className={"text-light-text-100 "} />}
         placeholder={"Search projects, creators, and categories"}
         variant={"no-outlined"}
         className={
           "flex w-0 max-w-full group-focus-within:w-full transition-all ease-out duration-500"
         }
       />
-      <div className={"w-[16rem] flex items-center justify-center gap-x-4 group-focus-within:hidden"}>
+      <div
+        className={
+          "w-[16rem] flex items-center justify-center gap-x-4 group-focus-within:hidden"
+        }
+      >
         <Link
           href={FrontendRoutesEnum.HOME.toString()}
           className={"flex items-center gap-2"}
@@ -34,7 +38,9 @@ export default function NavbarMobile({ toggleSidebar }: NavbarMobileProps) {
         </Link>
       </div>
       <Menu
-        className={"text-light-text-100 cursor-pointer"}
+        className={
+          "min-w-6 text-light-text-100 cursor-pointer group-focus-within:block"
+        }
         onClick={toggleSidebar}
       />
     </nav>

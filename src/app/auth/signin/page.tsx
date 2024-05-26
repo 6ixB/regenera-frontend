@@ -1,4 +1,5 @@
 import SignInForm from "@/components/pages/auth/signin/SignInForm";
+import SignInToast from "@/components/pages/auth/signin/SignInToast";
 import Regenera from "@/components/vector-graphics/Regenera";
 import { FrontendRoutesEnum } from "@/lib/routes";
 import Link from "next/link";
@@ -6,6 +7,7 @@ import Link from "next/link";
 export default function SignIn() {
   return (
     <main className={"w-full flex justify-center"}>
+      <SignInToast />
       <div className={"w-[418px] flex flex-col gap-4"}>
         <Link
           href={FrontendRoutesEnum.HOME.toString()}

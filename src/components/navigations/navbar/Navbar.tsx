@@ -2,7 +2,7 @@
 
 import Regenera from "../../vector-graphics/Regenera";
 import Link from "next/link";
-import { Search, MessageCircleMore, Bell } from "lucide-react";
+import { Search, MessageCircleMore, Bell, Router } from "lucide-react";
 import { useEffect, useState } from "react";
 import NavbarCollapsed from "./NavbarCollapsed";
 import NavbarMobile from "./NavbarMobile";
@@ -10,7 +10,7 @@ import InputGroup from "@/components/forms/InputGroup";
 import { FrontendRoutesEnum } from "@/lib/routes";
 import { useSession } from "next-auth/react";
 import NavbarUserDropdown from "./NavbarUserDropdown";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 function isStaticPage(pathname: string) {
   const staticPages = [
@@ -22,12 +22,14 @@ function isStaticPage(pathname: string) {
 }
 
 export default function Navbar() {
+  const router = useRouter();
   const pathname = usePathname();
   const { status } = useSession();
   const [isShrinked, setIsShrinked] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const pill = isStaticPage(pathname);
+  const centered = !pathname.includes(FrontendRoutesEnum.DASHBOARD.toString());
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
@@ -51,17 +53,18 @@ export default function Navbar() {
 
   return (
     <header
-      className={`flex z-50 fixed justify-center items-center user-select-none transition-all duration-200 bg-light-background-100
+      className={`flex z-50 fixed top-0 justify-center items-center user-select-none transition-all duration-200 bg-light-background-100
     shadow px-8
     ${isShrinked ? "top-0 w-full rounded-none md:w-10/12 md:top-4 md:rounded-full lg:container lg:px-8 lg:py-0" : "top-0 w-full"}`}
     >
       <nav
-        className={`container w-full px-0 py-3 items-center justify-between gap-x-4 hidden md:flex
+        className={`${centered && "container"} w-full px-0 py-3 items-center justify-between gap-x-4 hidden md:flex
         `}
       >
         {/* Left Section */}
         <div className={"w-[16rem] flex items-center justify-start gap-x-4"}>
           <Link
+            prefetch={false}
             href={FrontendRoutesEnum.HOME.toString()}
             className={"flex items-center gap-2"}
           >
@@ -70,17 +73,21 @@ export default function Navbar() {
               Regenera
             </div>
           </Link>
-          <Link
-            href={
-              status === "authenticated"
-                ? FrontendRoutesEnum.DASHBOARD.toString()
-                : FrontendRoutesEnum.ABOUT.toString()
-            }
-          >
-            <div className={"text-base text-light-text-100 whitespace-nowrap"}>
-              {status === "authenticated" ? "Dashboard" : "How it works"}
-            </div>
-          </Link>
+          {!pathname.includes(FrontendRoutesEnum.DASHBOARD.toString()) && (
+            <Link
+              href={
+                status === "authenticated"
+                  ? FrontendRoutesEnum.DASHBOARD.toString()
+                  : FrontendRoutesEnum.ABOUT.toString()
+              }
+            >
+              <div
+                className={"text-base text-light-text-100 whitespace-nowrap"}
+              >
+                {status === "authenticated" ? "Dashboard" : "How it works"}
+              </div>
+            </Link>
+          )}
         </div>
 
         {/* Search Bar */}
@@ -99,7 +106,13 @@ export default function Navbar() {
                   "flex justify-center items-center p-2 rounded-md cursor-pointer hover:bg-light-background-200"
                 }
               >
-                <div className={"relative inline-block"}>
+                <div
+                  className={"relative inline-block"}
+                  onClick={() => {
+                    router.push("/chats/1/1");
+                    router.refresh();
+                  }}
+                >
                   <MessageCircleMore
                     className={"text-light-text-100"}
                     size={20}
