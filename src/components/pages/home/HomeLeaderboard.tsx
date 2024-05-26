@@ -1,14 +1,13 @@
 import { Trophy } from "lucide-react";
 import HomeLeaderboardItem from "./HomeLeaderboardItem";
 import Link from "next/link";
+import { FrontendRoutesEnum } from "@/lib/routes";
 
 export default function HomeLeaderboard() {
   return (
     <div className={"w-full bg-light-primary-100 flex justify-center py-16"}>
       <div
-        className={
-          "container text-light-background-100 flex flex-col gap-y-8"
-        }
+        className={"container text-light-background-100 flex flex-col gap-y-8"}
       >
         <div className={"flex justify-between items-end"}>
           <div className={"flex flex-col gap-4"}>
@@ -29,7 +28,7 @@ export default function HomeLeaderboard() {
           <HomeLeaderboardItem />
           <HomeLeaderboardItem />
         </div>
-        <Link href={"/leaderboard"}>
+        <Link href={FrontendRoutesEnum.LEADERBOARD.toString()}>
           <div
             className={"text-base text-light-background-100 hover:opacity-75"}
           >
