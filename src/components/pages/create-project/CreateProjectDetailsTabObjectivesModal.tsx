@@ -43,7 +43,7 @@ export default function CreateProjectDetailsTabObjectivesModal({ objectives, han
                                     key={idx}
                                     className={`h-full w-full object-cover rounded-md border`}
                                 />
-                                <div className="h-fit w-fit bg-light-background-100 aspect-square border rounded-full absolute top-2 right-2 transition-all hover:bg-light-background-200" onClick={() => handleRemoveObjectives(idx)}>
+                                <div className="cursor-pointer h-fit w-fit bg-light-background-100 aspect-square border rounded-full absolute top-2 right-2 transition-all hover:bg-light-background-200" onClick={() => handleRemoveObjectives(idx)}>
                                     <X className="p-1 text-light-accent-100" />
                                 </div>
                             </div>
