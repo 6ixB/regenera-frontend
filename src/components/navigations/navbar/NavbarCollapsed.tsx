@@ -2,6 +2,7 @@ import { ChevronRight, Menu } from "lucide-react";
 import Regenera from "../../vector-graphics/Regenera";
 import Link from "next/link";
 import NavbarCollapsedNavLink from "./NavbarCollapsedNavLink";
+import { FrontendRoutesEnum } from "@/lib/routes";
 
 interface SidebarProps {
   isSidebarOpen: Boolean;
@@ -15,7 +16,7 @@ export default function NavbarCollapsed({
   return (
     <div
       className={`fixed flex top-0 left-0 w-screen h-screen bg-black bg-opacity-40 
-        ${isSidebarOpen ? "opacity-100" : "opacity-0 pointer-events-none"} justify-end z-50 transition-opacity ease-in-out duration-300 md:opacity-0 md:pointer-events-none`}
+        ${isSidebarOpen ? "opacity-100" : "opacity-0 pointer-events-none"} justify-end z-50 ttion-oransipacity ease-in-out duration-300 md:opacity-0 md:pointer-events-none`}
     >
       <div
         className={`flex flex-col w-5/6 h-full bg-light-background-100 shadow py-3 px-6 gap-y-4 text-end
@@ -26,7 +27,10 @@ export default function NavbarCollapsed({
             className={"text-light-text-100 cursor-pointer"}
             onClick={toggleSidebar}
           />
-          <Link href={"/"} className={"flex items-center gap-2"}>
+          <Link
+            href={FrontendRoutesEnum.HOME.toString()}
+            className={"flex items-center gap-2"}
+          >
             <Regenera className={"fill-light-text-100"} />
             <div className={"text-lg font-medium text-light-text-100"}>
               Regenera
@@ -36,7 +40,7 @@ export default function NavbarCollapsed({
 
         <div className={"flex flex-col"}>
           <NavbarCollapsedNavLink
-            link={"/about"}
+            link={FrontendRoutesEnum.ABOUT.toString()}
             title={"About"}
             description={"How it works"}
           />
