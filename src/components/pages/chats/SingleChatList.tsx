@@ -1,7 +1,7 @@
 "use client";
 
 import { CircleUserRound, User, UserCircle } from 'lucide-react';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 
 interface SingleChatListProps {
@@ -14,8 +14,13 @@ const SingleChatBox: React.FC<SingleChatListProps> = ({ message, id, idFromURL }
     const [secondId, setSecondId] = useState("");
     const router = useRouter();
 
+    const handleOnClick=(id:string)=>{
+        const next_url = "/chats/"+id
+        router.push(next_url)
+    }
+
     return (
-        <div className={`w-full flex gap-3 p-2 justify-center rounded-md ${id === idFromURL ? 'bg-light-background-200' : 'bg-light-background-100'}`}>
+        <div className={`w-full flex gap-3 p-2 justify-center rounded-md ${id === idFromURL ? 'bg-light-background-200' : 'bg-light-background-100'}`} onClick={()=>handleOnClick(id)}>
             <div className={"flex w-1/6"}>
                 <UserCircle strokeWidth={1.5} className={"w-full h-full text-light-text-100"}/>
             </div>
