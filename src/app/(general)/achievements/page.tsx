@@ -1,5 +1,4 @@
-import AchievementsTable from "@/components/achievements/AchievementsTable";
-import LeaderboardTable from "@/components/pages/leaderboard/LeaderboardTable";
+import AchievementsTable from "@/components/pages/achievements/AchievementsTable";
 import { Award } from "lucide-react";
 
 export default function Achievements() {
