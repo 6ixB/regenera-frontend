@@ -11,6 +11,7 @@ import Button from "@/components/base/Button";
 import CreateProjectDetailsTabRequirements from "./CreateProjectDetailsTabRequirements";
 import { ProjectRequirement } from "./CreateProjectDetailsTabRequirementsItem";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 export default function CreateProjectDetailsTabForm() {
 
@@ -20,6 +21,7 @@ export default function CreateProjectDetailsTabForm() {
 
     const objectives = watch('objectives')
     const requirements = watch('requirements')
+    const minimumFund = watch('minimumFund')
 
     const handleAddObjectives = (objectives: FileList) => {
 
@@ -60,11 +62,8 @@ export default function CreateProjectDetailsTabForm() {
     }
 
     const onSubmit: SubmitHandler<CreateProjectDetailsDto> = async (data) => {
-        console.log("Data: " + data);
-
         router.push('/discover')
     }
-
 
     return (
         <form onSubmit={handleSubmit(onSubmit)} className="w-2/3 flex flex-col gap-y-10 p-8">
@@ -105,6 +104,7 @@ export default function CreateProjectDetailsTabForm() {
                     placeholder={"e.g. Rp 9.500.000,00"}
                     type={"number"}
                     step={100000}
+                    min={0}
                     error={errors.minimumFund?.message}
                     {...register('minimumFund')}
                 />

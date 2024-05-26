@@ -14,11 +14,11 @@ interface CreateProjectDetailsTabObjectivesModalProps {
 export default function CreateProjectDetailsTabObjectivesModal({ objectives, handleAddObjectives, handleRemoveObjectives, handleOpenModel, className }: CreateProjectDetailsTabObjectivesModalProps) {
 
     return (
-        <div id="hs-scroll-inside-body-modal" className={cn(`hs-overlay size-full fixed bg-black bg-opacity-40 top-0 start-0 z-[80] overflow-x-hidden overflow-y-auto select-none pointer-events-none`
+        <div id="hs-scroll-inside-body-modal" className={cn(`size-full fixed bg-black bg-opacity-40 top-0 start-0 z-[80] overflow-x-hidden overflow-y-auto select-none pointer-events-none`
             , className)
         }
         >
-            <div id="hs-scroll-inside-body-modal" className=" container ease-out transition-all  sm:w-full m-3 sm:mx-auto h-[calc(100%-3.5rem)]">
+            <div id="hs-scroll-inside-body-modal" className="container ease-out transition-all sm:w-full m-3 sm:mx-auto h-[calc(100%-3.5rem)]">
                 <div className="max-h-full overflow-hidden flex flex-col bg-white border shadow-sm rounded-xl pointer-events-auto dark:bg-neutral-800 dark:border-neutral-700 dark:shadow-neutral-700/70">
                     <div className="flex justify-between items-center py-3 px-4 border-b dark:border-neutral-700">
                         <h3 className="font-bold text-light-text-100 dark:text-white">
@@ -43,7 +43,7 @@ export default function CreateProjectDetailsTabObjectivesModal({ objectives, han
                                     key={idx}
                                     className={`h-full w-full object-cover rounded-md border`}
                                 />
-                                <div className="h-fit w-fit bg-light-background-100 aspect-square border rounded-full absolute top-2 right-2 transition-all hover:bg-light-background-200" onClick={() => handleRemoveObjectives(idx)}>
+                                <div className="cursor-pointer h-fit w-fit bg-light-background-100 aspect-square border rounded-full absolute top-2 right-2 transition-all hover:bg-light-background-200" onClick={() => handleRemoveObjectives(idx)}>
                                     <X className="p-1 text-light-accent-100" />
                                 </div>
                             </div>
