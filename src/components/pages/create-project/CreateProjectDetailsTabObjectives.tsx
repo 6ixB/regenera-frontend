@@ -1,7 +1,7 @@
 'use client'
 
 import Button from "@/components/base/Button";
-import { Aperture, Eye, Goal, ImagePlus, Images } from "lucide-react";
+import { Eye, Goal, ImagePlus, Images } from "lucide-react";
 import Image from "next/image";
 import { forwardRef, useEffect, useImperativeHandle, useRef, useState } from "react";
 import { createPortal } from "react-dom";
@@ -50,7 +50,7 @@ const CreateProjectDetailsTabObjectives = forwardRef<
         return () => {
             document.body.style.overflow = '';
         };
-    }, [isOpenModal])
+    }, [isOpenModal])    
 
     return (
         <div className="flex flex-col gap-y-2">
@@ -140,7 +140,9 @@ const CreateProjectDetailsTabObjectives = forwardRef<
                 onChange={(e) => handleAddObjectives(e.target.files!)}
             />
             {
-                isOpenModal && <CreateProjectDetailsTabObjectivesModal objectives={objectives} handleAddObjectives={handleClick} handleRemoveObjectives={handleRemoveObjectives} handleOpenModel={handleOpenModel} />
+                isOpenModal && 
+                createPortal(<CreateProjectDetailsTabObjectivesModal objectives={objectives} handleAddObjectives={handleClick} handleRemoveObjectives={handleRemoveObjectives} handleOpenModel={handleOpenModel} />
+                , document.body)
             }
         </div>
     )
