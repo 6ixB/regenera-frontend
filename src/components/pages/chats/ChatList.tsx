@@ -2,11 +2,13 @@ import InputGroup from "@/components/forms/InputGroup";
 import SingleChatBox from "./SingleChatList";
 import { Search } from "lucide-react";
 import SquareInputGroup from "@/components/forms/SquareInputGroup";
+import { useRouter } from "next/router";
 
 interface ChatListProps {
     id: string;
 }
 const ChatList : React.FC<ChatListProps> = ({ id })=>{
+
     return(
         <div className={"w-full bg-light-background-100 p-2 flex flex-col gap-4"}>
             <div className={"w-full"}>

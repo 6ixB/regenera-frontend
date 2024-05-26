@@ -11,6 +11,7 @@ import Button from "@/components/base/Button";
 import CreateProjectDetailsTabRequirements from "./CreateProjectDetailsTabRequirements";
 import { ProjectRequirement } from "./CreateProjectDetailsTabRequirementsItem";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 export default function CreateProjectDetailsTabForm() {
 
@@ -20,6 +21,7 @@ export default function CreateProjectDetailsTabForm() {
 
     const objectives = watch('objectives')
     const requirements = watch('requirements')
+    const minimumFund = watch('minimumFund')
 
     const handleAddObjectives = (objectives: FileList) => {
 
@@ -33,6 +35,14 @@ export default function CreateProjectDetailsTabForm() {
 
     }
 
+    const handleRemoveObjectives = (idx: number) => {
+        
+        const updatedObjectives = objectives.filter((_, index) => index !== idx);
+
+        setValue('objectives', updatedObjectives);
+    
+    }
+
     const handleAddRequirements = (item: ProjectRequirement) => {
 
         const currentItems = getValues('requirements')
@@ -41,23 +51,26 @@ export default function CreateProjectDetailsTabForm() {
 
         setValue('requirements', [...currentItems, item])
 
-        console.log(getValues('requirements'));
+    }
 
+    const handleRemoveRequirements = (idx: number) => {
+        
+        const updatedRequirements = requirements.filter((_, index) => index !== idx);
+
+        setValue('requirements', updatedRequirements);
+    
     }
 
     const onSubmit: SubmitHandler<CreateProjectDetailsDto> = async (data) => {
-        console.log("Data: " + data);
-
         router.push('/discover')
     }
-
 
     return (
         <form onSubmit={handleSubmit(onSubmit)} className="w-2/3 flex flex-col gap-y-10 p-8">
 
             <div className="w-full h-full relative">
 
-                <CreateProjectDetailsTabFormObjectives {...register('objectives')} objectives={objectives} handleAddObjectives={handleAddObjectives} />
+                <CreateProjectDetailsTabFormObjectives {...register('objectives')} objectives={objectives} handleAddObjectives={handleAddObjectives} handleRemoveObjectives={handleRemoveObjectives} />
                 {errors.objectives && <p className="text-sm text-light-accent-100 absolute bottom-0 translate-y-full ">{errors.objectives.message}</p>}
             </div>
 
@@ -91,6 +104,7 @@ export default function CreateProjectDetailsTabForm() {
                     placeholder={"e.g. Rp 9.500.000,00"}
                     type={"number"}
                     step={100000}
+                    min={0}
                     error={errors.minimumFund?.message}
                     {...register('minimumFund')}
                 />
@@ -108,7 +122,7 @@ export default function CreateProjectDetailsTabForm() {
             />
             <div className="w-full h-full relative">
 
-                <CreateProjectDetailsTabRequirements requirements={requirements} handleAddRequirements={handleAddRequirements} />
+                <CreateProjectDetailsTabRequirements requirements={requirements} handleAddRequirements={handleAddRequirements} handleRemoveRequirements={handleRemoveRequirements}/>
                 {errors.requirements && <p className="text-sm text-light-accent-100 absolute bottom-0 translate-y-full">{errors.requirements.message}</p>}
 
             </div>

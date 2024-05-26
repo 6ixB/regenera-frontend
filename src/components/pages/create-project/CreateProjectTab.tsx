@@ -9,12 +9,12 @@ export enum CreateProjectTabEnum {
     DETAILS = 'Details'
 }
 
-export default function CreateProjectTab(){
+export default function CreateProjectTab() {
 
     const [activeTab, setActiveTab] = useState<CreateProjectTabEnum>(CreateProjectTabEnum.TITLE)
 
     const handleActiveTab = (tab: CreateProjectTabEnum) => {
-        
+
         setActiveTab(tab)
     }
 
@@ -29,6 +29,7 @@ export default function CreateProjectTab(){
                     <CreateProjectDetailsTab handleActiveTab={handleActiveTab} className={`t${activeTab === CreateProjectTabEnum.DETAILS ? 'opacity-100 h-fit' : 'opacity-0 h-0'}`} />
                 </div>
             </div>
+
         </div>
     );
 }

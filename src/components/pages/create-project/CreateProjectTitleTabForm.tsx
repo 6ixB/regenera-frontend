@@ -30,7 +30,6 @@ export default function CreateProjectTitleTabForm({ handleActiveTab }: CreatePro
   const imageValue = watch("image");
 
   const onSubmit: SubmitHandler<CreateProjectTitleDto> = async (data) => {
-    console.log("Data: ", data);
 
     handleActiveTab(CreateProjectTabEnum.DETAILS)
   };
