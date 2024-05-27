@@ -6,6 +6,7 @@ import Footer from "@/components/navigations/Footer";
 import Providers from "@/components/Providers";
 import Header from "@/components/navigations/Header";
 import Sidebar from "@/components/navigations/sidebar/Sidebar";
+import NextTopLoader from "nextjs-toploader";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -25,6 +26,7 @@ export default function DashboardLayout({
         className={`${inter.className} w-full h-dvh overflow-y-hidden bg-light-background-100 flex flex-col items-center`}
       >
         <Providers>
+          <NextTopLoader color="#c1ffff" height={2} />
           <Header />
           <div
             className={

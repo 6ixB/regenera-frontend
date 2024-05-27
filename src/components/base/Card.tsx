@@ -6,9 +6,8 @@ import Badge from "./Badge";
 import { ChevronRight, User } from "lucide-react";
 import { ProjectPhaseEnum } from "@/app/(general)/projects/[id]/page";
 
-
 interface CardProps {
-  phase: ProjectPhaseEnum,
+  phase: ProjectPhaseEnum;
   variant?: "outlined" | "no-outlined" | "big";
   className?: string;
 }
@@ -21,15 +20,18 @@ export default function Card({
   return (
     <Link href="/projects/mk-ultra">
       <div className="w-full h-full relative ">
-        <div className={cn(
-              "w-full h-fit p-4 rounded-t-xl rounded-b-md group duration-200 -translate-x-4 box-content",
-              {
-                "hover:ring-1 hover:ring-light-primary-200 hover:absolute hover:z-40 hover:shadow-xl hover:bg-light-background-100": variant !== "big",
-              }
-            )}>
-          <div 
+        <div
+          className={cn(
+            "w-full h-fit p-4 rounded-t-xl rounded-b-md group duration-200 -translate-x-4 box-content",
+            {
+              "hover:ring-1 hover:ring-light-primary-200 hover:absolute hover:z-30 hover:shadow-xl hover:bg-light-background-100":
+                variant !== "big",
+            }
+          )}
+        >
+          <div
             className={cn(
-              "w-full h-full flex flex-col rounded-t-xl rounded-b-md cursor-pointer relative shadow group-hover:shadow-none duration-0",
+              "w-full h-full flex flex-col rounded-t-xl rounded-b-md cursor-pointer relative shadow group-hover:shadow-none duration-0 bg-light-background-100",
               {
                 "ring-1 ring-light-background-300": variant === "outlined",
               },
@@ -47,10 +49,12 @@ export default function Card({
                 }
                 alt={"Image Description"}
               />
-                <Badge text={phase} className="absolute bottom-2 right-2" />
+              <Badge text={phase} className="absolute bottom-2 right-2" />
             </div>
 
-            <div className={"h-fit flex flex-row items-center gap-1 p-4 md:p-5"}>
+            <div
+              className={"h-fit flex flex-row items-center gap-1 p-4 md:p-5"}
+            >
               <div className="flex m-auto w-3/12">
                 <Image
                   width={0}
@@ -77,17 +81,26 @@ export default function Card({
               </div>
             </div>
 
-            <Progress progress={80.23} color={'green'} background={false} className="absolute bottom-0 rounded-b-full rounded-t-sm -translate-x-1/2 left-1/2" />
+            <Progress
+              progress={80.23}
+              color={"green"}
+              background={false}
+              className="absolute bottom-0 rounded-b-full rounded-t-sm -translate-x-1/2 left-1/2"
+            />
 
-            {variant !== 'big' &&
+            {variant !== "big" && (
               <div className="hidden group-hover:flex pt-0 pb-6 px-8 break-words">
-                <p className="text-base text-light-text-100">Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit nostrum incidunt ipsa sapiente corrupti fuga. Quaerat, magni in voluptatum illum quidem itaque nam unde tempore consequuntur hic doloremque adipisci vitae?</p>
+                <p className="text-base text-light-text-100">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit
+                  nostrum incidunt ipsa sapiente corrupti fuga. Quaerat, magni
+                  in voluptatum illum quidem itaque nam unde tempore
+                  consequuntur hic doloremque adipisci vitae?
+                </p>
               </div>
-            }
+            )}
           </div>
         </div>
       </div>
-
     </Link>
   );
 }

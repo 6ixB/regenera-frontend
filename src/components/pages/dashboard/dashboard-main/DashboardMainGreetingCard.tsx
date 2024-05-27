@@ -43,7 +43,7 @@ export default function DashboardMainGreetingCard() {
   return (
     <div
       className={
-        "h-2/5 w-full bg-light-background-100 border border-light-background-300 text-light-text-100 p-8 rounded-md row-span-5 flex flex-col gap-y-4"
+        "h-72 w-full bg-light-background-100 border border-light-background-300 text-light-text-100 p-8 rounded-md row-span-5 flex flex-col gap-y-4"
       }
     >
       <div className={"text-xl font-semibold"}>
@@ -68,19 +68,27 @@ export default function DashboardMainGreetingCard() {
           "flex-1 grid grid-cols-4 rounded-md border border-light-background-300 divide-light-background-300 divide-x  text-base 3xl:text-xl font-semibold text-center"
         }
       >
-        <div className={"w-full flex flex-col items-center justify-center"}>
+        <div
+          className={"w-full flex flex-col gap-y-2 items-center justify-center"}
+        >
+          <Star size={16} />
           <div>2120</div>
-          <div>Rating</div>
         </div>
-        <div className={"w-full flex flex-col items-center justify-center"}>
+        <div
+          className={"w-full flex flex-col gap-y-2 items-center justify-center"}
+        >
           <div>2</div>
           <div>Projects</div>
         </div>
-        <div className={"w-full flex flex-col items-center justify-center"}>
+        <div
+          className={"w-full flex flex-col gap-y-2 items-center justify-center"}
+        >
           <div>10</div>
           <div>Donations</div>
         </div>
-        <div className={"w-full flex flex-col items-center justify-center"}>
+        <div
+          className={"w-full flex flex-col gap-y-2 items-center justify-center"}
+        >
           <div>7</div>
           <div>Volunteers</div>
         </div>

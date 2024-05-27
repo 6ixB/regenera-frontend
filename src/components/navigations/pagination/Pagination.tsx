@@ -148,7 +148,7 @@ export default function Pagination({
         <input
           type="number"
           max={endPage}
-          className="min-h-[38px] py-2 px-2.5 block w-12 border-gray-200 rounded-lg text-sm text-center focus:border-blue-500 focus:ring-blue-500 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none disabled:opacity-50 disabled:pointer-events-none"
+          className="min-h-[38px] py-2 px-2.5 block w-12 border-gray-200 rounded-md text-sm text-center focus:border-blue-500 focus:ring-blue-500 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none disabled:opacity-50 disabled:pointer-events-none"
           style={{ MozAppearance: "textfield" }}
           onChange={handleExceedingPageInput}
           onKeyDown={handleKeyDown}

@@ -1,5 +1,7 @@
-import { LayoutDashboard } from "lucide-react";
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 interface SidebarNavLinkProps {
   icon: React.ReactNode;
@@ -12,12 +14,13 @@ export default function SidebarNavLink({
   text,
   link,
 }: SidebarNavLinkProps) {
+  const pathname = usePathname();
+  const isActive = pathname === link;
+
   return (
     <Link
       href={link}
-      className={
-        "flex items-center gap-x-2 p-2 py-3 hover:bg-light-background-200 rounded-md cursor-pointer text-light-text-100"
-      }
+      className={`${isActive && "bg-light-background-200"} flex items-center gap-x-2 p-2 py-3 hover:bg-light-background-200 rounded-md cursor-pointer text-light-text-100`}
     >
       {icon}
       <div className={"text-base"}>{text}</div>
