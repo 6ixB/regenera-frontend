@@ -10,11 +10,16 @@ export default function Leaderboard() {
     >
       <div
         className={
-          "self-start text-3xl font-medium text-light-text-100 flex items-center gap-x-2"
+          "self-start text-light-text-100 flex flex-col justify-center gap-y-2"
         }
       >
-        <Trophy size={28} />
-        <div>Leaderboard</div>
+        <div className={"flex items-center gap-x-2"}>
+          <Trophy size={28} />
+          <div className={"text-3xl font-medium"}>Leaderboard</div>
+        </div>
+        <div>
+          Track the top performers and see how you rank on the leaderboard page.
+        </div>
       </div>
       <LeaderboardTable />
     </main>

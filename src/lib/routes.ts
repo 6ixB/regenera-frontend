@@ -5,7 +5,9 @@ export enum FrontendRoutesEnum {
   ABOUT = "/about",
   DASHBOARD = "/dashboard",
   LEADERBOARD = "/leaderboard",
-  ACHIEVEMENTS = "/achievements",
+  DASHBOARD_ACHIEVEMENTS = "/dashboard/achievements",
+  DASHBOARD_PROJECTS = "/dashboard/projects",
+  DASHBOARD_PROJECTS_JOINED = "/dashboard/projects/joined",
 }
 
 export enum BackendRoutesEnum {

@@ -1,4 +1,10 @@
-import { Award, LeafyGreen, Target, Trophy } from "lucide-react";
+import {
+  LayoutDashboard,
+  Award,
+  LeafyGreen,
+  Target,
+  Trophy,
+} from "lucide-react";
 import SidebarNavLink from "./SidebarNavLink";
 import Link from "next/link";
 import { FrontendRoutesEnum } from "@/lib/routes";
@@ -7,14 +13,11 @@ export default function Sidebar() {
   return (
     <div
       className={
-        "self-start min-w-[18rem] w-[18rem] h-full flex flex-col gap-y-8 bg-light-background-100 drop-shadow-md ps-8 pe-8 py-6 overflow-y-hidden hover:overflow-y-auto [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:bg-light-background-100 [&::-webkit-scrollbar-thumb]:bg-light-background-300 [&::-webkit-scrollbar-thumb]:rounded-full"
+        "self-start min-w-[18rem] w-[18rem] h-full flex flex-col gap-y-8 bg-light-background-100 drop-shadow-md px-8 py-6 overflow-y-hidden hover:overflow-y-auto [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:bg-light-background-100 [&::-webkit-scrollbar-thumb]:bg-light-background-300 [&::-webkit-scrollbar-thumb]:rounded-full"
       }
       style={{ scrollbarGutter: "stable" }}
     >
       <div className={"flex flex-col gap-y-2"}>
-        <div className={"font-semibold text-base text-light-text-100"}>
-          Dashboard
-        </div>
         <div className={"flex flex-col gap-y-2 py-2"}>
           <Link
             href={"/projects/create"}
@@ -50,22 +53,26 @@ export default function Sidebar() {
         </div>
       </div>
       <div className={"flex flex-col gap-y-2"}>
-        <div className={"font-semibold text-base text-light-text-100"}>
-          Projects
-        </div>
-        <div className={"flex flex-col"}>
+        <div className={"flex flex-col gap-y-1"}>
           <SidebarNavLink
             link={FrontendRoutesEnum.DASHBOARD.toString()}
+            icon={
+              <LayoutDashboard size={20} className={"text-light-text-100"} />
+            }
+            text={"Dashboard"}
+          />
+          <SidebarNavLink
+            link={FrontendRoutesEnum.DASHBOARD_PROJECTS.toString()}
             icon={<LeafyGreen size={20} className={"text-light-text-100"} />}
             text={"My projects"}
           />
           <SidebarNavLink
-            link={FrontendRoutesEnum.DASHBOARD.toString()}
+            link={FrontendRoutesEnum.DASHBOARD_PROJECTS_JOINED.toString()}
             icon={<Target size={20} className={"text-light-text-100"} />}
             text={"Joined projects"}
           />
           <SidebarNavLink
-            link={FrontendRoutesEnum.ACHIEVEMENTS.toString()}
+            link={FrontendRoutesEnum.DASHBOARD_ACHIEVEMENTS.toString()}
             icon={<Award size={20} className={"text-light-text-100"} />}
             text={"Achievements"}
           />

@@ -5,7 +5,7 @@ export default function DashboardMainJoinedProjectsCard() {
   return (
     <div
       className={
-        "h-3/5 w-full flex flex-col gap-y-4 bg-light-background-100 border border-light-background-300 text-light-text-100 ps-8 py-8 pe-4 rounded-md row-span-7 overflow-y-hidden"
+        "flex-1 h-full w-full flex flex-col gap-y-4 bg-light-background-100 border border-light-background-300 text-light-text-100 ps-8 py-8 pe-4 rounded-md row-span-7 overflow-y-hidden"
       }
     >
       <div className={"flex items-center gap-x-2"}>
