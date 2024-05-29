@@ -92,6 +92,9 @@ async function refreshTokens(token: JWT): Promise<JWT> {
       },
     }
   );
+
+  if (!response.ok) throw new Error("Failed to refresh token");
+
   const data = await response.json();
   const { accessToken, refreshToken, expiresIn } = data;
 
@@ -115,12 +118,17 @@ export const callbacks = {
       return token;
     }
 
-    return await refreshTokens(token);
+    try {
+      return await refreshTokens(token);
+    } catch (error) {
+      return { ...token, error: "RefreshTokenError" };
+    }
   },
   async session({ session, user, token }: SessionParams) {
     session.user = token.backendData.user;
     session.accessToken = token.backendData.accessToken;
     session.refreshToken = token.backendData.refreshToken;
+    session.error = token.error;
 
     return session;
   },

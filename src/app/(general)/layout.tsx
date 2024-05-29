@@ -25,7 +25,7 @@ export default function GeneralLayout({
         className={`${inter.className} w-full min-h-dvh bg-light-background-100 flex flex-col items-center`}
       >
         <Providers>
-          <NextTopLoader color="#c1ffff" height={2} />
+          <NextTopLoader color="#dd0025" height={2} />
           <Header />
           {children}
           <Footer />

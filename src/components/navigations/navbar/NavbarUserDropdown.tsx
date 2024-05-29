@@ -1,24 +1,29 @@
 import { signOutMutationFn } from "@/lib/api/authApi";
 import { FrontendRoutesEnum } from "@/lib/routes";
 import { ChevronDown, CircleUserRound, LogOut, Settings } from "lucide-react";
-import { signOut, useSession } from "next-auth/react";
+import { Session } from "next-auth";
+import { signOut } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 
-interface NavbarUserDropdownProps {}
+interface NavbarUserDropdownProps {
+  session: Session | null;
+}
 
-export default function NavbarUserDropdown({}: NavbarUserDropdownProps) {
-  const { data } = useSession();
-
+export default function NavbarUserDropdown({
+  session,
+}: NavbarUserDropdownProps) {
   const handleSignOutClick = async () => {
-    if (new Date().getTime() < data?.expiresIn!) {
-      await signOutMutationFn(data?.accessToken!);
+    try {
+      await signOutMutationFn(session?.accessToken!, session?.refreshToken!);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      signOut({
+        callbackUrl: FrontendRoutesEnum.SIGNIN.toString(),
+        redirect: true,
+      });
     }
-
-    signOut({
-      callbackUrl: FrontendRoutesEnum.SIGNIN.toString(),
-      redirect: true,
-    });
   };
 
   return (
@@ -69,7 +74,7 @@ export default function NavbarUserDropdown({}: NavbarUserDropdownProps) {
           <div>
             <p className="text-sm text-light-text-100">Signed in as</p>
             <p className="text-sm font-medium text-light-text-100">
-              {data?.user?.username}
+              {session?.user?.username}
             </p>
           </div>
         </div>
@@ -77,7 +82,7 @@ export default function NavbarUserDropdown({}: NavbarUserDropdownProps) {
         <div className="first:pt-0 last:pb-0">
           <Link
             className="flex items-center gap-x-3.5 px-4 py-3 m-2 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
-            href={`/profiles/${data?.user?.id}`}
+            href={`/profiles/${session?.user?.id}`}
           >
             <CircleUserRound size={20} className={"text-light-text-100"} />
             Profile

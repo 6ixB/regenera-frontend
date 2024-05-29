@@ -1,4 +1,5 @@
 import { Star } from "lucide-react";
+import Link from "next/link";
 
 interface HomeLeaderboardItemProps {
   isTop3?: boolean;
@@ -8,16 +9,25 @@ export default function HomeLeaderboardItem({
   isTop3 = false,
 }: HomeLeaderboardItemProps) {
   return (
-    <div
+    <Link
+      href={"/profiles/1"}
       className={`py-6 px-6 w-full rounded bg-gradient-to-r ${
         isTop3 ? "from-[#DD8C73]" : "from-light-primary-200"
-      } to-light-primary-100 border-t border-r border-b border-light-primary-200 text-light-background-100 flex justify-between`}
+      } to-light-primary-100 border-t border-r border-b border-light-primary-200 text-light-background-100 flex justify-between hover:scale-105 cursor-pointer transition-all`}
     >
       <div className={"flex items-center gap-4"}>
-        <div className={"w-8 h-6 flex justify-center items-center"}>1</div>
+        <div
+          className={
+            "w-8 h-6 flex justify-center items-center font-bold text-xl"
+          }
+        >
+          1
+        </div>
         <div className={"flex gap-x-4"}>
           <div
-            className={"w-10 h-10 aspect-square rounded-full bg-light-background-300 m-auto"}
+            className={
+              "w-10 h-10 aspect-square rounded-full bg-light-background-300 m-auto"
+            }
           ></div>
           <div className={"flex flex-col justify-center"}>
             <div className={"text-base font-medium"}>Example User</div>
@@ -34,6 +44,6 @@ export default function HomeLeaderboardItem({
         </div>
         <div className={"bg-light-background-300 w-10 h-10 rounded"}></div>
       </div>
-    </div>
+    </Link>
   );
 }

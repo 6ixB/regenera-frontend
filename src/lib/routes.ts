@@ -8,6 +8,7 @@ export enum FrontendRoutesEnum {
   DASHBOARD_ACHIEVEMENTS = "/dashboard/achievements",
   DASHBOARD_PROJECTS = "/dashboard/projects",
   DASHBOARD_PROJECTS_JOINED = "/dashboard/projects/joined",
+  CHATS = "/chats",
 }
 
 export enum BackendRoutesEnum {
