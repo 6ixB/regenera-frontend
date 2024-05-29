@@ -21,21 +21,32 @@ function isStaticPage(pathname: string) {
   return staticPages.includes(pathname);
 }
 
+function isNotCentered(pathname: string) {
+  const nonCenteredPages = [
+    FrontendRoutesEnum.DASHBOARD.toString(),
+    FrontendRoutesEnum.CHATS.toString(),
+  ];
+
+  return nonCenteredPages.includes(pathname);
+}
+
 export default function Navbar() {
   const router = useRouter();
   const pathname = usePathname();
-  const { status } = useSession();
+  const { status, data: session } = useSession();
   const [isShrinked, setIsShrinked] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const pill = isStaticPage(pathname);
-  const centered = !pathname.includes(FrontendRoutesEnum.DASHBOARD.toString());
+  const centered = !isNotCentered(pathname);
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+
     if (pill) {
       const handleScroll = () => {
         const scrollTop = window.scrollY;
@@ -48,8 +59,10 @@ export default function Navbar() {
       return () => {
         window.removeEventListener("scroll", handleScroll);
       };
+    } else {
+      setIsShrinked(false);
     }
-  });
+  }, [pill]);
 
   return (
     <header
@@ -102,17 +115,15 @@ export default function Navbar() {
             // Authenticated
             <>
               <div
+                onClick={() => {
+                  router.push("/chats");
+                  router.refresh();
+                }}
                 className={
                   "flex justify-center items-center p-2 rounded-md cursor-pointer hover:bg-light-background-200 select-none"
                 }
               >
-                <div
-                  className={"relative inline-block"}
-                  onClick={() => {
-                    router.push("/chats");
-                    router.refresh();
-                  }}
-                >
+                <div className={"relative inline-block"}>
                   <MessageCircleMore
                     className={"text-light-text-100"}
                     size={20}
@@ -138,7 +149,7 @@ export default function Navbar() {
                   ></span>
                 </div>
               </div>
-              <NavbarUserDropdown />
+              <NavbarUserDropdown session={session} />
             </>
           ) : (
             // Unauthenticated

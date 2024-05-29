@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "../globals.css";
 import PrelineScript from "@/components/preline/PrelineScript";
 import Providers from "@/components/Providers";
+import NextTopLoader from "nextjs-toploader";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,7 +22,10 @@ export default function AuthLayout({
       <body
         className={`${inter.className} bg-light-background-100 py-8 md:bg-light-background-200 md:py-16`}
       >
-        <Providers>{children}</Providers>
+        <Providers>
+          <NextTopLoader color="#dd0025" height={2} />
+          {children}
+        </Providers>
       </body>
       <PrelineScript />
     </html>

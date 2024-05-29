@@ -6,17 +6,19 @@ import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 
 export default function SignOutOptions() {
-  const { data } = useSession();
+  const { data: session } = useSession();
 
   const handleSignOutClick = async () => {
-    if (new Date().getTime() < data?.expiresIn!) {
-      await signOutMutationFn(data?.accessToken!);
+    try {
+      await signOutMutationFn(session?.accessToken!, session?.refreshToken!);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      signOut({
+        callbackUrl: FrontendRoutesEnum.SIGNIN.toString(),
+        redirect: true,
+      });
     }
-
-    signOut({
-      callbackUrl: FrontendRoutesEnum.SIGNIN.toString(),
-      redirect: true,
-    });
   };
 
   return (
