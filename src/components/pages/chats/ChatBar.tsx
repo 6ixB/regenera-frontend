@@ -1,0 +1,24 @@
+import LongInputGroup from "@/components/forms/LongInputGroup";
+import { Image, LucideMessageCircleMore, SendIcon } from "lucide-react";
+
+interface CharBarProps {
+  groupname: string;
+}
+const ChatBar: React.FC<CharBarProps> = ({ groupname }) => {
+  return (
+    <div className="flex w-full h-auto bg-light-background-100 gap-5 p-3 justify-between items-center">
+      <div className="flex w-full items-center">
+        <LongInputGroup
+          icon={<LucideMessageCircleMore className="text-light-text-100" />}
+          placeholder="Enter a message..."
+        />
+      </div>
+      <div className="flex w-fit h-full items-center justify-around gap-4 py-2">
+        <Image size={"24px"} className={"text-light-text-100"} />
+        <SendIcon size={"24px"} className={"text-light-text-100"} />
+      </div>
+    </div>
+  );
+};
+
+export default ChatBar;

@@ -6,9 +6,8 @@ import Badge from "./Badge";
 import { ChevronRight, User } from "lucide-react";
 import { ProjectPhaseEnum } from "@/app/(general)/projects/[id]/page";
 
-
 interface CardProps {
-  phase: ProjectPhaseEnum,
+  phase: ProjectPhaseEnum;
   variant?: "outlined" | "no-outlined" | "big";
   className?: string;
 }
@@ -50,10 +49,12 @@ export default function Card({
                 }
                 alt={"Image Description"}
               />
-                <Badge text={phase} className="absolute bottom-2 right-2" />
+              <Badge text={phase} className="absolute bottom-2 right-2" />
             </div>
 
-            <div className={"h-fit flex flex-row items-center gap-1 p-4 md:p-5"}>
+            <div
+              className={"h-fit flex flex-row items-center gap-1 p-4 md:p-5"}
+            >
               <div className="flex m-auto w-3/12">
                 <Image
                   width={0}
@@ -80,17 +81,26 @@ export default function Card({
               </div>
             </div>
 
-            <Progress progress={80.23} color={'green'} background={false} className="absolute bottom-0 rounded-b-full rounded-t-sm -translate-x-1/2 left-1/2" />
+            <Progress
+              progress={80.23}
+              color={"green"}
+              background={false}
+              className="absolute bottom-0 rounded-b-full rounded-t-sm -translate-x-1/2 left-1/2"
+            />
 
-            {variant !== 'big' &&
+            {variant !== "big" && (
               <div className="hidden group-hover:flex pt-0 pb-6 px-8 break-words">
-                <p className="text-base text-light-text-100">Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit nostrum incidunt ipsa sapiente corrupti fuga. Quaerat, magni in voluptatum illum quidem itaque nam unde tempore consequuntur hic doloremque adipisci vitae?</p>
+                <p className="text-base text-light-text-100">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit
+                  nostrum incidunt ipsa sapiente corrupti fuga. Quaerat, magni
+                  in voluptatum illum quidem itaque nam unde tempore
+                  consequuntur hic doloremque adipisci vitae?
+                </p>
               </div>
-            }
+            )}
           </div>
         </div>
       </div>
-
     </Link>
   );
 }
