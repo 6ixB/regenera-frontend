@@ -71,7 +71,7 @@ const CreateProjectDetailsTabObjectives = forwardRef<
                     </div>
                     :
                     <div className="flex w-full h-[20rem] items-center justify-center flex-col border-light-primary-100 border rounded-lg p-4 gap-2 group relative">
-                        <div className="w-full h-full grid grid-rows-2 grid-cols-4 gap-2 rounded-md">
+                        <div className="w-full h-full grid grid-rows-4 grid-cols-2 sm:grid-rows-2 sm:grid-cols-4 gap-2 rounded-md">
                             {
                                 objectives.slice(0, 5).map((objective, idx) => {
                                     return idx === 4 ? (

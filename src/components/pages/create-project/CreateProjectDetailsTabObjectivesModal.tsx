@@ -18,7 +18,7 @@ export default function CreateProjectDetailsTabObjectivesModal({ objectives, han
             , className)
         }
         >
-            <div id="hs-scroll-inside-body-modal" className="container ease-out transition-all sm:w-full m-3 sm:mx-auto h-[calc(100%-3.5rem)]">
+            <div id="hs-scroll-inside-body-modal" className="container ease-out transition-all sm:w-full my-4 sm:mx-auto h-[calc(100%-3.5rem)]">
                 <div className="max-h-full overflow-hidden flex flex-col bg-white border shadow-sm rounded-xl pointer-events-auto dark:bg-neutral-800 dark:border-neutral-700 dark:shadow-neutral-700/70">
                     <div className="flex justify-between items-center py-3 px-4 border-b dark:border-neutral-700">
                         <h3 className="font-bold text-light-text-100 dark:text-white">
