@@ -21,17 +21,6 @@ export default function Card({
   return (
     <Link href="/projects/mk-ultra">
       <div className="w-full h-full relative ">
-<<<<<<< Updated upstream
-        <div className={cn(
-              "w-full h-fit p-4 rounded-t-xl rounded-b-md group duration-200 -translate-x-4 box-content",
-              {
-                "hover:ring-1 hover:ring-light-primary-200 hover:absolute hover:z-40 hover:shadow-xl hover:bg-light-background-100": variant !== "big",
-              }
-            )}>
-          <div 
-            className={cn(
-              "w-full h-full flex flex-col rounded-t-xl rounded-b-md cursor-pointer relative shadow group-hover:shadow-none duration-0",
-=======
         <div
           className={cn(
             "w-full h-fit p-4 rounded-t-xl rounded-b-md  duration-200 -translate-x-4 box-content",
@@ -44,7 +33,6 @@ export default function Card({
           <div
             className={cn(
               "w-full h-full flex flex-col rounded-t-xl rounded-b-md cursor-pointer relative shadow group hover:shadow-none duration-0 bg-light-background-100",
->>>>>>> Stashed changes
               {
                 "ring-1 ring-light-background-300": variant === "outlined",
               },
