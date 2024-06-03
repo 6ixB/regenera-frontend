@@ -21,7 +21,6 @@ export default function CreateProjectDetailsTabForm() {
 
     const objectives = watch('objectives')
     const requirements = watch('requirements')
-    const minimumFund = watch('minimumFund')
 
     const handleAddObjectives = (objectives: FileList) => {
 
@@ -66,7 +65,7 @@ export default function CreateProjectDetailsTabForm() {
     }
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)} className="w-2/3 flex flex-col gap-y-10 p-8">
+        <form onSubmit={handleSubmit(onSubmit)} className="w-full lg:w-2/3 flex flex-col gap-y-10 p-8">
 
             <div className="w-full h-full relative">
 
@@ -84,7 +83,7 @@ export default function CreateProjectDetailsTabForm() {
                 {...register('address')}
             />
 
-            <div className="w-full flex flex-row gap-x-6 items-end">
+            <div className="w-full flex flex-col gap-6 items-end md:flex-row">
                 <Input
                     icon={<CalendarCheck2 className="text-light-text-100" />}
                     label={"Crowdfund End Date"}
