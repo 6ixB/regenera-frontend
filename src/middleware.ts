@@ -6,7 +6,7 @@ const protectedRoutes = [
   "/dashboard",
   "/auth/signout",
   "/projects/create",
-  // "/chats",
+  "/chats",
 ];
 const publicRoutes = ["/auth/signin", "/auth/signup"];
 
