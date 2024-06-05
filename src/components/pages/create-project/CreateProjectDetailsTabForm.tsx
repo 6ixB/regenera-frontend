@@ -5,13 +5,14 @@ import CreateProjectDetailsTabFormObjectives from "./CreateProjectDetailsTabObje
 import { CalendarCheck2, Goal, HandCoins, MapPinned, NotebookPen } from "lucide-react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { CreateProjectDetailsDto, CreateProjectDetailsDtoSchema } from "@/lib/model/project/project.dto";
+import { CreateProjectDetailsDto, CreateProjectDetailsDtoSchema, ProjectObjectiveDto } from "@/lib/model/project/project.dto";
 import TextArea from "@/components/forms/TextArea";
 import Button from "@/components/base/Button";
 import CreateProjectDetailsTabRequirements from "./CreateProjectDetailsTabRequirements";
 import { ProjectRequirement } from "./CreateProjectDetailsTabRequirementsItem";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
+import { error } from "console";
 
 export default function CreateProjectDetailsTabForm() {
 
@@ -22,24 +23,38 @@ export default function CreateProjectDetailsTabForm() {
     const objectives = watch('objectives')
     const requirements = watch('requirements')
 
-    const handleAddObjectives = (objectives: FileList) => {
+    const handleObjectives = (images?: FileList, idx?: number, description?: string) => {
 
         const currentObjectives = getValues('objectives')
 
-        const newObjectives = Array.from(objectives)
+        if (images) {
 
-        if (!currentObjectives) return setValue('objectives', newObjectives)
+            const newObjectives = Array.from(images).map((image) => ({
+                image: image,
+            }))
 
-        setValue('objectives', [...currentObjectives, ...newObjectives])
+            if (!currentObjectives) return setValue('objectives', newObjectives)
 
+            setValue('objectives', [...currentObjectives, ...newObjectives])
+        }
+        
+        if (idx !== undefined && description !== undefined) {
+            
+            setValue('objectives', currentObjectives.map((objective, index) =>
+                index === idx ? { ...objective, description } : objective
+            ));
+
+        }
+
+        
     }
 
     const handleRemoveObjectives = (idx: number) => {
-        
+
         const updatedObjectives = objectives.filter((_, index) => index !== idx);
 
         setValue('objectives', updatedObjectives);
-    
+
     }
 
     const handleAddRequirements = (item: ProjectRequirement) => {
@@ -53,11 +68,11 @@ export default function CreateProjectDetailsTabForm() {
     }
 
     const handleRemoveRequirements = (idx: number) => {
-        
+
         const updatedRequirements = requirements.filter((_, index) => index !== idx);
 
         setValue('requirements', updatedRequirements);
-    
+
     }
 
     const onSubmit: SubmitHandler<CreateProjectDetailsDto> = async (data) => {
@@ -69,8 +84,19 @@ export default function CreateProjectDetailsTabForm() {
 
             <div className="w-full h-full relative">
 
-                <CreateProjectDetailsTabFormObjectives {...register('objectives')} objectives={objectives} handleAddObjectives={handleAddObjectives} handleRemoveObjectives={handleRemoveObjectives} />
+                <CreateProjectDetailsTabFormObjectives {...register('objectives')} objectives={objectives} handleObjectives={handleObjectives} handleRemoveObjectives={handleRemoveObjectives} />
                 {errors.objectives && <p className="text-sm text-light-accent-100 absolute bottom-0 translate-y-full ">{errors.objectives.message}</p>}
+                {Array.isArray(errors.objectives) && errors.objectives.length >= 1 && (
+                    <ul>
+                        {errors.objectives.map((error, index) => (
+                            <li key={index} className="text-sm text-light-accent-100">
+                                {error.message}
+                            </li>
+                        ))}
+                    </ul>
+                )}
+
+
             </div>
 
             <Input
@@ -121,11 +147,11 @@ export default function CreateProjectDetailsTabForm() {
             />
             <div className="w-full h-full relative">
 
-                <CreateProjectDetailsTabRequirements requirements={requirements} handleAddRequirements={handleAddRequirements} handleRemoveRequirements={handleRemoveRequirements}/>
+                <CreateProjectDetailsTabRequirements requirements={requirements} handleAddRequirements={handleAddRequirements} handleRemoveRequirements={handleRemoveRequirements} />
                 {errors.requirements && <p className="text-sm text-light-accent-100 absolute bottom-0 translate-y-full">{errors.requirements.message}</p>}
 
             </div>
-            
+
             <Button variant={'solid'} type={'submit'} >Launch Project</Button>
         </form>
     )

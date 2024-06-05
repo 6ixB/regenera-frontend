@@ -6,18 +6,19 @@ import Image from "next/image";
 import { forwardRef, useEffect, useImperativeHandle, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import CreateProjectDetailsTabObjectivesModal from "./CreateProjectDetailsTabObjectivesModal";
+import { ProjectObjectiveDto } from "@/lib/model/project/project.dto";
 
 interface CreateProjectDetailsTabObjectivesProps
     extends React.InputHTMLAttributes<HTMLInputElement> {
-    objectives: File[];
-    handleAddObjectives: (newObjectives: FileList) => void,
+    objectives: ProjectObjectiveDto[];
+    handleObjectives: (images?: FileList, idx?: number, description?: string) => void,
     handleRemoveObjectives: (idx: number) => void
 }
 
 const CreateProjectDetailsTabObjectives = forwardRef<
     HTMLInputElement,
     CreateProjectDetailsTabObjectivesProps
->(({ objectives, handleAddObjectives, handleRemoveObjectives, ...props }, ref) => {
+>(({ objectives, handleObjectives, handleRemoveObjectives, ...props }, ref) => {
 
     const [isOpenModal, setIsOpenModel] = useState(false)
 
@@ -80,7 +81,7 @@ const CreateProjectDetailsTabObjectives = forwardRef<
                                                 width={0}
                                                 height={0}
                                                 sizes={"100vw"}
-                                                src={URL.createObjectURL(objective)}
+                                                src={URL.createObjectURL(objective.image)}
                                                 alt=""
                                                 key={idx}
                                                 className={`h-full w-full object-cover rounded-md border`}
@@ -98,7 +99,7 @@ const CreateProjectDetailsTabObjectives = forwardRef<
                                                 width={0}
                                                 height={0}
                                                 sizes={"100vw"}
-                                                src={URL.createObjectURL(objective)}
+                                                src={URL.createObjectURL(objective.image)}
                                                 alt=""
                                                 key={idx}
                                                 className={`h-full w-full object-cover rounded-md border ${idx === 0 ? 'col-span-2 row-span-2' : ''}`}
@@ -137,11 +138,11 @@ const CreateProjectDetailsTabObjectives = forwardRef<
                 ref={inputRef}
                 {...props}
                 multiple
-                onChange={(e) => handleAddObjectives(e.target.files!)}
+                onChange={(e) => handleObjectives(e.target.files!)}
             />
             {
                 isOpenModal && 
-                createPortal(<CreateProjectDetailsTabObjectivesModal objectives={objectives} handleAddObjectives={handleClick} handleRemoveObjectives={handleRemoveObjectives} handleOpenModel={handleOpenModel} />
+                createPortal(<CreateProjectDetailsTabObjectivesModal objectives={objectives} handleClick={handleClick} handleObjectives={handleObjectives} handleRemoveObjectives={handleRemoveObjectives} handleOpenModel={handleOpenModel} />
                 , document.body)
             }
         </div>

@@ -13,8 +13,8 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
   ({ icon, label, desc, className, error, ...props }, ref) => {
     return (
-      <div className="flex flex-col gap-y-2 w-full relative">
-        <div className="flex flex-col gap-y-1">
+      <div className={`flex flex-col w-full relative ${error || label ? 'gap-y-2' : ''}`}>
+        <div className={`flex flex-col  ${desc ? 'gap-y-1' : ''} `}>
           <div className="flex gap-x-2 items-center">
             {icon}
             <p className="font-medium text-base text-light-text-100">{label}</p>
