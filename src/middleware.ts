@@ -5,8 +5,8 @@ import { FrontendRoutesEnum } from "./lib/routes";
 const protectedRoutes = [
   "/dashboard",
   "/auth/signout",
-  // "/projects/create",
-  "/chats",
+  "/projects/create",
+  // "/chats",
 ];
 const publicRoutes = ["/auth/signin", "/auth/signup"];
 
