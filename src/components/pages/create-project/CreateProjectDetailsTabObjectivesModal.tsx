@@ -1,18 +1,46 @@
+'use state'
+
 import Button from "@/components/base/Button";
 import { ProjectObjectiveDto } from "@/lib/model/project/project.dto";
 import cn from "@/lib/utils/cn";
 import { ImagePlus, X } from "lucide-react";
 import Image from "next/image";
+import CreateProjectObjectiveCard from "./CreateProjectObjectiveCard";
+import { useCallback, useState } from "react";
 
 interface CreateProjectDetailsTabObjectivesModalProps {
     objectives: ProjectObjectiveDto[];
-    handleAddObjectives: () => void
+    handleClick: () => void
+    handleObjectives: (images?: FileList, idx?: number, description?: string) => void
     handleRemoveObjectives: (idx: number) => void,
     handleOpenModel: () => void,
     className?: string
 }
 
-export default function CreateProjectDetailsTabObjectivesModal({ objectives, handleAddObjectives, handleRemoveObjectives, handleOpenModel, className }: CreateProjectDetailsTabObjectivesModalProps) {
+export default function CreateProjectDetailsTabObjectivesModal({ objectives, handleClick, handleObjectives, handleRemoveObjectives, handleOpenModel, className }: CreateProjectDetailsTabObjectivesModalProps) {
+
+    const [objectiveDescriptions, setObjectiveDescriptions] = useState<Map<number, string>>(new Map())
+
+    const handleObjectiveDescriptions = useCallback((idx: number, description:string) => {
+
+        const newObjectiveDescriptions = new Map(objectiveDescriptions);
+
+        newObjectiveDescriptions.set(idx, description);
+    
+        setObjectiveDescriptions(newObjectiveDescriptions);    
+    }, [objectiveDescriptions])
+    
+    const handleSaveChanges = () => {
+    
+        objectiveDescriptions.forEach((description, idx) => {
+            handleObjectives(undefined, idx, description)
+        })
+
+
+    }
+
+    console.log(objectiveDescriptions);
+    
 
     return (
         <div id="hs-scroll-inside-body-modal" className={cn(`size-full fixed bg-black bg-opacity-40 top-0 start-0 z-[80] overflow-x-hidden overflow-y-auto select-none pointer-events-none`
@@ -32,37 +60,36 @@ export default function CreateProjectDetailsTabObjectivesModal({ objectives, han
 
                         </button>
                     </div>
-                    <div className="grid grid-cols-3 p-2 gap-2 overflow-y-auto">
+                    <div className="grid grid-cols-3 p-4 gap-4 overflow-y-auto">
                         {objectives.map((objective, idx) => (
-                            <div key={idx} className="h-[12rem] w-full rounded-md border relative">
-                                <Image
-                                    width={0}
-                                    height={0}
-                                    sizes={"100vw"}
-                                    src={URL.createObjectURL(objective.image)}
-                                    alt=""
-                                    key={idx}
-                                    className={`h-full w-full object-cover rounded-md border`}
-                                />
-                                <div className="cursor-pointer h-fit w-fit bg-light-background-100 aspect-square border rounded-full absolute top-2 right-2 transition-all hover:bg-light-background-200" onClick={() => handleRemoveObjectives(idx)}>
-                                    <X className="p-1 text-light-accent-100" />
-                                </div>
-                            </div>
+                            <CreateProjectObjectiveCard key={idx} objective={objective} idx={idx} handleRemoveObjectives={handleRemoveObjectives} handleObjectiveDescriptions={handleObjectiveDescriptions} />
                         ))}
                     </div>
-                    <div className="flex justify-end items-center gap-x-2 py-3 px-4 border-t dark:border-neutral-700">
-                        <Button variant={'solid'} className="py-2 px-2">
-                            <div className="flex h-full gap-x-2 items-center" onClick={handleAddObjectives}>
-                                <ImagePlus className="h-4 w-auto text-light-background-100" />
-                                <p className="font-medium text-sm text-light-background-100" >Add Photos</p>
-                            </div>
-                        </Button>
+                    <div className="flex justify-between items-center py-3 px-4 border-t dark:border-neutral-700">
+                        {objectiveDescriptions?.size >= 1 &&
+                            <Button variant={'solid'} className="py-2 px-2" onClick={handleSaveChanges}>
 
-                        <Button variant={'solid'} className="py-2 px-2">
+                                <p className="font-medium text-sm text-light-background-100 whitespace-nowrap">Save Changes</p>
 
-                            <p className="font-medium text-sm text-light-background-100" onClick={handleOpenModel}>Close</p>
+                            </Button>
+                        }
 
-                        </Button>
+                        <div className="flex w-full justify-end gap-x-2">
+                            <Button variant={'solid'} className="py-2 px-2" onClick={handleClick}>
+                                <div className="flex h-full gap-x-2 items-center">
+                                    <ImagePlus className="h-4 w-auto text-light-background-100" />
+                                    <p className="font-medium text-sm text-light-background-100" >Add Photos</p>
+                                </div>
+                            </Button>
+
+                            <Button variant={'solid'} className="py-2 px-2" onClick={handleOpenModel}>
+
+                                <p className="font-medium text-sm text-light-background-100">Close</p>
+
+                            </Button>
+                        </div>
+
+
 
                     </div>
                 </div>

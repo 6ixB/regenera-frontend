@@ -2,7 +2,7 @@ import { z } from "zod";
 
 export const ProjectObjectiveSchema = z.object({
   image: z.instanceof(File).refine((file) => file, "Image is required"),
-  description: z.string().min(4, {message: "Describe the objective clearly"})
+  description: z.string().min(4, {message: "Describe the objective clearly"}).optional()
 })
 
 export const ProjectRequirementSchema = z.object({
@@ -24,7 +24,18 @@ export const CreateProjectDetailsDtoSchema = z.object({
   objectives:
     ProjectObjectiveSchema
     .array()
-    .refine((files) => files.length >= 1, "Objectives is required"),
+    .min(1, "Objectives is required")
+    .superRefine((objectives, ctx) => {
+      objectives.forEach((objective, index) => {
+        if (!objective.description || objective.description.trim() === "") {
+          ctx.addIssue({
+            code: z.ZodIssueCode.custom,
+            message: `Each objective must have a description [${index}]`,
+            path: [index]
+          });
+        }
+      });
+    }),
   address: z
     .string()
     .min(8, { message: "Address must be at least 8 characters long" }),

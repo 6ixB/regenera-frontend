@@ -11,7 +11,7 @@ export enum CreateProjectTabEnum {
 
 export default function CreateProjectTab() {
 
-    const [activeTab, setActiveTab] = useState<CreateProjectTabEnum>(CreateProjectTabEnum.DETAILS)
+    const [activeTab, setActiveTab] = useState<CreateProjectTabEnum>(CreateProjectTabEnum.TITLE)
 
     const handleActiveTab = (tab: CreateProjectTabEnum) => {
 
