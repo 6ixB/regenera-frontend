@@ -5,7 +5,7 @@ import CreateProjectDetailsTabFormObjectives from "./CreateProjectDetailsTabObje
 import { CalendarCheck2, Goal, HandCoins, MapPinned, NotebookPen } from "lucide-react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { CreateProjectDetailsDto, CreateProjectDetailsDtoSchema } from "@/lib/model/project/project.dto";
+import { CreateProjectDetailsDto, CreateProjectDetailsDtoSchema, ProjectObjectiveDto } from "@/lib/model/project/project.dto";
 import TextArea from "@/components/forms/TextArea";
 import Button from "@/components/base/Button";
 import CreateProjectDetailsTabRequirements from "./CreateProjectDetailsTabRequirements";
@@ -22,7 +22,7 @@ export default function CreateProjectDetailsTabForm() {
     const objectives = watch('objectives')
     const requirements = watch('requirements')
 
-    const handleAddObjectives = (objectives: FileList) => {
+    const handleAddObjectives = (objectives: ProjectObjectiveDto[]) => {
 
         const currentObjectives = getValues('objectives')
 

@@ -1,5 +1,15 @@
 import { z } from "zod";
 
+export const ProjectObjectiveSchema = z.object({
+  image: z.instanceof(File).refine((file) => file, "Image is required"),
+  description: z.string().min(4, {message: "Describe the objective clearly"})
+})
+
+export const ProjectRequirementSchema = z.object({
+  name: z.string().min(1, "Item name is required"),
+  quantity: z.number().min(1, "Quantity must be more than 0"),
+});
+
 export const CreateProjectTitleDtoSchema = z.object({
   title: z
     .string()
@@ -11,8 +21,8 @@ export const CreateProjectTitleDtoSchema = z.object({
 });
 
 export const CreateProjectDetailsDtoSchema = z.object({
-  objectives: z
-    .instanceof(File)
+  objectives:
+    ProjectObjectiveSchema
     .array()
     .refine((files) => files.length >= 1, "Objectives is required"),
   address: z
@@ -37,14 +47,11 @@ export const CreateProjectDetailsDtoSchema = z.object({
     .min(1, { message: "1 item can increase the team efficiency" }),
 });
 
-export const ProjectRequirementSchema = z.object({
-  name: z.string().min(1, "Item name is required"),
-  quantity: z.number().min(1, "Quantity must be more than 0"),
-});
 
 
 export type CreateProjectTitleDto = z.infer<typeof CreateProjectTitleDtoSchema>;
 export type CreateProjectDetailsDto = z.infer<
   typeof CreateProjectDetailsDtoSchema
 >;
+export type ProjectObjectiveDto = z.infer<typeof ProjectObjectiveSchema>
 export type ProjectRequirementDto = z.infer<typeof ProjectRequirementSchema>;

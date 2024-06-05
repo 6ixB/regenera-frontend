@@ -1,10 +1,11 @@
 import Button from "@/components/base/Button";
+import { ProjectObjectiveDto } from "@/lib/model/project/project.dto";
 import cn from "@/lib/utils/cn";
 import { ImagePlus, X } from "lucide-react";
 import Image from "next/image";
 
 interface CreateProjectDetailsTabObjectivesModalProps {
-    objectives: File[];
+    objectives: ProjectObjectiveDto[];
     handleAddObjectives: () => void
     handleRemoveObjectives: (idx: number) => void,
     handleOpenModel: () => void,
@@ -38,7 +39,7 @@ export default function CreateProjectDetailsTabObjectivesModal({ objectives, han
                                     width={0}
                                     height={0}
                                     sizes={"100vw"}
-                                    src={URL.createObjectURL(objective)}
+                                    src={URL.createObjectURL(objective.image)}
                                     alt=""
                                     key={idx}
                                     className={`h-full w-full object-cover rounded-md border`}

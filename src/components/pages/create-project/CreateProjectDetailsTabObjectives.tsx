@@ -6,10 +6,11 @@ import Image from "next/image";
 import { forwardRef, useEffect, useImperativeHandle, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import CreateProjectDetailsTabObjectivesModal from "./CreateProjectDetailsTabObjectivesModal";
+import { ProjectObjectiveDto } from "@/lib/model/project/project.dto";
 
 interface CreateProjectDetailsTabObjectivesProps
     extends React.InputHTMLAttributes<HTMLInputElement> {
-    objectives: File[];
+    objectives: ProjectObjectiveDto[];
     handleAddObjectives: (newObjectives: FileList) => void,
     handleRemoveObjectives: (idx: number) => void
 }
@@ -80,7 +81,7 @@ const CreateProjectDetailsTabObjectives = forwardRef<
                                                 width={0}
                                                 height={0}
                                                 sizes={"100vw"}
-                                                src={URL.createObjectURL(objective)}
+                                                src={URL.createObjectURL(objective.image)}
                                                 alt=""
                                                 key={idx}
                                                 className={`h-full w-full object-cover rounded-md border`}
@@ -98,7 +99,7 @@ const CreateProjectDetailsTabObjectives = forwardRef<
                                                 width={0}
                                                 height={0}
                                                 sizes={"100vw"}
-                                                src={URL.createObjectURL(objective)}
+                                                src={URL.createObjectURL(objective.image)}
                                                 alt=""
                                                 key={idx}
                                                 className={`h-full w-full object-cover rounded-md border ${idx === 0 ? 'col-span-2 row-span-2' : ''}`}
