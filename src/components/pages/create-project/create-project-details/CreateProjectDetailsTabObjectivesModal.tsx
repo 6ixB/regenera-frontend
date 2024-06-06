@@ -37,10 +37,7 @@ export default function CreateProjectDetailsTabObjectivesModal({ objectives, han
         })
 
 
-    }
-
-    console.log(objectiveDescriptions);
-    
+    }    
 
     return (
         <div id="hs-scroll-inside-body-modal" className={cn(`size-full fixed bg-black bg-opacity-40 top-0 start-0 z-[80] overflow-x-hidden overflow-y-auto select-none pointer-events-none`
