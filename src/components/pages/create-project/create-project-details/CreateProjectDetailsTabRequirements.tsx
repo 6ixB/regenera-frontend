@@ -21,7 +21,7 @@ export default function CreateProjectDetailsTabRequirements({ requirements, hand
     }
 
     return (
-        <div className="flex flex-col gap-y-2">
+        <div className="flex flex-col gap-y-2 ">
             <div className="flex w-full justify-between items-center">
                 <div className="flex flex-col gap-y-1">
                     <div className="flex gap-x-2 items-center">
@@ -31,10 +31,10 @@ export default function CreateProjectDetailsTabRequirements({ requirements, hand
                     <p className="font-medium text-xs text-gray-500">List the items required for the plan</p>
                 </div>
 
-                <Button variant={'solid'} className="py-2 px-2">
+                <Button variant={'solid'} className="py-2 px-2" onClick={handleIsAddingItem}>
                     <div className="flex h-full gap-x-2 items-center">
                         <Plus className="h-4 w-auto text-light-background-100" />
-                        <p className="font-medium text-sm text-light-background-100" onClick={handleIsAddingItem}>Add Items</p>
+                        <p className="font-medium text-sm text-light-background-100">Add Items</p>
                     </div>
                 </Button>
             </div>

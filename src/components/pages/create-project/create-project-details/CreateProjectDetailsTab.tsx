@@ -2,13 +2,15 @@ import cn from "@/lib/utils/cn";
 import { CreateProjectTabEnum } from "../CreateProjectTab";
 import { ChevronLeft } from "lucide-react";
 import CreateProjectDetailsTabForm from "./CreateProjectDetailsTabForm";
+import { CreateProjectDto } from "@/lib/model/project/project.dto";
 
 interface CreateProjectDetailsTabProps {
+    handleFormData: (data: Partial<CreateProjectDto>, isSubmit?: boolean) => void
     handleActiveTab: (tab: CreateProjectTabEnum) => void,
     className?: string
 }
 
-export default function CreateProjectDetailsTab({ handleActiveTab, className }: CreateProjectDetailsTabProps) {
+export default function CreateProjectDetailsTab({ handleFormData, handleActiveTab, className }: CreateProjectDetailsTabProps) {
 
     return (
         <div className={cn(`container h-fit flex flex-col items-center gap-4 py-4 m-auto relative`, className)}>
@@ -24,7 +26,7 @@ export default function CreateProjectDetailsTab({ handleActiveTab, className }: 
                 <p className="font-medium text-lg text-light-text-100 hidden md:block">Back</p>
             </div>
 
-            <CreateProjectDetailsTabForm />
+            <CreateProjectDetailsTabForm handleFormData={handleFormData} />
 
         </div>
     )

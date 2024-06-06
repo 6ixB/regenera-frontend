@@ -48,21 +48,21 @@ export const CreateProjectDetailsDtoSchema = z.object({
   endCrowdfundDate: z.coerce
     .date()
     .min(new Date(), "Start date must be in the future"),
-  requirements: z
-    .array(
+  requirements: 
       z.object({
         name: z.string(),
         quantity: z.number(),
-      })
-    )
+      }).array()
     .min(1, { message: "1 item can increase the team efficiency" }),
 });
 
-
+export const CreateProjectDtoSchema = z.object({
+  ...CreateProjectTitleDtoSchema.shape,
+  ...CreateProjectDetailsDtoSchema.shape
+})
 
 export type CreateProjectTitleDto = z.infer<typeof CreateProjectTitleDtoSchema>;
-export type CreateProjectDetailsDto = z.infer<
-  typeof CreateProjectDetailsDtoSchema
->;
+export type CreateProjectDetailsDto = z.infer<typeof CreateProjectDetailsDtoSchema>
+export type CreateProjectDto = z.infer<typeof CreateProjectDtoSchema>
 export type ProjectObjectiveDto = z.infer<typeof ProjectObjectiveSchema>
 export type ProjectRequirementDto = z.infer<typeof ProjectRequirementSchema>;

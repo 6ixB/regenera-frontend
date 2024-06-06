@@ -1,6 +1,7 @@
 import cn from "@/lib/utils/cn";
 import dynamic from "next/dynamic";
 import { CreateProjectTabEnum } from "../CreateProjectTab";
+import { CreateProjectDto } from "@/lib/model/project/project.dto";
 
 const CreateProjectTitleTabForm = dynamic(
   () => import("./CreateProjectTitleTabForm"),
@@ -10,11 +11,12 @@ const CreateProjectTitleTabForm = dynamic(
 );
 
 interface CreateProjectTitleTabProps{
+    handleFormData: (data: Partial<CreateProjectDto>, isSubmit?: boolean) => void
     handleActiveTab: (tab: CreateProjectTabEnum) => void,
     className?: string
 }
 
-export default function CreateProjectTitleTab({handleActiveTab, className} : CreateProjectTitleTabProps) {
+export default function CreateProjectTitleTab({ handleFormData, handleActiveTab, className} : CreateProjectTitleTabProps) {
   return (
     <div className={cn(`container h-fit flex flex-col items-center gap-10 py-4 m-auto `, className)}>
         <div className="w-full flex flex-col items-center text-center gap-2">
@@ -27,7 +29,7 @@ export default function CreateProjectTitleTab({handleActiveTab, className} : Cre
             </p>
         </div>
 
-        <CreateProjectTitleTabForm handleActiveTab={handleActiveTab} />
+        <CreateProjectTitleTabForm handleFormData={handleFormData} handleActiveTab={handleActiveTab} />
     </div>
   );
 }
