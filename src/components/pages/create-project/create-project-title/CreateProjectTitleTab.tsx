@@ -1,6 +1,6 @@
 import cn from "@/lib/utils/cn";
 import dynamic from "next/dynamic";
-import { CreateProjectTabEnum } from "./CreateProjectTab";
+import { CreateProjectTabEnum } from "../CreateProjectTab";
 
 const CreateProjectTitleTabForm = dynamic(
   () => import("./CreateProjectTitleTabForm"),

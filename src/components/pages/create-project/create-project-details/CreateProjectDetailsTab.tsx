@@ -1,7 +1,7 @@
 import cn from "@/lib/utils/cn";
-import CreateProjectDetailsTabForm from "./CreateProjectDetailsTabForm";
-import { CreateProjectTabEnum } from "./CreateProjectTab";
+import { CreateProjectTabEnum } from "../CreateProjectTab";
 import { ChevronLeft } from "lucide-react";
+import CreateProjectDetailsTabForm from "./CreateProjectDetailsTabForm";
 
 interface CreateProjectDetailsTabProps {
     handleActiveTab: (tab: CreateProjectTabEnum) => void,

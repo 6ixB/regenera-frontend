@@ -1,7 +1,7 @@
 "use client";
 
 import Input from "@/components/forms/Input";
-import CreateProjectTitleTabImage from "./CreateProjectTitleTabImage";
+import CreateProjectTitleTabImage from "../CreateProjectTitleTabImage";
 import { PenLine } from "lucide-react";
 import Button from "@/components/base/Button";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -10,7 +10,7 @@ import {
   CreateProjectTitleDto,
   CreateProjectTitleDtoSchema,
 } from "@/lib/model/project/project.dto";
-import { CreateProjectTabEnum } from "./CreateProjectTab";
+import { CreateProjectTabEnum } from "../CreateProjectTab";
 
 interface CreateProjectTitleTabFormProps {
   handleActiveTab: (tab: CreateProjectTabEnum) => void,
