@@ -1,8 +1,6 @@
-import InputGroup from "@/components/forms/InputGroup";
-import SingleChatBox from "./SingleChatList";
 import { Search } from "lucide-react";
 import SquareInputGroup from "@/components/forms/SquareInputGroup";
-import { useRouter } from "next/router";
+import ChatBox from "./ChatBox";
 
 interface ChatListProps {
     id: string;
@@ -10,21 +8,22 @@ interface ChatListProps {
 const ChatList : React.FC<ChatListProps> = ({ id })=>{
 
     return(
-        <div className={"w-full bg-light-background-100 p-2 flex flex-col gap-4"}>
+        <div className={"w-full bg-light-background-100 pt-2 px-2 flex flex-col gap-2 border-r"}>
             <div className={"w-full"}>
-                <SquareInputGroup icon={<Search/>} placeholder="Search Chat..."/>
+                <SquareInputGroup icon={<Search className="text-light-text-100"/>} placeholder="Search chat..." />
             </div>
-            <div className={"w-full overflow-y-auto"}>
-                <SingleChatBox message="testing" id="1" idFromURL={id}/>
-                <SingleChatBox message="testing" id="2" idFromURL={id}/>
-                <SingleChatBox message="testing" id="3" idFromURL={id}/>
-                <SingleChatBox message="testing" id="4" idFromURL={id}/>
-                <SingleChatBox message="testing" id="5" idFromURL={id}/>
-                <SingleChatBox message="testing" id="6" idFromURL={id}/>
-                <SingleChatBox message="testing" id="7" idFromURL={id}/>
-                <SingleChatBox message="testing" id="8" idFromURL={id}/>
-                <SingleChatBox message="testing" id="9" idFromURL={id}/>
-                <SingleChatBox message="testing" id="10" idFromURL={id}/>
+            <hr className="border-light-background-300" />
+            <div className={"flex flex-col w-full px-1 gap-y-1 pt-2 overflow-y-auto"}>
+                <ChatBox message="Jeremy Saputra Tatuil" id="1" idFromURL={id}/>
+                <ChatBox message="Anthonio Obert" id="2" idFromURL={id}/>
+                <ChatBox message="Mr. Tatuil Ganteng Max Pls Marry Me Pls Pls Pls" id="3" idFromURL={id}/>
+                <ChatBox message="Tuan Jeremy" id="4" idFromURL={id}/>
+                <ChatBox message="Yang Mulia Jeremy" id="5" idFromURL={id}/>
+                <ChatBox message="Jeremy-chan" id="6" idFromURL={id}/>
+                <ChatBox message="Tatuil Mixtape" id="7" idFromURL={id}/>
+                <ChatBox message="Yang Terhormat Sheryl" id="8" idFromURL={id}/>
+                <ChatBox message="Sir. Teresa Sheryl" id="9" idFromURL={id}/>
+                <ChatBox message="Naruto" id="10" idFromURL={id}/>
             </div>
         </div>
     )

@@ -25,9 +25,9 @@ function isNotCentered(pathname: string) {
   const nonCenteredPages = [
     FrontendRoutesEnum.DASHBOARD.toString(),
     FrontendRoutesEnum.CHATS.toString(),
-  ];
-
-  return nonCenteredPages.includes(pathname);
+  ];  
+  
+  return nonCenteredPages.some(page => pathname.startsWith(page));
 }
 
 export default function Navbar() {
@@ -110,7 +110,7 @@ export default function Navbar() {
         />
 
         {/* Right Section */}
-        <div className={"w-[16rem] flex items-center justify-end gap-x-4"}>
+        <div className={"w-[16rem] flex items-center justify-end gap-x-4 select-none"}>
           {status === "authenticated" ? (
             // Authenticated
             <>

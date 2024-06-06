@@ -1,8 +1,8 @@
 'use client'
 
 import { useState } from "react";
-import CreateProjectDetailsTab from "./CreateProjectDetailsTab";
-import CreateProjectTitleTab from "./CreateProjectTitleTab";
+import CreateProjectDetailsTab from "./create-project-details/CreateProjectDetailsTab";
+import CreateProjectTitleTab from "./create-project-title/CreateProjectTitleTab";
 
 export enum CreateProjectTabEnum {
     TITLE = 'Title',

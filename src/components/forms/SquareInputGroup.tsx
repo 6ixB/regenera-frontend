@@ -1,17 +1,18 @@
 interface InputGroupProps {
     icon: React.ReactNode;
     placeholder: string;
+    
   }
   
   export default function SquareInputGroup({ icon, placeholder }: InputGroupProps) {
     return (
-      <div className={`w-full max-w-[354px] lg:w-full relative`}>
+      <div className={`w-full lg:w-full relative`}>
         <input
           type={"text"}
           id={"hs-leading-icon"}
           name={"hs-leading-icon"}
           className={
-            "w-full py-3 px-4 ps-11 block border-light-background-300 text-sm focus:z-10 focus:border-light-primary-100 focus:ring-light-primary-100 bg-light-background-200"
+            "w-full py-3 px-4 ps-11 block border-light-background-300 text-sm focus:z-10 focus:border-light-primary-100 focus:ring-light-primary-100 bg-light-background-100 rounded-lg"
           }
           placeholder={placeholder}
         />

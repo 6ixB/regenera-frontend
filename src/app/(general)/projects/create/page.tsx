@@ -1,6 +1,6 @@
-import CreateProjectDetailsTab from "@/components/pages/create-project/CreateProjectDetailsTab";
+import CreateProjectDetailsTab from "@/components/pages/create-project/create-project-details/CreateProjectDetailsTab";
 import CreateProjectTab from "@/components/pages/create-project/CreateProjectTab";
-import CreateProjectTitleTab from "@/components/pages/create-project/CreateProjectTitleTab";
+import CreateProjectTitleTab from "@/components/pages/create-project/create-project-title/CreateProjectTitleTab";
 
 export default function CreateProject() {
 

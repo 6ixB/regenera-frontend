@@ -5,7 +5,7 @@ import { ProjectObjectiveDto } from "@/lib/model/project/project.dto";
 import cn from "@/lib/utils/cn";
 import { ImagePlus, X } from "lucide-react";
 import Image from "next/image";
-import CreateProjectObjectiveCard from "./CreateProjectObjectiveCard";
+import CreateProjectObjectiveCard from "../CreateProjectObjectiveCard";
 import { useCallback, useState } from "react";
 
 interface CreateProjectDetailsTabObjectivesModalProps {

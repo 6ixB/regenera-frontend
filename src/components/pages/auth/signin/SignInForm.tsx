@@ -1,7 +1,7 @@
 "use client";
 
 import Button from "@/components/base/Button";
-import Checkbox from "@/components/forms/Checbox";
+import Checkbox from "@/components/forms/Checkbox";
 import Input from "@/components/forms/Input";
 import GoogleSignInButton from "@/components/forms/GoogleSignInButton";
 import { SubmitHandler, useForm } from "react-hook-form";
