@@ -32,7 +32,7 @@
             if (images) {
 
                 const newObjectives = Array.from(images).map((image) => ({
-                    image: image,
+                    objectiveImage: image,
                 }))
 
                 if (!currentObjectives) return setValue('objectives', newObjectives)
@@ -43,7 +43,7 @@
             if (idx !== undefined && description !== undefined) {
                 
                 setValue('objectives', currentObjectives.map((objective, index) =>
-                    index === idx ? { ...objective, description } : objective
+                    index === idx ? { ...objective, objective: description } : objective
                 ));
 
             }
@@ -58,13 +58,13 @@
 
         }
 
-        const handleAddRequirements = (item: ProjectRequirement) => {
+        const handleAddRequirements = (requirement: ProjectRequirement) => {
 
-            const currentItems = getValues('requirements')
+            const currentRequirements = getValues('requirements')
 
-            if (!currentItems) return setValue('requirements', [item])
+            if (!currentRequirements) return setValue('requirements', [requirement])
 
-            setValue('requirements', [...currentItems, item])
+            setValue('requirements', [...currentRequirements, requirement])
 
         }
 
@@ -120,8 +120,8 @@
                         className={"border-light-primary-100 placeholder-light-background-300 text-base"}
                         placeholder={"e.g. 10-19-2004"}
                         type={"date"}
-                        error={errors.endCrowdfundDate?.message}
-                        {...register('endCrowdfundDate')}
+                        error={errors.deadline?.message}
+                        {...register('deadline')}
                     />
 
                     <Input
@@ -133,8 +133,8 @@
                         type={"number"}
                         step={100000}
                         min={0}
-                        error={errors.minimumFund?.message}
-                        {...register('minimumFund')}
+                        error={errors.fundingGoal?.message}
+                        {...register('fundingGoal')}
                     />
                 </div>
 

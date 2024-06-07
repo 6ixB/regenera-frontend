@@ -4,6 +4,11 @@ import { useEffect, useState } from "react";
 import CreateProjectDetailsTab from "./create-project-details/CreateProjectDetailsTab";
 import CreateProjectTitleTab from "./create-project-title/CreateProjectTitleTab";
 import { CreateProjectDto } from "@/lib/model/project/project.dto";
+import { useMutation } from "@tanstack/react-query";
+import { createProjectMutationFn } from "@/lib/api/projectApi";
+import { useRouter } from "next/navigation";
+import { FrontendRoutesEnum } from "@/lib/routes";
+import { useSession } from "next-auth/react";
 
 export enum CreateProjectTabEnum {
     TITLE = 'Title',
@@ -12,21 +17,44 @@ export enum CreateProjectTabEnum {
 
 export default function CreateProjectTab() {
 
+    const router = useRouter();
+
+    const { data: session } = useSession()
+
     const [formData, setFormData] = useState<Partial<CreateProjectDto>>({})
     const [activeTab, setActiveTab] = useState<CreateProjectTabEnum>(CreateProjectTabEnum.TITLE)
 
-    const handleFormData = (data: Partial<CreateProjectDto>, isSubmit: boolean = false) => {
+    const createProject = useMutation({
+        mutationFn: createProjectMutationFn,
+        onSuccess: () => {
+            router.push(
+                `${FrontendRoutesEnum.DISCOVER.toString()}`
+            );
+            router.refresh();
+        },
+        onError: (error) => {
+            console.log(error);
+        },
+    })
+
+    const handleFormData = async (latestFormData: Partial<CreateProjectDto>, isSubmit: boolean = false) => {
 
         setFormData((prevData) => ({
             ...prevData,
-            ...data,
+            ...latestFormData,
         }));
 
-        if (isSubmit) {
-            console.log('Final Form Data: ', { ...formData, ...data });
-
-        }
+        console.log(session?.user);
         
+
+        if (isSubmit) {
+            console.log('Final Form Data: ', { ...formData, ...latestFormData });
+
+            const finalFormData: CreateProjectDto = ({ ...formData, ...latestFormData, organizerId: session?.user.id }) as CreateProjectDto
+
+            await createProject.mutateAsync(finalFormData)
+        }
+
     }
 
     useEffect(() => {

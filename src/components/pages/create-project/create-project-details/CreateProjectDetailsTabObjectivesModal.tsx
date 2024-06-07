@@ -32,6 +32,8 @@ export default function CreateProjectDetailsTabObjectivesModal({ objectives, han
     
     const handleSaveChanges = () => {
     
+        console.log(objectiveDescriptions);
+        
         objectiveDescriptions.forEach((description, idx) => {
             handleObjectives(undefined, idx, description)
         })

@@ -13,16 +13,16 @@ interface CreateProjectDetailsTabRequirementsInputProps {
 export default function CreateProjectDetailsTabRequirementsInput({
   handleAddRequirements,
 }: CreateProjectDetailsTabRequirementsInputProps) {
-  const [itemName, setItemName] = useState("");
-  const [itemQuantity, setItemQuantity] = useState<number | null>(null);
-  const [errors, setErrors] = useState<{ name?: string; quantity?: string }>(
+  const [requirement, setRequirement] = useState("");
+  const [requirementQuantity, setRequirementQuantity] = useState<number | null>(null);
+  const [errors, setErrors] = useState<{ requirement?: string; quantity?: string }>(
     {}
   );
 
   const handleAddClick = () => {
     const newItem: ProjectRequirement = {
-      name: itemName,
-      quantity: itemQuantity ?? 0,
+      requirement: requirement,
+      quantity: requirementQuantity ?? 0,
     };
 
     const result = ProjectRequirementSchema.safeParse(newItem);
@@ -30,15 +30,15 @@ export default function CreateProjectDetailsTabRequirementsInput({
     if (!result.success) {
       const errorMessages = result.error.flatten().fieldErrors;
       setErrors({
-        name: errorMessages.name?.[0],
+        requirement: errorMessages.requirement?.[0],
         quantity: errorMessages.quantity?.[0],
       });
       return;
     }
     handleAddRequirements(newItem);
 
-    setItemName(""); // Clear input fields after adding
-    setItemQuantity(0); // Clear input fields after adding
+    setRequirement(""); // Clear input fields after adding
+    setRequirementQuantity(0); // Clear input fields after adding
     setErrors({});
   };
 
@@ -46,19 +46,19 @@ export default function CreateProjectDetailsTabRequirementsInput({
     <tr>
       <td className="px-6 pt-2 pb-6 whitespace-nowrap text-sm font-medium text-light-text-100">
         <Input
-          value={itemName}
-          onChange={(e) => setItemName(e.target.value)}
+          value={requirement}
+          onChange={(e) => setRequirement(e.target.value)}
           className=" py-2 border text-xs"
           placeholder="Enter item name"
-          error={errors.name}
+          error={errors.requirement}
         />
       </td>
       <td className="px-6 pt-2 pb-6 whitespace-nowrap text-sm text-light-text-100 ">
         <Input
           type="number"
           min={0}
-          value={itemQuantity ?? 0}
-          onChange={(e) => setItemQuantity(e.target.valueAsNumber)}
+          value={requirementQuantity ?? 0}
+          onChange={(e) => setRequirementQuantity(e.target.valueAsNumber)}
           className="py-2 border text-xs"
           placeholder="Must be more than 0"
           error={errors.quantity}

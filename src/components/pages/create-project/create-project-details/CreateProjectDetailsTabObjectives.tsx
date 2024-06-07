@@ -81,7 +81,7 @@ const CreateProjectDetailsTabObjectives = forwardRef<
                                                 width={0}
                                                 height={0}
                                                 sizes={"100vw"}
-                                                src={URL.createObjectURL(objective.image)}
+                                                src={URL.createObjectURL(objective.objectiveImage)}
                                                 alt=""
                                                 key={idx}
                                                 className={`h-full w-full object-cover rounded-md border`}
@@ -99,7 +99,7 @@ const CreateProjectDetailsTabObjectives = forwardRef<
                                                 width={0}
                                                 height={0}
                                                 sizes={"100vw"}
-                                                src={URL.createObjectURL(objective.image)}
+                                                src={URL.createObjectURL(objective.objectiveImage)}
                                                 alt=""
                                                 key={idx}
                                                 className={`h-full w-full object-cover rounded-md border ${idx === 0 ? 'col-span-2 row-span-2' : ''}`}

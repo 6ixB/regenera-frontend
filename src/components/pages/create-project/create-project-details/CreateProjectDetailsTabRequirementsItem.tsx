@@ -1,26 +1,26 @@
 export interface ProjectRequirement {
-  name: string;
+  requirement: string;
   quantity: number;
 }
 
 interface CreateProjectDetailsTabRequirementsItemProps {
-  item: ProjectRequirement;
+  requirement: ProjectRequirement;
   idx: number;
   handleRemoveRequirements: (idx: number) => void;
 }
 
 export default function CreateProjectDetailsTabRequirementsItem({
-  item,
+  requirement,
   idx,
   handleRemoveRequirements,
 }: CreateProjectDetailsTabRequirementsItemProps) {
   return (
     <tr>
       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-light-text-100 ">
-        {item.name}
+        {requirement.requirement}
       </td>
       <td className="px-6 py-4 whitespace-nowrap text-sm text-light-text-100 ">
-        {item.quantity}
+        {requirement.quantity}
       </td>
       <td className="px-6 py-4 whitespace-nowrap text-end text-sm font-medium">
         <button
