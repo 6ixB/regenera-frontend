@@ -1,23 +1,25 @@
 "use client";
 
 import Input from "@/components/forms/Input";
-import CreateProjectTitleTabImage from "./CreateProjectTitleTabImage";
+import CreateProjectTitleTabImage from "../CreateProjectTitleTabImage";
 import { PenLine } from "lucide-react";
 import Button from "@/components/base/Button";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
+  CreateProjectDto,
   CreateProjectTitleDto,
   CreateProjectTitleDtoSchema,
 } from "@/lib/model/project/project.dto";
-import { CreateProjectTabEnum } from "./CreateProjectTab";
+import { CreateProjectTabEnum } from "../CreateProjectTab";
 
 interface CreateProjectTitleTabFormProps {
+  handleFormData: (data: Partial<CreateProjectDto>, isSubmit?: boolean) => void
   handleActiveTab: (tab: CreateProjectTabEnum) => void,
 }
 
 
-export default function CreateProjectTitleTabForm({ handleActiveTab }: CreateProjectTitleTabFormProps) {
+export default function CreateProjectTitleTabForm({ handleFormData, handleActiveTab }: CreateProjectTitleTabFormProps) {
   const {
     register,
     handleSubmit,
@@ -31,6 +33,7 @@ export default function CreateProjectTitleTabForm({ handleActiveTab }: CreatePro
 
   const onSubmit: SubmitHandler<CreateProjectTitleDto> = async (data) => {
 
+    handleFormData(data)
     handleActiveTab(CreateProjectTabEnum.DETAILS)
   };
 
