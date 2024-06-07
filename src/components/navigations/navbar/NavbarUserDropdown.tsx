@@ -31,46 +31,62 @@ export default function NavbarUserDropdown({
       <button
         id="hs-dropdown-with-header"
         type="button"
-        className="hs-dropdown-toggle flex justify-center items-center p-2 gap-2 rounded-md cursor-pointer hover:bg-light-background-200 disabled:opacity-50 disabled:pointer-events-none"
+        className="hs-dropdown-toggle flex cursor-pointer items-center justify-center gap-2 rounded-md p-2 hover:bg-light-background-200 disabled:pointer-events-none disabled:opacity-50"
       >
         <div className={"relative inline-block"}>
-          <Image
-            width={0}
-            height={0}
-            sizes={"100vw"}
-            className={"inline-block size-6 rounded-full cursor-pointer"}
-            src={
-              "https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=300&h=300&q=80"
-            }
-            alt={"Image Description"}
-          />
+          {session?.user.imageUrl ? (
+            <Image
+              width={0}
+              height={0}
+              sizes={"100vw"}
+              className={
+                "inline-block size-6 cursor-pointer rounded-full bg-light-background-300 object-cover"
+              }
+              src={session.user.imageUrl}
+              alt={"Image Description"}
+            />
+          ) : (
+            <div
+              className={
+                "inline-block size-6 cursor-pointer rounded-full bg-light-background-300"
+              }
+            />
+          )}
           <span
             className={
-              "absolute top-0 end-0 block size-1.5 rounded-full ring-2 ring-white bg-light-accent-100"
+              "absolute end-0 top-0 block size-1.5 rounded-full bg-light-accent-100 ring-2 ring-white"
             }
           ></span>
         </div>
         <ChevronDown
           size={16}
-          className={"hs-dropdown-open:rotate-180 text-light-text-100"}
+          className={"text-light-text-100 hs-dropdown-open:rotate-180"}
         />
       </button>
 
       <div
-        className="hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden min-w-60 bg-light-background-100 shadow-md rounded-lg mt-2"
+        className="hs-dropdown-menu duration mt-2 hidden min-w-60 rounded-lg bg-light-background-100 opacity-0 shadow-md transition-[opacity,margin] hs-dropdown-open:opacity-100"
         aria-labelledby="hs-dropdown-with-header ring"
       >
-        <div className="py-3 px-5 rounded-t-lg flex items-center gap-x-4">
-          <Image
-            width={0}
-            height={0}
-            sizes={"100vw"}
-            className={"inline-block size-8 rounded-full cursor-pointer"}
-            src={
-              "https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=300&h=300&q=80"
-            }
-            alt={"Image Description"}
-          />
+        <div className="flex items-center gap-x-4 rounded-t-lg px-5 py-3">
+          {session?.user.imageUrl ? (
+            <Image
+              width={0}
+              height={0}
+              sizes={"100vw"}
+              className={
+                "inline-block size-8 cursor-pointer rounded-full bg-light-background-300 object-cover"
+              }
+              src={session.user.imageUrl}
+              alt={"Image Description"}
+            />
+          ) : (
+            <div
+              className={
+                "inline-block size-8 cursor-pointer rounded-full bg-light-background-300"
+              }
+            />
+          )}
           <div>
             <p className="text-sm text-light-text-100">Signed in as</p>
             <p className="text-sm font-medium text-light-text-100">
@@ -81,15 +97,15 @@ export default function NavbarUserDropdown({
         <hr />
         <div className="first:pt-0 last:pb-0">
           <Link
-            className="flex items-center gap-x-3.5 px-4 py-3 m-2 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+            className="m-2 flex items-center gap-x-3.5 rounded-lg px-4 py-3 text-sm text-gray-800 hover:bg-gray-100 focus:bg-gray-100 focus:outline-none"
             href={`/profiles/${session?.user?.id}`}
           >
             <CircleUserRound size={20} className={"text-light-text-100"} />
             Profile
           </Link>
           <Link
-            className="flex items-center gap-x-3.5 px-4 py-3 m-2 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
-            href={"/settings"}
+            className="m-2 flex items-center gap-x-3.5 rounded-lg px-4 py-3 text-sm text-gray-800 hover:bg-gray-100 focus:bg-gray-100 focus:outline-none"
+            href={FrontendRoutesEnum.SETTINGS.toString()}
           >
             <Settings size={20} className={"text-light-text-100"} />
             Settings
@@ -97,7 +113,7 @@ export default function NavbarUserDropdown({
           <hr />
           <div
             onClick={handleSignOutClick}
-            className="flex items-center gap-x-3.5 px-4 py-3 m-2 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 cursor-pointer"
+            className="m-2 flex cursor-pointer items-center gap-x-3.5 rounded-lg px-4 py-3 text-sm text-gray-800 hover:bg-gray-100 focus:bg-gray-100 focus:outline-none"
           >
             <LogOut size={20} className={"text-light-text-100"} />
             Sign out
