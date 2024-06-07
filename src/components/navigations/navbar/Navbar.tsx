@@ -25,7 +25,16 @@ function isNotCentered(pathname: string) {
   const nonCenteredPages = [
     FrontendRoutesEnum.DASHBOARD.toString(),
     FrontendRoutesEnum.CHATS.toString(),
+    FrontendRoutesEnum.SETTINGS.toString(),
   ];
+
+  if (
+    pathname.startsWith(FrontendRoutesEnum.DASHBOARD.toString()) ||
+    pathname.startsWith(FrontendRoutesEnum.CHATS.toString()) ||
+    pathname.startsWith(FrontendRoutesEnum.SETTINGS.toString())
+  ) {
+    return true;
+  }
 
   return nonCenteredPages.includes(pathname);
 }
@@ -66,16 +75,16 @@ export default function Navbar() {
 
   return (
     <header
-      className={`flex z-50 fixed top-0 justify-center items-center user-select-none transition-all duration-200 bg-light-background-100
-    shadow px-8
-    ${isShrinked ? "top-0 w-full rounded-none md:w-10/12 md:top-4 md:rounded-full lg:container lg:px-8 lg:py-0" : "top-0 w-full"}`}
+      className={`user-select-none fixed top-0 z-50 flex items-center justify-center bg-light-background-100 px-8 shadow
+    transition-all duration-200
+    ${isShrinked ? "top-0 w-full rounded-none lg:container md:top-4 md:w-10/12 md:rounded-full lg:px-8 lg:py-0" : "top-0 w-full"}`}
     >
       <nav
-        className={`${centered && "container"} w-full px-0 py-3 items-center justify-between gap-x-4 hidden md:flex
+        className={`${centered && "container"} hidden w-full items-center justify-between gap-x-4 px-0 py-3 md:flex
         `}
       >
         {/* Left Section */}
-        <div className={"w-[16rem] flex items-center justify-start gap-x-4"}>
+        <div className={"flex w-[16rem] items-center justify-start gap-x-4"}>
           <Link
             prefetch={false}
             href={FrontendRoutesEnum.HOME.toString()}
@@ -95,7 +104,7 @@ export default function Navbar() {
               }
             >
               <div
-                className={"text-base text-light-text-100 whitespace-nowrap"}
+                className={"whitespace-nowrap text-base text-light-text-100"}
               >
                 {status === "authenticated" ? "Dashboard" : "How it works"}
               </div>
@@ -110,7 +119,7 @@ export default function Navbar() {
         />
 
         {/* Right Section */}
-        <div className={"w-[16rem] flex items-center justify-end gap-x-4"}>
+        <div className={"flex w-[16rem] items-center justify-end gap-x-4"}>
           {status === "authenticated" ? (
             // Authenticated
             <>
@@ -120,7 +129,7 @@ export default function Navbar() {
                   router.refresh();
                 }}
                 className={
-                  "flex justify-center items-center p-2 rounded-md cursor-pointer hover:bg-light-background-200 select-none"
+                  "flex cursor-pointer select-none items-center justify-center rounded-md p-2 hover:bg-light-background-200"
                 }
               >
                 <div className={"relative inline-block"}>
@@ -130,21 +139,21 @@ export default function Navbar() {
                   />
                   <span
                     className={
-                      "absolute top-0 end-0 block size-1.5 rounded-full ring-2 ring-white bg-light-accent-100"
+                      "absolute end-0 top-0 block size-1.5 rounded-full bg-light-accent-100 ring-2 ring-white"
                     }
                   ></span>
                 </div>
               </div>
               <div
                 className={
-                  "flex justify-center items-center p-2 rounded-md cursor-pointer hover:bg-light-background-200"
+                  "flex cursor-pointer items-center justify-center rounded-md p-2 hover:bg-light-background-200"
                 }
               >
                 <div className={"relative inline-block"}>
                   <Bell className={"text-light-text-100"} size={20} />
                   <span
                     className={
-                      "absolute top-0 end-0 block size-1.5 rounded-full ring-2 ring-white bg-light-accent-100"
+                      "absolute end-0 top-0 block size-1.5 rounded-full bg-light-accent-100 ring-2 ring-white"
                     }
                   ></span>
                 </div>
@@ -156,7 +165,7 @@ export default function Navbar() {
             <>
               <Link href={FrontendRoutesEnum.SIGNIN.toString()}>
                 <div
-                  className={"text-base text-light-text-100 whitespace-nowrap"}
+                  className={"whitespace-nowrap text-base text-light-text-100"}
                 >
                   Sign in
                 </div>
@@ -164,11 +173,11 @@ export default function Navbar() {
               <Link
                 href={"/projects/create"}
                 className={
-                  "px-4 py-2 rounded-full border-2 border-light-accent-100"
+                  "rounded-full border-2 border-light-accent-100 px-4 py-2"
                 }
               >
                 <div
-                  className={"text-base text-light-text-100 whitespace-nowrap"}
+                  className={"whitespace-nowrap text-base text-light-text-100"}
                 >
                   Start a project
                 </div>

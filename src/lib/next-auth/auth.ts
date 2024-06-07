@@ -66,6 +66,8 @@ interface JWTParams {
   account?: any;
   profile?: any;
   isNewUser?: any;
+  trigger?: any;
+  session?: any;
 }
 
 interface SessionParams {
@@ -90,7 +92,7 @@ async function refreshTokens(token: JWT): Promise<JWT> {
       headers: {
         Authorization: `Bearer ${token.backendData.refreshToken}`,
       },
-    }
+    },
   );
 
   if (!response.ok) throw new Error("Failed to refresh token");
@@ -109,16 +111,29 @@ async function refreshTokens(token: JWT): Promise<JWT> {
 }
 
 export const callbacks = {
-  async jwt({ token, user, account, profile, isNewUser }: JWTParams) {
+  async jwt({
+    token,
+    user,
+    account,
+    profile,
+    isNewUser,
+    trigger,
+    session,
+  }: JWTParams) {
+    if (trigger === "update") {
+      token.backendData.user = session.user;
+    }
+
     if (user) {
       return { ...token, ...user, ...account, ...profile };
     }
 
-    if (new Date().getTime() < token.expiresIn) {
+    if (new Date().getTime() < token.backendData.expiresIn) {
       return token;
     }
 
     try {
+      console.log("Refreshing token...");
       return await refreshTokens(token);
     } catch (error) {
       return { ...token, error: "RefreshTokenError" };

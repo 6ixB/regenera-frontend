@@ -4,7 +4,6 @@ import "../globals.css";
 import PrelineScript from "@/components/preline/PrelineScript";
 import Footer from "@/components/navigations/Footer";
 import Providers from "@/components/Providers";
-import Header from "@/components/navigations/Header";
 import NextTopLoader from "nextjs-toploader";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -26,9 +25,7 @@ export default function GeneralLayout({
       >
         <Providers>
           <NextTopLoader color="#dd0025" height={2} />
-          <Header />
           {children}
-          <Footer />
         </Providers>
       </body>
       <PrelineScript />

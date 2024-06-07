@@ -1,7 +1,7 @@
 import { ChevronRight } from "lucide-react";
 import Link from "next/link";
 
-interface SidebarNavLinkProps {
+interface NavbarCollapsedNavLinkProps {
   link: string;
   title: string;
   description: string;
@@ -11,7 +11,7 @@ export default function NavbarCollapsedNavLink({
   link,
   title,
   description,
-}: SidebarNavLinkProps) {
+}: NavbarCollapsedNavLinkProps) {
   return (
     <Link href={link}>
       <div

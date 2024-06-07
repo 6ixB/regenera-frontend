@@ -5,15 +5,15 @@ import {
   Target,
   Trophy,
 } from "lucide-react";
-import SidebarNavLink from "./SidebarNavLink";
+import DashboardSidebarNavLink from "./DashboardSidebarNavLink";
 import Link from "next/link";
 import { FrontendRoutesEnum } from "@/lib/routes";
 
-export default function Sidebar() {
+export default function DashboardSidebar() {
   return (
     <div
       className={
-        "self-start min-w-[18rem] w-[18rem] h-full flex flex-col gap-y-8 bg-light-background-100 drop-shadow-md px-8 py-6 overflow-y-hidden hover:overflow-y-auto [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:bg-light-background-100 [&::-webkit-scrollbar-thumb]:bg-light-background-300 [&::-webkit-scrollbar-thumb]:rounded-full"
+        "flex h-full w-[18rem] min-w-[18rem] flex-col gap-y-8 self-start overflow-y-hidden bg-light-background-100 px-8 py-6 drop-shadow-md hover:overflow-y-auto"
       }
       style={{ scrollbarGutter: "stable" }}
     >
@@ -22,29 +22,29 @@ export default function Sidebar() {
           <Link
             href={"/projects/create"}
             className={
-              "px-4 py-2 rounded-full border-2 border-light-accent-100 hover:opacity-75"
+              "rounded-full border-2 border-light-accent-100 px-4 py-2 hover:opacity-75"
             }
           >
             <div
               className={
-                "text-base text-light-text-100 whitespace-nowrap text-center"
+                "whitespace-nowrap text-center text-base text-light-text-100"
               }
             >
               Start a project
             </div>
           </Link>
-          <div className="flex items-center text-sm px-4 text-gray-800 before:flex-1 before:border-t before:border-light-background-300 before:me-2 after:flex-1 after:border-t after:border-light-background-300 after:ms-2">
+          <div className="flex items-center px-4 text-sm text-gray-800 before:me-2 before:flex-1 before:border-t before:border-light-background-300 after:ms-2 after:flex-1 after:border-t after:border-light-background-300">
             or
           </div>
           <Link
             href={"/discover"}
             className={
-              "px-4 py-2 rounded-full bg-light-accent-100 hover:opacity-75"
+              "rounded-full bg-light-accent-100 px-4 py-2 hover:opacity-75"
             }
           >
             <div
               className={
-                "text-base text-light-background-100 whitespace-nowrap text-center"
+                "whitespace-nowrap text-center text-base text-light-background-100"
               }
             >
               Discover projects
@@ -54,29 +54,29 @@ export default function Sidebar() {
       </div>
       <div className={"flex flex-col gap-y-2"}>
         <div className={"flex flex-col gap-y-1"}>
-          <SidebarNavLink
+          <DashboardSidebarNavLink
             link={FrontendRoutesEnum.DASHBOARD.toString()}
             icon={
               <LayoutDashboard size={20} className={"text-light-text-100"} />
             }
             text={"Dashboard"}
           />
-          <SidebarNavLink
+          <DashboardSidebarNavLink
             link={FrontendRoutesEnum.DASHBOARD_PROJECTS.toString()}
             icon={<LeafyGreen size={20} className={"text-light-text-100"} />}
             text={"My projects"}
           />
-          <SidebarNavLink
+          <DashboardSidebarNavLink
             link={FrontendRoutesEnum.DASHBOARD_PROJECTS_JOINED.toString()}
             icon={<Target size={20} className={"text-light-text-100"} />}
             text={"Joined projects"}
           />
-          <SidebarNavLink
+          <DashboardSidebarNavLink
             link={FrontendRoutesEnum.DASHBOARD_ACHIEVEMENTS.toString()}
             icon={<Award size={20} className={"text-light-text-100"} />}
             text={"Achievements"}
           />
-          <SidebarNavLink
+          <DashboardSidebarNavLink
             link={FrontendRoutesEnum.LEADERBOARD.toString()}
             icon={<Trophy size={20} className={"text-light-text-100"} />}
             text={"Leaderboard"}
@@ -84,7 +84,7 @@ export default function Sidebar() {
         </div>
       </div>
       <div className={"flex flex-col gap-y-2"}>
-        <div className={"font-semibold text-base text-light-text-100"}>
+        <div className={"text-base font-semibold text-light-text-100"}>
           Need help?
         </div>
         <div className={"text-sm text-light-text-100"}>
@@ -95,14 +95,14 @@ export default function Sidebar() {
         <Link
           href={"/"}
           className={
-            "p-3 rounded-md text-center bg-gradient-to-r from-light-primary-200 to-light-primary-100 border-none hover:opacity-75 text-light-background-100"
+            "rounded-md border-none bg-gradient-to-r from-light-primary-200 to-light-primary-100 p-3 text-center text-light-background-100 hover:opacity-75"
           }
         >
           Help Center
         </Link>
       </div>
-      <div className={"flex flex-wrap gap-2 text-light-text-100 text-sm"}>
-        <div className={"font-semibold text-base"}>Learn more</div>
+      <div className={"flex flex-wrap gap-2 text-sm text-light-text-100"}>
+        <div className={"text-base font-semibold"}>Learn more</div>
         <Link href={FrontendRoutesEnum.ABOUT.toString()}>
           <div className="text-xs md:text-sm">How Regenera Works</div>
         </Link>
@@ -116,7 +116,7 @@ export default function Sidebar() {
           <div className="text-xs md:text-sm">Success stories</div>
         </Link>
       </div>
-      <div className={"text-light-text-100 text-xs"}>
+      <div className={"text-xs text-light-text-100"}>
         © 2024 SROOMY. All rights reserved.
       </div>
     </div>

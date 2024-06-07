@@ -6,12 +6,12 @@ import Link from "next/link";
 
 export default function SignIn() {
   return (
-    <main className={"w-full flex justify-center"}>
+    <main className={"flex w-full justify-center"}>
       <SignInToast />
-      <div className={"w-[418px] flex flex-col gap-4"}>
+      <div className={"flex w-[418px] flex-col gap-4"}>
         <Link
           href={FrontendRoutesEnum.HOME.toString()}
-          className={"px-8 md:px-0 flex items-center gap-2"}
+          className={"flex items-center gap-2 px-8 md:px-0"}
         >
           <Regenera className={"fill-light-text-100"} />
           <div className={"text-2xl font-medium text-light-text-100"}>
@@ -19,7 +19,7 @@ export default function SignIn() {
           </div>
         </Link>
         <SignInForm />
-        <div className={"text-light-text-100 text-xs px-8 md:px-0"}>
+        <div className={"px-8 text-xs text-light-text-100 md:px-0"}>
           © 2024 SROOMY. All rights reserved.
         </div>
       </div>

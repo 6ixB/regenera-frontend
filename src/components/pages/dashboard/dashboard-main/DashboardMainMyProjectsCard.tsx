@@ -5,7 +5,7 @@ export default function DashboardMainMyProjectsCard() {
   return (
     <div
       className={
-        "w-5/12 h-full flex flex-col gap-y-4 bg-light-background-100 border border-light-background-300 text-light-text-100 ps-8 py-8 pe-4 rounded"
+        "flex h-full w-5/12 flex-col gap-y-4 rounded border border-light-background-300 bg-light-background-100 py-8 pe-4 ps-8 text-light-text-100"
       }
     >
       <div className={"flex items-center gap-x-2"}>
@@ -14,7 +14,7 @@ export default function DashboardMainMyProjectsCard() {
       </div>
       <div
         className={
-          "w-full flex flex-col gap-y-4 pe-4 overflow-y-hidden hover:overflow-y-auto [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:bg-light-background-100 [&::-webkit-scrollbar-thumb]:bg-light-background-300 [&::-webkit-scrollbar-thumb]:rounded-full"
+          "flex w-full flex-col gap-y-4 overflow-y-hidden pe-4 hover:overflow-y-auto"
         }
         style={{ scrollbarGutter: "stable" }}
       >

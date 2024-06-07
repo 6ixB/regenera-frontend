@@ -25,7 +25,7 @@ const CreateProjectTitleTabImage = forwardRef<
 
   return (
     <div
-      className="flex h-[24rem] aspect-square bg-gradient-to-r from-light-primary-200 to-light-primary-100 rounded-md p-0.5 group"
+      className="flex h-[24rem] aspect-square bg-gradient-to-r from-light-primary-200 to-light-primary-100 rounded-md p-0.5 cursor-pointer group"
       onClick={handleClick}
     >
       <div className="flex h-full w-full bg-light-background-100 rounded-md justify-center overflow-hidden">

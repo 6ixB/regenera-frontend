@@ -1,11 +1,16 @@
+import { UserProfileEntity } from "@/lib/model/user/user.entity";
 import ProfileAboutAchievements from "./ProfileAboutAchievements";
 import ProfileAboutInformation from "./ProfileAboutInformation";
 
-export default function ProfileAboutTab() {
+interface ProfileAboutTabProps {
+  profileData: UserProfileEntity;
+}
+
+export default function ProfileAboutTab({ profileData }: ProfileAboutTabProps) {
   return (
-    <div className="w-full flex flex-col gap-4">
-      <div className="w-full flex gap-4">
-        <ProfileAboutInformation />
+    <div className="flex w-full flex-col gap-4">
+      <div className="flex w-full gap-4">
+        <ProfileAboutInformation profileData={profileData} />
         <ProfileAboutAchievements />
       </div>
     </div>

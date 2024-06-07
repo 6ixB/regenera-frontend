@@ -15,8 +15,12 @@ export default function ProfileInformationCards({
     <div className="w-full">
       <div className="w-full grid gap-6 grid-cols-2 md:grid-cols-3 ">
         <Card phase={ProjectPhaseEnum.DONATING} />
+        <Card phase={ProjectPhaseEnum.DONATING} />
+        <Card phase={ProjectPhaseEnum.DONATING} />
         <Card phase={ProjectPhaseEnum.VOLUNTEERING} />
         <Card phase={ProjectPhaseEnum.VOLUNTEERING} />
+        <Card phase={ProjectPhaseEnum.VOLUNTEERING} />
+        <Card phase={ProjectPhaseEnum.COMPLETED} />
         <Card phase={ProjectPhaseEnum.COMPLETED} />
         <Card phase={ProjectPhaseEnum.COMPLETED} />
       </div>
