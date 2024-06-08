@@ -1,11 +1,11 @@
 import { z } from "zod";
 
-export const ProjectObjectiveSchema = z.object({
+export const ProjectObjectiveDtoSchema = z.object({
   objectiveImage: z.instanceof(File).refine((file) => file, "Image is required"),
   objective: z.string().min(4, {message: "Describe the objective clearly"}).optional()
 })
 
-export const ProjectRequirementSchema = z.object({
+export const ProjectRequirementDtoSchema = z.object({
   requirement: z.string().min(1, "Item name is required"),
   quantity: z.number().min(1, "Quantity must be more than 0"),
 });
@@ -22,7 +22,7 @@ export const CreateProjectTitleDtoSchema = z.object({
 
 export const CreateProjectDetailsDtoSchema = z.object({
   objectives:
-    ProjectObjectiveSchema
+    ProjectObjectiveDtoSchema
     .array()
     .min(1, "Objectives is required")
     .superRefine((objectives, ctx) => {
@@ -59,11 +59,11 @@ export const CreateProjectDetailsDtoSchema = z.object({
 export const CreateProjectDtoSchema = z.object({
   ...CreateProjectTitleDtoSchema.shape,
   ...CreateProjectDetailsDtoSchema.shape,
-  organizerId: z.string()
+  organizerId: z.string(),
 })
 
 export type CreateProjectTitleDto = z.infer<typeof CreateProjectTitleDtoSchema>;
 export type CreateProjectDetailsDto = z.infer<typeof CreateProjectDetailsDtoSchema>
 export type CreateProjectDto = z.infer<typeof CreateProjectDtoSchema>
-export type ProjectObjectiveDto = z.infer<typeof ProjectObjectiveSchema>
-export type ProjectRequirementDto = z.infer<typeof ProjectRequirementSchema>;
+export type ProjectObjectiveDto = z.infer<typeof ProjectObjectiveDtoSchema>
+export type ProjectRequirementDto = z.infer<typeof ProjectRequirementDtoSchema>;

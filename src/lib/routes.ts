@@ -12,10 +12,12 @@ export enum FrontendRoutesEnum {
   DISCOVER = "/discover",
   SETTINGS = "/settings",
   SETTINGS_PROFILE = "/settings/profile",
+  PROJECTS = "/projects",
+  PROJECTS_CREATE = "/projects/create",
 }
 
 export enum BackendRoutesEnum {
   AUTH = "auth",
   USERS = "users",
-  PROJECTS = "projects"
+  PROJECTS = "projects",
 }
