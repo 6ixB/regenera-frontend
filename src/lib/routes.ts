@@ -9,13 +9,15 @@ export enum FrontendRoutesEnum {
   DASHBOARD_PROJECTS = "/dashboard/projects",
   DASHBOARD_PROJECTS_JOINED = "/dashboard/projects/joined",
   CHATS = "/chats",
-  DISCOVER = "/discover"
+  DISCOVER = "/discover",
   SETTINGS = "/settings",
   SETTINGS_PROFILE = "/settings/profile",
+  PROJECTS = "/projects",
+  PROJECTS_CREATE = "/projects/create",
 }
 
 export enum BackendRoutesEnum {
   AUTH = "auth",
   USERS = "users",
-  PROJECTS = "projects"
+  PROJECTS = "projects",
 }

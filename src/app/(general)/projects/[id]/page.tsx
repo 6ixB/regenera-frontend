@@ -12,12 +12,12 @@ export enum ProjectPhaseEnum {
   COMPLETED = 'Completed'
 }
 
-export default function Project() {
+export default function Project({ params }: { params: { id: string } }) {
   return (
     <main className={"w-full pt-24 pb-8 flex justify-center"}>
       <div className={"container flex flex-col gap-y-4"}>
         <div className={"text-light-text-100 font-medium text-2xl"}>
-          Project MK Ultra
+          {params.id}
         </div>
         <div className={"w-full flex gap-x-8 relative flex-col lg:flex-row"}>
           <div className={"flex flex-col gap-y-8 w-full lg:w-2/3"}>
