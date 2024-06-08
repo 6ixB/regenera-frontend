@@ -49,35 +49,23 @@ export function useUpdateUserProfileMutation({
   const userId = session.data?.user.id as string;
   const accessToken = session.data?.accessToken as string;
 
-  const updateUserProfileDtoCopy: UpdateUserProfileDto = {
-    ...currentUpdateUserProfileDto,
-  };
-
-  // Strip all keys that have the same value as the original
-  for (const key in updateUserProfileDtoCopy) {
-    if (
-      updateUserProfileDtoCopy[key as keyof UpdateUserProfileDto] ===
-      originalUpdateUserProfileDto[key as keyof UpdateUserProfileDto]
-    ) {
-      delete updateUserProfileDtoCopy[key as keyof UpdateUserProfileDto];
-    }
-  }
-
-  async function mutateAsync() {
+  async function mutateAsync(
+    cleanedUpdateUserProfileDto: UpdateUserProfileDto,
+  ) {
     setIsPending(true);
     setIsSuccess(false);
     setIsError(false);
 
     if (
-      updateUserProfileDtoCopy.imageUrl !== null &&
-      updateUserProfileDtoCopy.imageUrl !== undefined
+      cleanedUpdateUserProfileDto.imageUrl !== null &&
+      cleanedUpdateUserProfileDto.imageUrl !== undefined
     ) {
       try {
-        const response = await fetch(updateUserProfileDtoCopy.imageUrl);
+        const response = await fetch(cleanedUpdateUserProfileDto.imageUrl);
         const imageFile = await response.blob();
 
-        delete updateUserProfileDtoCopy.imageUrl;
-        updateUserProfileDtoCopy.image = imageFile;
+        delete cleanedUpdateUserProfileDto.imageUrl;
+        cleanedUpdateUserProfileDto.image = imageFile;
       } catch (error) {
         console.log("Error fetching image:", error);
 
@@ -90,15 +78,15 @@ export function useUpdateUserProfileMutation({
     }
 
     if (
-      updateUserProfileDtoCopy.bannerUrl !== null &&
-      updateUserProfileDtoCopy.bannerUrl !== undefined
+      cleanedUpdateUserProfileDto.bannerUrl !== null &&
+      cleanedUpdateUserProfileDto.bannerUrl !== undefined
     ) {
       try {
-        const response = await fetch(updateUserProfileDtoCopy.bannerUrl);
+        const response = await fetch(cleanedUpdateUserProfileDto.bannerUrl);
         const bannerFile = await response.blob();
 
-        delete updateUserProfileDtoCopy.bannerUrl;
-        updateUserProfileDtoCopy.banner = bannerFile;
+        delete cleanedUpdateUserProfileDto.bannerUrl;
+        cleanedUpdateUserProfileDto.banner = bannerFile;
       } catch (error) {
         console.log("Error fetching banner:", error);
 
@@ -112,7 +100,7 @@ export function useUpdateUserProfileMutation({
 
     // Separate updateUserDto with updateUserProfileDto
     const { image, imageUrl, ...updateUserProfileDto } =
-      updateUserProfileDtoCopy;
+      cleanedUpdateUserProfileDto;
 
     const updateUserDto: UpdateUserDto = {};
 

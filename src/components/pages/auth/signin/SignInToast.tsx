@@ -23,14 +23,14 @@ export default function SignInToast() {
     if (code in signInToastCodeMap) {
       toast.custom(
         <div
-          className="max-w-xs bg-white border border-light-background-300 md:shadow-sm rounded-xl"
+          className="max-w-xs rounded-xl border border-light-background-300 bg-white md:shadow-sm"
           role="alert"
         >
-          <div className="flex p-4 text-light-text-100">
+          <div className="flex items-center p-4 text-light-text-100">
             <CircleCheck size={20} className="flex-shrink-0" />
             <div className="ms-3">{signInToastCodeMap[code]}</div>
           </div>
-        </div>
+        </div>,
       );
     }
   }, [code]);
