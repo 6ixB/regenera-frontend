@@ -91,9 +91,6 @@ export default function CreateProjectDetailsTabForm({ handleFormData }: CreatePr
         handleFormData(data, true)
     }
 
-    if (Array.isArray(errors.objectives))
-        console.log(errors.objectives[0].objective.message);
-
     return (
         <form onSubmit={handleSubmit(onSubmit)} className="w-full lg:w-2/3 flex flex-col gap-y-10 p-8">
 
@@ -102,7 +99,6 @@ export default function CreateProjectDetailsTabForm({ handleFormData }: CreatePr
                 <CreateProjectDetailsTabFormObjectives {...register('objectives')} objectives={objectives} handleObjectives={handleObjectives} handleRemoveObjectives={handleRemoveObjectives} />
 
                 {Array.isArray(errors.objectives) && errors.objectives.length > 0 ? (
-                    // Check for general error messages first
                     errors.objectives.some(error => error.message) ? (
                         <ul>
                             {errors.objectives.map((error, index) => (
