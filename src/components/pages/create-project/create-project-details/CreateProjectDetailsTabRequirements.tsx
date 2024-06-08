@@ -56,7 +56,7 @@ export default function CreateProjectDetailsTabRequirements({ requirements, hand
                                     }
                                     {
                                         requirements?.map((item, idx) => (
-                                            <CreateProjectDetailsTabRequirementsItem item={item} idx={idx} key={idx} handleRemoveRequirements={handleRemoveRequirements} />
+                                            <CreateProjectDetailsTabRequirementsItem requirement={item} idx={idx} key={idx} handleRemoveRequirements={handleRemoveRequirements} />
                                         ))
                                     }
                                 </tbody>

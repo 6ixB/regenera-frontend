@@ -15,17 +15,17 @@ const CreateProjectObjectiveCard = React.memo(function CreateProjectObjectiveCar
     objective, idx, handleRemoveObjectives, handleObjectiveDescriptions
 }: CreateProjectObjectiveCardProps) {
     
-    const [displayDescription, setDisplayDescription] = useState(objective.description || "");
+    const [displayDescription, setDisplayDescription] = useState(objective.objective || "");
     const [imageUrl, setImageUrl] = useState<string>('');
 
     useEffect(() => {
-        const url = URL.createObjectURL(objective.image);
+        const url = URL.createObjectURL(objective.objectiveImage);
         setImageUrl(url);
 
         return () => {
             URL.revokeObjectURL(url);
         };
-    }, [objective.image]);
+    }, [objective.objectiveImage]);
 
     const handleChange = (idx: number, description: string) => {
 
