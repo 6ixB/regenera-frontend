@@ -50,7 +50,7 @@ export default function CreateProjectDetailsTabForm({ handleFormData }: CreatePr
                     className="max-w-xs bg-white border border-light-background-300 md:shadow-sm rounded-xl"
                     role="alert"
                 >
-                    <div className="flex p-4 text-light-text-100">
+                    <div className="flex p-4 text-light-text-100 items-center">
                         <CircleCheck size={20} className="flex-shrink-0" />
                         <div className="ms-3">Changes has been saved</div>
                     </div>
@@ -89,8 +89,10 @@ export default function CreateProjectDetailsTabForm({ handleFormData }: CreatePr
     const onSubmit: SubmitHandler<CreateProjectDetailsDto> = async (data) => {
 
         handleFormData(data, true)
-        //router.push('/discover')
     }
+
+    if (Array.isArray(errors.objectives))
+        console.log(errors.objectives[0].objective.message);
 
     return (
         <form onSubmit={handleSubmit(onSubmit)} className="w-full lg:w-2/3 flex flex-col gap-y-10 p-8">
@@ -98,16 +100,31 @@ export default function CreateProjectDetailsTabForm({ handleFormData }: CreatePr
             <div className="w-full h-full relative">
 
                 <CreateProjectDetailsTabFormObjectives {...register('objectives')} objectives={objectives} handleObjectives={handleObjectives} handleRemoveObjectives={handleRemoveObjectives} />
-                {errors.objectives && <p className="text-sm text-light-accent-100 absolute bottom-0 translate-y-full ">{errors.objectives.message}</p>}
-                {Array.isArray(errors.objectives) && errors.objectives.length >= 1 && (
-                    <ul>
-                        {errors.objectives.map((error, index) => (
-                            <li key={index} className="text-sm text-light-accent-100">
-                                {error.message}
-                            </li>
-                        ))}
-                    </ul>
-                )}
+
+                {Array.isArray(errors.objectives) && errors.objectives.length > 0 ? (
+                    // Check for general error messages first
+                    errors.objectives.some(error => error.message) ? (
+                        <ul>
+                            {errors.objectives.map((error, index) => (
+                                error.message && (
+                                    <li key={index} className="text-sm text-light-accent-100">
+                                        {error.message}
+                                    </li>
+                                )
+                            ))}
+                        </ul>
+                    ) : (
+                        <ul>
+                            {errors.objectives.map((obj, index) => (
+                                obj.objective?.message && (
+                                    <li key={index} className="text-sm text-light-accent-100">
+                                        {obj.objective.message} with a minimal of 4 characters [{index}] 
+                                    </li>
+                                )
+                            ))}
+                        </ul>
+                    )
+                ) : null}
 
 
             </div>

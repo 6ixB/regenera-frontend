@@ -16,7 +16,7 @@ interface CreateProjectDetailsTabObjectivesModalProps {
     description?: string,
   ) => void;
   handleRemoveObjectives: (idx: number) => void;
-  handleOpenModel: () => void;
+  handleOpenModal: () => void;
   className?: string;
 }
 
@@ -25,7 +25,7 @@ export default function CreateProjectDetailsTabObjectivesModal({
   handleClick,
   handleObjectives,
   handleRemoveObjectives,
-  handleOpenModel,
+  handleOpenModal,
   className,
 }: CreateProjectDetailsTabObjectivesModalProps) {
   const [objectiveDescriptions, setObjectiveDescriptions] = useState<
@@ -68,7 +68,7 @@ export default function CreateProjectDetailsTabObjectivesModal({
               type="button"
               className="flex size-7 items-center justify-center rounded-full border border-transparent text-sm font-semibold text-gray-800 hover:bg-gray-100 disabled:pointer-events-none disabled:opacity-50"
               data-hs-overlay="#hs-scroll-inside-body-modal"
-              onClick={handleOpenModel}
+              onClick={handleOpenModal}
             >
               <span className="sr-only">Close</span>
               <X className="p-1 text-light-text-100" />
@@ -115,7 +115,7 @@ export default function CreateProjectDetailsTabObjectivesModal({
               <Button
                 variant={"solid"}
                 className="px-2 py-2"
-                onClick={handleOpenModel}
+                onClick={handleOpenModal}
               >
                 <p className="text-sm font-medium text-light-background-100">
                   Close
