@@ -13,11 +13,11 @@ interface CreateProjectDetailsTabObjectivesModalProps {
     handleClick: () => void
     handleObjectives: (images?: FileList, idx?: number, description?: string) => void
     handleRemoveObjectives: (idx: number) => void,
-    handleOpenModel: () => void,
+    handleOpenModal: () => void,
     className?: string
 }
 
-export default function CreateProjectDetailsTabObjectivesModal({ objectives, handleClick, handleObjectives, handleRemoveObjectives, handleOpenModel, className }: CreateProjectDetailsTabObjectivesModalProps) {
+export default function CreateProjectDetailsTabObjectivesModal({ objectives, handleClick, handleObjectives, handleRemoveObjectives, handleOpenModal, className }: CreateProjectDetailsTabObjectivesModalProps) {
 
     const [objectiveDescriptions, setObjectiveDescriptions] = useState<Map<number, string>>(new Map())
 
@@ -31,9 +31,7 @@ export default function CreateProjectDetailsTabObjectivesModal({ objectives, han
     }, [objectiveDescriptions])
     
     const handleSaveChanges = () => {
-    
-        console.log(objectiveDescriptions);
-        
+            
         objectiveDescriptions.forEach((description, idx) => {
             handleObjectives(undefined, idx, description)
         })
@@ -53,7 +51,7 @@ export default function CreateProjectDetailsTabObjectivesModal({ objectives, han
                             Objectives Photos
                         </h3>
                         <button type="button" className="flex justify-center items-center size-7 text-sm font-semibold rounded-full border border-transparent text-gray-800 hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:hover:bg-neutral-700"
-                            data-hs-overlay="#hs-scroll-inside-body-modal" onClick={handleOpenModel}>
+                            data-hs-overlay="#hs-scroll-inside-body-modal" onClick={handleOpenModal}>
                             <span className="sr-only">Close</span>
                             <X className="p-1 text-light-text-100" />
 
@@ -81,7 +79,7 @@ export default function CreateProjectDetailsTabObjectivesModal({ objectives, han
                                 </div>
                             </Button>
 
-                            <Button variant={'solid'} className="py-2 px-2" onClick={handleOpenModel}>
+                            <Button variant={'solid'} className="py-2 px-2" onClick={handleOpenModal}>
 
                                 <p className="font-medium text-sm text-light-background-100">Close</p>
 

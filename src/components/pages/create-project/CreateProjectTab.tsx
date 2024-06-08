@@ -9,6 +9,8 @@ import { createProjectMutationFn } from "@/lib/api/projectApi";
 import { useRouter } from "next/navigation";
 import { FrontendRoutesEnum } from "@/lib/routes";
 import { useSession } from "next-auth/react";
+import toast from "react-hot-toast";
+import { CircleCheck } from "lucide-react";
 
 export enum CreateProjectTabEnum {
     TITLE = 'Title',
@@ -45,14 +47,22 @@ export default function CreateProjectTab() {
         }));
 
         console.log(session?.user);
-        
+
 
         if (isSubmit) {
             console.log('Final Form Data: ', { ...formData, ...latestFormData });
 
             const finalFormData: CreateProjectDto = ({ ...formData, ...latestFormData, organizerId: session?.user.id }) as CreateProjectDto
 
-            await createProject.mutateAsync(finalFormData)
+            const response = await createProject.mutateAsync(finalFormData)
+
+            if (response.data) {
+
+                toast.success('Project launched successfully')
+            } else {
+                toast.error('An error occured when creating project')
+            }
+
         }
 
     }

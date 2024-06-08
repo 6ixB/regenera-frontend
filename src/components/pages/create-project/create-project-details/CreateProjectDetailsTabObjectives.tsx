@@ -20,7 +20,7 @@ const CreateProjectDetailsTabObjectives = forwardRef<
     CreateProjectDetailsTabObjectivesProps
 >(({ objectives, handleObjectives, handleRemoveObjectives, ...props }, ref) => {
 
-    const [isOpenModal, setIsOpenModel] = useState(false)
+    const [isOpenModal, setIsOpenModal] = useState(false)
 
     const inputRef = useRef<HTMLInputElement>(null)
 
@@ -32,12 +32,12 @@ const CreateProjectDetailsTabObjectives = forwardRef<
         }
     };
 
-    const handleOpenModel = () => {
-        setIsOpenModel(!isOpenModal)
+    const handleOpenModal = () => {
+        setIsOpenModal(!isOpenModal)
     }
 
     useEffect(() => {
-        if(objectives?.length <= 0) setIsOpenModel(false)
+        if(objectives?.length <= 0) setIsOpenModal(false)
 
     }, [objectives])
 
@@ -120,7 +120,7 @@ const CreateProjectDetailsTabObjectives = forwardRef<
                                     </div>
                                 </Button>
 
-                                <Button variant={'solid'} className="py-2 px-2" data-hs-overlay="#hs-scroll-inside-body-modal" onClick={handleOpenModel}>
+                                <Button variant={'solid'} className="py-2 px-2" data-hs-overlay="#hs-scroll-inside-body-modal" onClick={handleOpenModal}>
                                     <div className="flex h-full gap-x-2 items-center">
                                         <Eye className="h-4 w-auto text-light-background-100" />
                                         <p className="font-medium text-sm text-light-background-100">View / Edit Photos</p>
@@ -142,7 +142,7 @@ const CreateProjectDetailsTabObjectives = forwardRef<
             />
             {
                 isOpenModal && 
-                createPortal(<CreateProjectDetailsTabObjectivesModal objectives={objectives} handleClick={handleClick} handleObjectives={handleObjectives} handleRemoveObjectives={handleRemoveObjectives} handleOpenModel={handleOpenModel} />
+                createPortal(<CreateProjectDetailsTabObjectivesModal objectives={objectives} handleClick={handleClick} handleObjectives={handleObjectives} handleRemoveObjectives={handleRemoveObjectives} handleOpenModal={handleOpenModal} />
                 , document.body)
             }
         </div>
