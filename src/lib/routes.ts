@@ -10,6 +10,8 @@ export enum FrontendRoutesEnum {
   DASHBOARD_PROJECTS_JOINED = "/dashboard/projects/joined",
   CHATS = "/chats",
   DISCOVER = "/discover"
+  SETTINGS = "/settings",
+  SETTINGS_PROFILE = "/settings/profile",
 }
 
 export enum BackendRoutesEnum {

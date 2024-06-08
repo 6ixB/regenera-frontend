@@ -1,12 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { regeneraApi } from "./services/auth.service";
 import { setupListeners } from "@reduxjs/toolkit/query";
+import updateUserProfileDtoReducer from "./features/users/updateUserProfileSlice";
 
 export const makeStore = () => {
   const store = configureStore({
-    reducer: { [regeneraApi.reducerPath]: regeneraApi.reducer },
-    middleware: (getDefaultMiddleware) =>
-      getDefaultMiddleware().concat(regeneraApi.middleware),
+    reducer: {
+      updateUserProfileDto: updateUserProfileDtoReducer,
+    },
   });
 
   setupListeners(store.dispatch);

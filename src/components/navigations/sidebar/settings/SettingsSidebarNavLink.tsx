@@ -3,17 +3,17 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-interface SidebarNavLinkProps {
+interface SettingsSidebarNavLinkProps {
   icon: React.ReactNode;
   text: string;
   link: string;
 }
 
-export default function SidebarNavLink({
+export default function SettingsSidebarNavLink({
   icon,
   text,
   link,
-}: SidebarNavLinkProps) {
+}: SettingsSidebarNavLinkProps) {
   const pathname = usePathname();
   const isActive = pathname === link;
 

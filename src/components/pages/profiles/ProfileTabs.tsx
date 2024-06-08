@@ -1,12 +1,15 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import ProfileTabsText from "./ProfileTabsMenu";
 import ProfileAboutTabs from "./ProfileAboutTab";
 import ProfileDonatedTab from "./ProfileDonatedTab";
 import ProfileVolunteeredTab from "./ProfileVolunteeredTab";
 import { MapPin } from "lucide-react";
 import ProfileCreatedTab from "./ProfileCreatedTab";
+import { UserProfileEntity } from "@/lib/model/user/user.entity";
+import { profile } from "console";
+import Image from "next/image";
 
 export enum ProfileTabEnum {
   ABOUT = "About",
@@ -22,9 +25,13 @@ const tabsDictionary = {
   [ProfileTabEnum.VOLUNTEERED]: { component: ProfileVolunteeredTab },
 };
 
-export default function ProfileTabs() {
+interface ProfileTabsProps {
+  profileData: UserProfileEntity;
+}
+
+export default function ProfileTabs({ profileData }: ProfileTabsProps) {
   const [activeTab, setActiveTab] = useState<ProfileTabEnum>(
-    ProfileTabEnum.ABOUT
+    ProfileTabEnum.ABOUT,
   );
   const handleActiveTab = (tab: ProfileTabEnum) => {
     window.scrollTo(0, 352);
@@ -52,22 +59,37 @@ export default function ProfileTabs() {
   }, []);
 
   return (
-    <div className="w-full h-full">
-      <div className="w-full sticky top-[132px] md:top-[141.9px] z-40 shadow">
+    <div className="h-full w-full">
+      <div className="sticky top-[132px] z-40 w-full shadow md:top-[141.9px]">
         <div
-          className={`w-full fixed top-[60px] md:top-[69.6px] transition-opacity duration-150 ease-in-out ${
+          className={`fixed top-[60px] w-full transition-opacity duration-150 ease-in-out md:top-[69.6px] ${
             isScrolled ? "opacity-100" : "opacity-0"
           }`}
         >
-          <div className="w-full bg-light-background-100 flex items-center justify-center">
-            <div className="container bg-light-background-100 m-auto">
+          <div className="flex w-full items-center justify-center bg-light-background-100">
+            <div className="container m-auto bg-light-background-100">
               <div className="flex items-center gap-x-6 py-3">
-                <div className="size-12 bg-light-background-300 rounded-full" />
+                {profileData.user?.imageUrl ? (
+                  <Image
+                    sizes="100vw"
+                    width={0}
+                    height={0}
+                    className="size-12 rounded-full bg-light-background-300 object-cover"
+                    src={profileData.user?.imageUrl}
+                    alt="User Profile Image"
+                  />
+                ) : (
+                  <div className="size-12 rounded-full bg-light-background-300" />
+                )}
                 <div className="flex flex-col justify-center">
-                  <div className="text-lg font-medium">Robert William</div>
+                  <div className="text-lg font-medium">
+                    {profileData.user?.username}
+                  </div>
                   <div className="flex items-center gap-x-2 text-light-text-100">
                     <MapPin size={12} />
-                    <div className="text-xs">Kemanggisan, Jakarta Barat</div>
+                    <div className="text-xs">
+                      {profileData.address ?? "Unknown"}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -79,7 +101,7 @@ export default function ProfileTabs() {
             }`}
           />
         </div>
-        <div className="w-full bg-light-background-100 flex items-center justify-center">
+        <div className="flex w-full items-center justify-center bg-light-background-100">
           <div className="container flex flex-row items-center gap-6">
             <ProfileTabsText
               menu={ProfileTabEnum.ABOUT}
@@ -104,8 +126,8 @@ export default function ProfileTabs() {
           </div>
         </div>
       </div>
-      <div className="h-full container flex flex-col gap-4 m-auto py-4">
-        <ActiveTabComponent />
+      <div className="container m-auto flex h-full flex-col gap-4 py-4">
+        <ActiveTabComponent profileData={profileData} />
       </div>
     </div>
   );

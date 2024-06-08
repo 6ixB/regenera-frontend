@@ -5,7 +5,7 @@ export default function DashboardMainJoinedProjectsCard() {
   return (
     <div
       className={
-        "flex-1 h-full w-full flex flex-col gap-y-4 bg-light-background-100 border border-light-background-300 text-light-text-100 ps-8 py-8 pe-4 rounded-md row-span-7 overflow-y-hidden"
+        "row-span-7 flex h-full w-full flex-1 flex-col gap-y-4 overflow-y-hidden rounded-md border border-light-background-300 bg-light-background-100 py-8 pe-4 ps-8 text-light-text-100"
       }
     >
       <div className={"flex items-center gap-x-2"}>
@@ -13,9 +13,7 @@ export default function DashboardMainJoinedProjectsCard() {
         <div className={"text-base font-semibold"}>Joined projects</div>
       </div>
       <div
-        className={
-          "flex flex-col pe-4 overflow-y-hidden hover:overflow-y-auto [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:bg-light-background-100 [&::-webkit-scrollbar-thumb]:bg-light-background-300 [&::-webkit-scrollbar-thumb]:rounded-full"
-        }
+        className={"flex flex-col overflow-y-hidden pe-4 hover:overflow-y-auto"}
         style={{ scrollbarGutter: "stable" }}
       >
         <DashboardMainJoinedProjectListItem />
