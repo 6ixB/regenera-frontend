@@ -136,7 +136,7 @@ export default function SettingsProfilePhotoAndBannerCard({}: SettingsProfilePho
     if (isSuccess) {
       toast.custom((t) => (
         <div
-          className="max-w-xs rounded-xl border border-light-background-300 bg-white md:shadow-sm"
+          className="max-w-md rounded-xl border border-light-background-300 bg-white md:shadow-sm"
           role="alert"
         >
           <div className="flex items-center p-4 text-light-text-100">
