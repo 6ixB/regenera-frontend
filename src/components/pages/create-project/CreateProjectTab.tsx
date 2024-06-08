@@ -46,22 +46,20 @@ export default function CreateProjectTab() {
             ...latestFormData,
         }));
 
-        console.log(session?.user);
-
+        console.log(formData, latestFormData);
+        
 
         if (isSubmit) {
             console.log('Final Form Data: ', { ...formData, ...latestFormData });
 
             const finalFormData: CreateProjectDto = ({ ...formData, ...latestFormData, organizerId: session?.user.id }) as CreateProjectDto
 
-            const response = await createProject.mutateAsync(finalFormData)
-
-            if (response.data) {
-
-                toast.success('Project launched successfully')
-            } else {
-                toast.error('An error occured when creating project')
-            }
+            toast.promise(createProject.mutateAsync(finalFormData),
+                {
+                    loading: 'Launching your project...',
+                    success: 'Project launched successfully',
+                    error: 'An error occurred when creating project',
+                })
 
         }
 
