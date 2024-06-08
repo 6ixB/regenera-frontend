@@ -16,10 +16,14 @@ export const UpdateUserDtoSchema = z.object({
   refreshToken: z.string().nullable().optional(),
 });
 
+const MAX_FILE_SIZE = 5 * 1024 * 1024;
+const VALID_FILE_TYPES = ["image/jpeg", "image/png", "image/gif"];
+
 const validateFileUrl = (url: any, fileType: any, maxSize: any) => {
   if (!url) return true;
 
   const blob = fetch(url).then((response) => response.blob());
+
   return blob.then((blob) => {
     const isValidType = fileType.includes(blob.type);
     const isValidSize = blob.size <= maxSize;
@@ -27,16 +31,13 @@ const validateFileUrl = (url: any, fileType: any, maxSize: any) => {
   });
 };
 
-const MAX_FILE_SIZE = 5 * 1024 * 1024;
-const VALID_FILE_TYPES = ["image/jpeg", "image/png", "image/gif"];
-
 export const CreateUserProfileDtoSchema = z.object({
   imageUrl: z
     .string()
     .nullable()
     .refine((url) => validateFileUrl(url, VALID_FILE_TYPES, MAX_FILE_SIZE), {
       message:
-        "Invalid image URL. The file must be a jpg, jpeg, png, or gif and should not exceed 5 MB in size.",
+        "Profile image file must be of type image (.jpg, .png, .gif), and less than 5 MB in size",
     })
     .optional(),
   image: z.any().optional(),
@@ -45,11 +46,15 @@ export const CreateUserProfileDtoSchema = z.object({
     .nullable()
     .refine((url) => validateFileUrl(url, VALID_FILE_TYPES, MAX_FILE_SIZE), {
       message:
-        "Invalid banner URL. The file must be a jpg, jpeg, png, or gif and should not exceed 5 MB in size.",
+        "Profile banner file must be of type image (.jpg, .png, .gif), and less than 5 MB in size",
     })
     .optional(),
   banner: z.any().optional(),
-  bio: z.string().nullable().optional(),
+  bio: z
+    .string()
+    .max(256, { message: "Bio must be less than 256 characters" })
+    .nullable()
+    .optional(),
   birthDate: z.string().nullable().optional(),
   address: z.string().nullable().optional(),
   phone: z.string().nullable().optional(),

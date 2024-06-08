@@ -19,7 +19,7 @@ export default function SettingsProfileBioCard({}: SettingsProfileBioCardProps) 
     <div className="h-[288px] flex-col rounded-xl border border-light-background-300 bg-light-background-100 p-8">
       <TextArea
         icon={<Info size={18} className="text-light-text-100" />}
-        label={"Bio"}
+        label={`Bio (${currentUpdateUserProfileDto.bio ? currentUpdateUserProfileDto.bio?.length : 0}/256)`}
         desc={"Tell us about yourself and your projects"}
         className={
           "h-full w-full resize-none border-light-background-300 placeholder-light-background-300"

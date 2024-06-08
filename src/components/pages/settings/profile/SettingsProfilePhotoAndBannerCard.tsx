@@ -2,18 +2,29 @@
 
 import Button from "@/components/base/Button";
 import { useUpdateUserProfileMutation } from "@/lib/hooks/useUpdateUserProfileMutation";
-import { UpdateUserProfileDto } from "@/lib/model/user/user.dto";
+import {
+  CreateUserProfileDtoSchema,
+  UpdateUserProfileDto,
+} from "@/lib/model/user/user.dto";
 import {
   setCurrentUpdateProfileDto,
   setOriginalUpdateProfileDto,
-  // setOriginalUpdateProfileDto,
 } from "@/lib/state/features/users/updateUserProfileSlice";
 import { useAppDispatch, useAppSelector } from "@/lib/state/hooks";
 import { RootState } from "@/lib/state/store";
-import { Eraser, SquarePen, Upload } from "lucide-react";
+import {
+  CircleAlert,
+  CircleCheck,
+  Eraser,
+  SquarePen,
+  Upload,
+  X,
+} from "lucide-react";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import toast from "react-hot-toast";
+import { ZodIssue } from "zod";
 
 interface SettingsProfilePhotoAndBannerCardProps {}
 
@@ -33,6 +44,30 @@ function detectChanges(
   return false;
 }
 
+function cleanUpdateUserProfileDto({
+  currentUpdateUserProfileDto,
+  originalUpdateUserProfileDto,
+}: {
+  currentUpdateUserProfileDto: UpdateUserProfileDto;
+  originalUpdateUserProfileDto: UpdateUserProfileDto;
+}) {
+  const updateUserProfileDtoCopy: UpdateUserProfileDto = {
+    ...currentUpdateUserProfileDto,
+  };
+
+  // Strip all keys that have the same value as the original
+  for (const key in updateUserProfileDtoCopy) {
+    if (
+      updateUserProfileDtoCopy[key as keyof UpdateUserProfileDto] ===
+      originalUpdateUserProfileDto[key as keyof UpdateUserProfileDto]
+    ) {
+      delete updateUserProfileDtoCopy[key as keyof UpdateUserProfileDto];
+    }
+  }
+
+  return updateUserProfileDtoCopy;
+}
+
 export default function SettingsProfilePhotoAndBannerCard({}: SettingsProfilePhotoAndBannerCardProps) {
   const session = useSession();
 
@@ -48,24 +83,76 @@ export default function SettingsProfilePhotoAndBannerCard({}: SettingsProfilePho
   const uploadImageInputRef = useRef<HTMLInputElement | null>(null);
   const uploadBannerInputRef = useRef<HTMLInputElement | null>(null);
 
-  const { mutateAsync: updateUserProfileMutateAsync, isPending } =
-    useUpdateUserProfileMutation({
-      session,
-      currentUpdateUserProfileDto,
-      originalUpdateUserProfileDto,
-      onSuccess: (res) => {
-        if (res.user) session.update({ ...res });
-        dispatch(setOriginalUpdateProfileDto(currentUpdateUserProfileDto));
-      },
-      onError: (error) => {
-        console.log(error);
-      },
-    });
+  const {
+    mutateAsync: updateUserProfileMutateAsync,
+    isPending,
+    isSuccess,
+  } = useUpdateUserProfileMutation({
+    session,
+    currentUpdateUserProfileDto,
+    originalUpdateUserProfileDto,
+    onSuccess: (res) => {
+      if (res.user) session.update({ ...res });
+      dispatch(setOriginalUpdateProfileDto(currentUpdateUserProfileDto));
+    },
+    onError: (error) => {
+      console.log(error);
+    },
+  });
+
+  const [errors, setErrors] = useState<ZodIssue[]>([]);
 
   const isChanged = detectChanges(
     currentUpdateUserProfileDto,
     originalUpdateUserProfileDto,
   );
+
+  useEffect(() => {
+    if (errors.length) {
+      errors.forEach((error) => {
+        toast.custom(
+          (t) => (
+            <div
+              className="max-w-md rounded-xl border border-light-background-300 bg-white md:shadow-sm"
+              role="alert"
+            >
+              <div className="flex items-center p-4 text-light-text-100">
+                <CircleAlert size={20} className="flex-shrink-0" />
+                <div className="ms-3">{error.message}</div>
+                <div
+                  className="ms-4 cursor-pointer rounded p-2 hover:bg-light-background-200"
+                  onClick={() => toast.remove(t.id)}
+                >
+                  <X size={20} />
+                </div>
+              </div>
+            </div>
+          ),
+          { duration: 6000 },
+        );
+      });
+    }
+
+    if (isSuccess) {
+      toast.custom((t) => (
+        <div
+          className="max-w-xs rounded-xl border border-light-background-300 bg-white md:shadow-sm"
+          role="alert"
+        >
+          <div className="flex items-center p-4 text-light-text-100">
+            <CircleCheck size={20} className="flex-shrink-0" />
+            <div className="ms-3">Successfully updated the profile</div>
+            <div
+              className="ms-4 cursor-pointer rounded p-2 hover:bg-light-background-200"
+              onClick={() => toast.remove(t.id)}
+            >
+              <X size={20} />
+            </div>
+          </div>
+        </div>
+      ));
+    }
+  }, [errors, isSuccess]);
 
   return (
     <div className="relative rounded-xl border border-light-background-300  bg-light-background-100">
@@ -187,7 +274,25 @@ export default function SettingsProfilePhotoAndBannerCard({}: SettingsProfilePho
                 variant="solid"
                 className="py-2"
                 onClick={async () => {
-                  await updateUserProfileMutateAsync();
+                  const cleanedUpdateUserProfileDto = cleanUpdateUserProfileDto(
+                    {
+                      currentUpdateUserProfileDto,
+                      originalUpdateUserProfileDto,
+                    },
+                  );
+
+                  const valid = await CreateUserProfileDtoSchema.safeParseAsync(
+                    cleanedUpdateUserProfileDto,
+                  );
+
+                  if (!valid.success) {
+                    setErrors(valid.error.errors);
+                    return;
+                  }
+
+                  await updateUserProfileMutateAsync(
+                    cleanedUpdateUserProfileDto,
+                  );
                 }}
               >
                 {isPending ? (
@@ -211,6 +316,8 @@ export default function SettingsProfilePhotoAndBannerCard({}: SettingsProfilePho
         ref={uploadImageInputRef}
         className="hidden"
         type="file"
+        multiple={false}
+        accept=".png,.jpg,.jpeg,.webp,.gif"
         onChange={(e) => {
           const file = e.target.files?.[0];
           if (file) {
@@ -228,6 +335,8 @@ export default function SettingsProfilePhotoAndBannerCard({}: SettingsProfilePho
         ref={uploadBannerInputRef}
         className="hidden"
         type="file"
+        multiple={false}
+        accept=".png,.jpg,.jpeg,.webp,.gif"
         onChange={(e) => {
           const file = e.target.files?.[0];
           if (file) {

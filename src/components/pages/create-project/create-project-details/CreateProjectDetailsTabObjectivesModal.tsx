@@ -61,14 +61,12 @@ export default function CreateProjectDetailsTabObjectivesModal({
         id="hs-scroll-inside-body-modal"
         className="container my-4 h-[calc(100%-3.5rem)] transition-all ease-out sm:mx-auto sm:w-full"
       >
-        <div className="pointer-events-auto flex max-h-full flex-col overflow-hidden rounded-xl border bg-white shadow-sm dark:border-neutral-700 dark:bg-neutral-800 dark:shadow-neutral-700/70">
-          <div className="flex items-center justify-between border-b px-4 py-3 dark:border-neutral-700">
-            <h3 className="font-bold text-light-text-100 dark:text-white">
-              Objectives Photos
-            </h3>
+        <div className="pointer-events-auto flex max-h-full flex-col overflow-hidden rounded-xl border bg-white shadow-sm">
+          <div className="flex items-center justify-between border-b px-4 py-3">
+            <h3 className="font-bold text-light-text-100">Objectives Photos</h3>
             <button
               type="button"
-              className="flex size-7 items-center justify-center rounded-full border border-transparent text-sm font-semibold text-gray-800 hover:bg-gray-100 disabled:pointer-events-none disabled:opacity-50 dark:text-white dark:hover:bg-neutral-700"
+              className="flex size-7 items-center justify-center rounded-full border border-transparent text-sm font-semibold text-gray-800 hover:bg-gray-100 disabled:pointer-events-none disabled:opacity-50"
               data-hs-overlay="#hs-scroll-inside-body-modal"
               onClick={handleOpenModel}
             >
@@ -87,7 +85,7 @@ export default function CreateProjectDetailsTabObjectivesModal({
               />
             ))}
           </div>
-          <div className="flex items-center justify-between border-t px-4 py-3 dark:border-neutral-700">
+          <div className="flex items-center justify-between border-t px-4 py-3">
             {objectiveDescriptions?.size >= 1 && (
               <Button
                 variant={"solid"}
