@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Card from "../../base/Card";
 import { ChevronRight } from "lucide-react";
-import { ProjectPhaseEnum } from "@/app/(general)/projects/[id]/page";
+import { ProjectPhaseEnum } from "@/lib/utils/projectUtils";
 
 export default function HomeFeatured() {
   return (

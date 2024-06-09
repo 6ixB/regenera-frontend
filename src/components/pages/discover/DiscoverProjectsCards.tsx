@@ -1,5 +1,5 @@
-import { ProjectPhaseEnum } from "@/app/(general)/projects/[id]/page"
 import Card from "@/components/base/Card"
+import { ProjectPhaseEnum } from "@/lib/utils/projectUtils"
 
 interface DiscoverProjectsCardsProps{
     activePage: number

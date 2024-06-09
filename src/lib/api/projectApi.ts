@@ -1,6 +1,9 @@
 import axios from "axios";
 import { CreateUserDto } from "../model/user/user.dto";
-import { CreateProjectDto } from "../model/project/project.dto";
+import {
+  CreateProjectDto,
+  UpdateProjectDto,
+} from "../model/project/project.dto";
 import { BackendRoutesEnum } from "../routes";
 
 const projectApi = axios.create({
@@ -8,25 +11,37 @@ const projectApi = axios.create({
   withCredentials: true,
 });
 
-export async function createProjectMutationFn({createProject, accessToken}: {createProject: CreateProjectDto, accessToken: string}) {
+export async function createProjectMutationFn({
+  createProjectDto,
+  accessToken,
+}: {
+  createProjectDto: CreateProjectDto;
+  accessToken: string;
+}) {
   const formData = new FormData();
 
-  formData.append("title", createProject.title);
-  formData.append("image", createProject.image);
-  formData.append("address", createProject.address);
-  formData.append("description", createProject.description);
-  formData.append("fundingGoal", createProject.fundingGoal.toString());
-  formData.append("fundingGoalDeadline", createProject.fundingGoalDeadline.toString());
-  formData.append("volunteerGoal", createProject.volunteerGoal.toString());
-  formData.append("volunteerGoalDeadline", createProject.volunteerGoalDeadline.toString());
+  formData.append("title", createProjectDto.title);
+  formData.append("image", createProjectDto.image);
+  formData.append("address", createProjectDto.address);
+  formData.append("description", createProjectDto.description);
+  formData.append("fundingGoal", createProjectDto.fundingGoal.toString());
+  formData.append(
+    "fundingGoalDeadline",
+    createProjectDto.fundingGoalDeadline.toString(),
+  );
+  formData.append("volunteerGoal", createProjectDto.volunteerGoal.toString());
+  formData.append(
+    "volunteerGoalDeadline",
+    createProjectDto.volunteerGoalDeadline.toString(),
+  );
 
-  createProject.objectives.forEach((object) => {
+  createProjectDto.objectives.forEach((object) => {
     formData.append("objectiveImages", object.objectiveImage);
     formData.append("objectiveDescriptions", object.objective!);
   });
 
-  formData.append("requirements", JSON.stringify(createProject.requirements));
-  formData.append("organizerId", createProject.organizerId);
+  formData.append("requirements", JSON.stringify(createProjectDto.requirements));
+  formData.append("organizerId", createProjectDto.organizerId);
 
   return await projectApi.post("/", formData, {
     headers: {
@@ -36,22 +51,47 @@ export async function createProjectMutationFn({createProject, accessToken}: {cre
   });
 }
 
-export async function getAllProjects() {
+export async function updateProjectMutationFn({
+  id,
+  updateProjectDto,
+  accessToken,
+}: {
+  id: string
+  updateProjectDto: UpdateProjectDto;
+  accessToken: string;
+}) {
+ 
+  return await projectApi.patch(`/${id}`, updateProjectDto, {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+}
+
+export async function getAllProjectsFn() {
   return await projectApi.get(`/`);
 }
 
-export async function getProjectById(id: string) {
+export async function getProjectByIdFn(id: string) {
   return await projectApi.get(`/${id}`);
 }
 
-export async function getProjectsByOrganizer(organizerId: string) {
+export async function getProjectsByOrganizerFn(organizerId: string) {
   return await projectApi.get(`/organizer/${organizerId}`);
 }
 
-export async function getProjectsByVolunteer(volunteerId: string) {
+export async function getProjectsByVolunteerFn(volunteerId: string) {
   return await projectApi.get(`/volunteer/${volunteerId}`);
 }
 
-export async function getProjectsByDonator(donatorId: string) {
+export async function getProjectsByDonatorFn(donatorId: string) {
   return await projectApi.get(`/donator/${donatorId}`);
+}
+
+export async function getProjectTopDonationsFn(id: string) {
+  return await projectApi.get(`top-donations/${id}`);
+}
+
+export async function getPopularProjectsFn() {
+  return await projectApi.get(`/popular`);
 }

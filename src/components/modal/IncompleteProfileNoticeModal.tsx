@@ -5,13 +5,20 @@ import { FrontendRoutesEnum } from "@/lib/routes";
 import { X } from "lucide-react";
 import Link from "next/link";
 
-interface CreateProjectIncompleteProfileNoticeModalProps {
-  onClose?: () => void;
+export enum IncompleteProfileNoticeModalEnum{
+  CREATE_PROJECT = "create a project",
+  DONATE_PROJECT = "donate to a project",
+  VOLUNTEER_PROJECT = "volunteer to a project",
 }
 
-export default function CreateProjectIncompleteProfileNoticeModal({
-  onClose,
-}: CreateProjectIncompleteProfileNoticeModalProps) {
+interface IncompleteProfileNoticeModalProps {
+  onClose?: () => void;
+  notice: IncompleteProfileNoticeModalEnum
+}
+
+export default function IncompleteProfileNoticeModal({
+  onClose, notice
+}: IncompleteProfileNoticeModalProps) {
   return (
     <div
       id="hs-small-modal"
@@ -37,7 +44,7 @@ export default function CreateProjectIncompleteProfileNoticeModal({
           </div>
           <div className="overflow-y-auto p-4">
             <p className="mt-1 text-gray-800">
-              In order to create a project, you need to complete your profile
+              In order to {notice}, you need to complete your profile
               information, mainly your <b>photo, address, and phone</b>, such
               that other people can contact you.
             </p>

@@ -1,4 +1,10 @@
-export default function ProjectTopDonation() {
+interface ProjectTopDonationProps {
+  idx: number,
+  donatorId: string
+  sum: number,
+}
+
+export default function ProjectTopDonation({ idx, donatorId, sum }: ProjectTopDonationProps) {
   return (
     <div
       className={
@@ -10,12 +16,12 @@ export default function ProjectTopDonation() {
           "text-base font-medium w-10 h-10 flex items-center justify-center border border-light-primary-200 rounded"
         }
       >
-        #1
+        #{idx}
       </div>
       <div className={"w-10 h-10 rounded-full bg-light-background-300"}></div>
       <div className={"flex flex-col"}>
-        <div className={"text-base font-medium"}>Example User</div>
-        <div className={"text-sm"}>Donated $500</div>
+        <div className={"text-base font-medium"}>{donatorId}</div>
+        <div className={"text-sm"}>Donated Rp {sum}</div>
       </div>
     </div>
   );

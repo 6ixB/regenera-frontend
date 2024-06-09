@@ -1,12 +1,22 @@
-import { ProjectPhaseEnum } from "@/app/(general)/projects/[id]/page";
+import { ProjectEntity } from "../model/project/project.entity";
 
-enum ProjectEntityPhaseEnum {
+export const enum ProjectPhaseEnum {
+  DONATING = 'Donating Phase',
+  VOLUNTEERING = 'Volunteering Phase',
+  PENDING = 'Pending',
+  ONGOING = 'Ongoing',
+  COMPLETED = 'Completed'
+}
+
+const enum ProjectEntityPhaseEnum {
   DONATING = "DONATING",
   VOLUNTEERING = "VOLUNTEERING",
+  PENDING = "PENDING",
+  ONGOING = "ONGOING",
   COMPLETED = "COMPLETED",
 }
 
-export function calculateDaysLeft(deadline: Date) {
+export function getProjectDaysLeft(deadline: Date) {
   const timeDiff = new Date(deadline).getTime() - new Date().getTime();
 
   const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
@@ -15,11 +25,12 @@ export function calculateDaysLeft(deadline: Date) {
   );
   const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
 
-  return `${days} days left`;
+  return `${days}`;
 }
 
-export function calculateFundingPercentage(fundingGoal: number) {
-  return fundingGoal;
+export function getProjectPercentage(goal: number, current: number) {
+  const percentage = (current / goal) * 100;
+  return percentage;
 }
 
 export function getProjectPhase(phase: string) {
@@ -30,10 +41,60 @@ export function getProjectPhase(phase: string) {
     case ProjectEntityPhaseEnum.VOLUNTEERING:
       return ProjectPhaseEnum.VOLUNTEERING;
 
+    case ProjectEntityPhaseEnum.PENDING:
+      return ProjectPhaseEnum.PENDING;
+
+    case ProjectEntityPhaseEnum.ONGOING:
+      return ProjectPhaseEnum.ONGOING;
+
     case ProjectEntityPhaseEnum.COMPLETED:
       return ProjectPhaseEnum.COMPLETED;
 
     default:
       return "Unknown";
+  }
+}
+
+export function getProjectPhaseInformation(data: ProjectEntity) {
+  switch (data.phase) {
+    case ProjectEntityPhaseEnum.DONATING:
+      return `${getProjectDaysLeft(data.fundingGoalDeadline)} days left | ${getProjectPercentage(data.fundingGoal, data.funding)}%`;
+
+    case ProjectEntityPhaseEnum.VOLUNTEERING:
+      return `${getProjectDaysLeft(data.volunteerGoalDeadline)} days left| ${data.volunteers.length} joined`;
+
+    case ProjectEntityPhaseEnum.PENDING:
+      return ProjectPhaseEnum.PENDING;
+
+    case ProjectEntityPhaseEnum.ONGOING:
+      return ProjectPhaseEnum.ONGOING;
+
+    case ProjectEntityPhaseEnum.COMPLETED:
+      return ProjectPhaseEnum.COMPLETED;
+
+    default:
+      return "Unknown";
+  }
+}
+
+export function getProjectProgressByPhase(data: ProjectEntity) {
+  switch (data.phase) {
+    case ProjectEntityPhaseEnum.DONATING:
+      return getProjectPercentage(data.fundingGoal, data.funding);
+
+    case ProjectEntityPhaseEnum.VOLUNTEERING:
+      return getProjectPercentage(data.volunteerGoal, data.volunteers.length);
+
+    case ProjectEntityPhaseEnum.PENDING:
+      return 100;
+
+    case ProjectEntityPhaseEnum.ONGOING:
+      return 100;
+
+    case ProjectEntityPhaseEnum.COMPLETED:
+      return 100;
+
+    default:
+      return 0;
   }
 }
