@@ -1,4 +1,4 @@
-import CreateProjectIncompleteProfileNoticeModal from "@/components/pages/create-project/CreateProjectIncompleteProfileNoticeModal";
+import IncompleteProfileNoticeModal, { IncompleteProfileNoticeModalEnum } from "@/components/modal/IncompleteProfileNoticeModal";
 import CreateProjectTab from "@/components/pages/create-project/CreateProjectTab";
 import { getUserProfileByIdQueryFn } from "@/lib/api/usersApi";
 import { UserProfileEntity } from "@/lib/model/user/user.entity";
@@ -34,7 +34,7 @@ export default async function CreateProject() {
     !userProfileData.phone ||
     !userProfileData.user?.imageUrl
   ) {
-    return <CreateProjectIncompleteProfileNoticeModal />;
+    return <IncompleteProfileNoticeModal notice={IncompleteProfileNoticeModalEnum.CREATE_PROJECT} />;
   }
 
   return (

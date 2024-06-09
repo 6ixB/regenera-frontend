@@ -3,8 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Progress from "./Progress";
 import Badge from "./Badge";
-import { ChevronRight, User } from "lucide-react";
-import { ProjectPhaseEnum } from "@/app/(general)/projects/[id]/page";
+import { ProjectPhaseEnum } from "@/lib/utils/projectUtils";
 
 interface CardProps {
   phase: ProjectPhaseEnum;

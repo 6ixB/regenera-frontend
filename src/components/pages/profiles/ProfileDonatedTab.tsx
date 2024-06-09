@@ -4,7 +4,7 @@ import { ProfileTabEnum } from "./ProfileTabs";
 import { AxiosResponse } from "axios";
 import { ProjectEntity } from "@/lib/model/project/project.entity";
 import { CardSkeletonGrid } from "@/components/base/CardSkeletonGrid";
-import { getProjectsByDonator } from "@/lib/api/projectApi";
+import { getProjectsByDonatorFn } from "@/lib/api/projectApi";
 import { UserProfileEntity } from "@/lib/model/user/user.entity";
 
 interface ProfileDonatedTabProps {
@@ -16,7 +16,7 @@ export default function ProfileDonatedTab({ profileData }: ProfileDonatedTabProp
   const { data: projects, isFetching, isSuccess } = useQuery<AxiosResponse<ProjectEntity[]>>
     ({
       queryKey: ["profileDonatedProjects"],
-      queryFn: () => getProjectsByDonator(profileData.user?.id!),
+      queryFn: () => getProjectsByDonatorFn(profileData.user?.id!),
       refetchOnWindowFocus: false,
       staleTime: 1000 * 60 * 5,
       refetchOnMount: true

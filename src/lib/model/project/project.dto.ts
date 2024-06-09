@@ -63,13 +63,25 @@ export const CreateProjectDetailsDtoSchema = z.object({
       quantity: z.number(),
     })
     .array()
-    .min(1, { message: "1 item can increase the team efficiency" }),
+    .min(1, { message: "Bring items to your project" }),
 });
 
 export const CreateProjectDtoSchema = z.object({
   ...CreateProjectTitleDtoSchema.shape,
   ...CreateProjectDetailsDtoSchema.shape,
   organizerId: z.string(),
+});
+
+export const ProjectDonationDtoSchema = z.object({
+  donatorId: z.string().min(1, {message: "Input a valid user ID"}),
+  amount: z
+    .number()
+    .min(1000, { message: "The minimum donation is Rp 1.000,00" }),
+});
+
+export const UpdateProjectDtoSchema = z.object({
+  donation: ProjectDonationDtoSchema.nullable().optional(),
+  volunteerId: z.string().min(1).nullable().optional()
 });
 
 export type CreateProjectTitleDto = z.infer<typeof CreateProjectTitleDtoSchema>;
@@ -79,3 +91,4 @@ export type CreateProjectDetailsDto = z.infer<
 export type CreateProjectDto = z.infer<typeof CreateProjectDtoSchema>;
 export type ProjectObjectiveDto = z.infer<typeof ProjectObjectiveDtoSchema>;
 export type ProjectRequirementDto = z.infer<typeof ProjectRequirementDtoSchema>;
+export type UpdateProjectDto = z.infer<typeof UpdateProjectDtoSchema>;

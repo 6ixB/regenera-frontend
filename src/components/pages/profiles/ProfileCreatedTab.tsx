@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import ProfileInformationCards from "./ProfileInformationCards";
 import { ProfileTabEnum } from "./ProfileTabs";
 import { UserProfileEntity } from "@/lib/model/user/user.entity";
-import { getProjectsByOrganizer } from "@/lib/api/projectApi";
+import { getProjectsByOrganizerFn } from "@/lib/api/projectApi";
 import { useQuery } from "@tanstack/react-query";
 import { CardSkeletonGrid } from "@/components/base/CardSkeletonGrid";
 import { AxiosResponse } from "axios";
@@ -18,7 +18,7 @@ export default function ProfileCreatedTab({ profileData }: ProfileCreatedTabProp
   const { data: projects, isFetching, isSuccess } = useQuery<AxiosResponse<ProjectEntity[]>>
     ({
       queryKey: ["profileCreatedProjects"],
-      queryFn: () => getProjectsByOrganizer(profileData.user?.id!),
+      queryFn: () => getProjectsByOrganizerFn(profileData.user?.id!),
       refetchOnWindowFocus: false,
       staleTime: 1000 * 60 * 5,
       refetchOnMount: true
