@@ -1,5 +1,4 @@
 import { z } from "zod";
-import { CreateProjectDtoSchema } from "./project.dto";
 
 export const ProjectObjectiveEntitySchema = z
   .object({
@@ -26,7 +25,9 @@ export const CreateProjectDetailsEntitySchema = z.object({
   address: z.string(),
   description: z.string(),
   fundingGoal: z.number(),
-  deadline: z.date(),
+  fundingGoalDeadline: z.date(),
+  volunteerGoal: z.number(),
+  volunteerGoalDeadline: z.date(),
   objectives: ProjectObjectiveEntitySchema,
   requirements: ProjectRequirementEntitySchema,
 });

@@ -143,8 +143,8 @@ export default function CreateProjectDetailsTabForm({ handleFormData }: CreatePr
                     className={"border-light-primary-100 placeholder-light-background-300 text-base"}
                     placeholder={"e.g. 10-19-2004"}
                     type={"date"}
-                    error={errors.deadline?.message}
-                    {...register('deadline')}
+                    error={errors.fundingGoalDeadline?.message}
+                    {...register('fundingGoalDeadline')}
                 />
 
                 <Input
@@ -158,6 +158,32 @@ export default function CreateProjectDetailsTabForm({ handleFormData }: CreatePr
                     min={0}
                     error={errors.fundingGoal?.message}
                     {...register('fundingGoal')}
+                />
+            </div>
+
+            <div className="w-full flex flex-col gap-6 items-end md:flex-row">
+                <Input
+                    icon={<CalendarCheck2 className="text-light-text-100" />}
+                    label={"Volunteer Registration End Date"}
+                    desc={"Arrange the deadline of volunteer registration"}
+                    className={"border-light-primary-100 placeholder-light-background-300 text-base"}
+                    placeholder={"e.g. 10-19-2004"}
+                    type={"date"}
+                    error={errors.volunteerGoalDeadline?.message}
+                    {...register('volunteerGoalDeadline')}
+                />
+
+                <Input
+                    icon={<HandCoins className="text-light-text-100" />}
+                    label={"Minimum Volunteer [All or Nothing]"}
+                    desc={"Define minimum volunteer to realize your project"}
+                    className={"border-light-primary-100 placeholder-light-background-300"}
+                    placeholder={"e.g. 100"}
+                    type={"number"}
+                    step={1}
+                    min={0}
+                    error={errors.volunteerGoal?.message}
+                    {...register('volunteerGoal')}
                 />
             </div>
 
