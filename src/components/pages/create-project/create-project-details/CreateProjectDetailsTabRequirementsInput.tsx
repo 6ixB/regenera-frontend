@@ -4,7 +4,7 @@ import Input from "@/components/forms/Input";
 import { ProjectRequirement } from "./CreateProjectDetailsTabRequirementsItem";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { ProjectRequirementSchema } from "@/lib/model/project/project.dto";
+import { ProjectRequirementDtoSchema } from "@/lib/model/project/project.dto";
 
 interface CreateProjectDetailsTabRequirementsInputProps {
   handleAddRequirements: (item: ProjectRequirement) => void;
@@ -25,7 +25,7 @@ export default function CreateProjectDetailsTabRequirementsInput({
       quantity: requirementQuantity ?? 0,
     };
 
-    const result = ProjectRequirementSchema.safeParse(newItem);
+    const result = ProjectRequirementDtoSchema.safeParse(newItem);
 
     if (!result.success) {
       const errorMessages = result.error.flatten().fieldErrors;

@@ -13,6 +13,9 @@ export default function ProfileInformationCards({
 }: ProfileInformationCardsProps) {
   if (type === ProfileTabEnum.ABOUT) return;
 
+  console.log(projects);
+  
+
   return (
     <div className="w-full">
       <div className="w-full grid gap-6 grid-cols-2 md:grid-cols-3 ">

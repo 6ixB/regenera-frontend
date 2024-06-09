@@ -40,12 +40,12 @@ export default function ProjectCard({
                             className
                         )}
                     >
-                        <div className="w-full h-full relative ">
+                        <div className="w-full h-full relative overflow-hidden">
                             <Image
                                 width={0}
                                 height={0}
                                 sizes={"100vw"}
-                                className={`w-full h-full rounded-t-xl object-cover`}
+                                className={`w-full lg:h-52 h-36 rounded-t-xl object-cover`}
                                 src={
                                     data.imageUrl
                                 }
@@ -78,7 +78,7 @@ export default function ProjectCard({
                                     {data.address}
                                 </p>
                                 <h3 className={"text-base font-semibold text-light-text-200"}>
-                                    {calculateDaysLeft(data.deadline)} | {calculateFundingPercentage(data.fundingGoal)}%
+                                    {calculateDaysLeft(data.fundingGoalDeadline)} | {calculateFundingPercentage(data.fundingGoal)}%
                                 </h3>
                             </div>
                         </div>
@@ -91,8 +91,8 @@ export default function ProjectCard({
                         />
 
                         {variant !== "big" && (
-                            <div className="hidden group-hover:flex pt-0 pb-6 px-8 break-words">
-                                <p className="text-base text-light-text-100">
+                            <div className="hidden group-hover:flex pt-0 pb-6 px-8 ">
+                                <p className="text-base text-light-text-100 break-words flex-wrap overflow-hidden">
                                     {data.description}
                                 </p>
                             </div>

@@ -47,14 +47,14 @@ export default function CreateProjectTab() {
         }));
 
         console.log(formData, latestFormData);
-        
+
 
         if (isSubmit) {
             console.log('Final Form Data: ', { ...formData, ...latestFormData });
 
             const finalFormData: CreateProjectDto = ({ ...formData, ...latestFormData, organizerId: session?.user.id }) as CreateProjectDto
 
-            toast.promise(createProject.mutateAsync(finalFormData),
+            toast.promise(createProject.mutateAsync({ createProject: finalFormData, accessToken: session?.accessToken! }),
                 {
                     loading: 'Launching your project...',
                     success: 'Project launched successfully',
