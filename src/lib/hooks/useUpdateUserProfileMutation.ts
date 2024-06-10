@@ -11,16 +11,12 @@ import {
 
 interface UseUpdateUserProfileMutationProps {
   session: SessionContextValue;
-  currentUpdateUserProfileDto: UpdateUserProfileDto;
-  originalUpdateUserProfileDto: UpdateUserProfileDto;
   onSuccess?: (res: any) => void;
   onError?: (error: any) => void;
 }
 
 export function useUpdateUserProfileMutation({
   session,
-  currentUpdateUserProfileDto,
-  originalUpdateUserProfileDto,
   onSuccess,
   onError,
 }: UseUpdateUserProfileMutationProps) {

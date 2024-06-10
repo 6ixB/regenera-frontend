@@ -10,6 +10,7 @@ import ProfileCreatedTab from "./ProfileCreatedTab";
 import { UserProfileEntity } from "@/lib/model/user/user.entity";
 import { profile } from "console";
 import Image from "next/image";
+import { useWindowScroll } from "@uidotdev/usehooks";
 
 export enum ProfileTabEnum {
   ABOUT = "About",
@@ -40,27 +41,24 @@ export default function ProfileTabs({ profileData }: ProfileTabsProps) {
 
   const ActiveTabComponent = tabsDictionary[activeTab].component;
 
+  const [{ x, y }, scrollTo] = useWindowScroll();
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
-    window.scrollTo(0, 0);
+    scrollTo({ left: 0, top: 0, behavior: "smooth" });
+  }, [scrollTo]);
 
-    const handleScroll = () => {
-      const scrollTop = window.scrollY;
-
-      setIsScrolled(scrollTop >= 356);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
+  useEffect(() => {
+    if (y && y > 365) {
+      setIsScrolled(true);
+    } else {
+      setIsScrolled(false);
+    }
+  }, [y]);
 
   return (
     <div className="h-full w-full">
-      <div className="sticky top-[132px] z-40 w-full shadow md:top-[141.9px]">
+      <div className="sticky top-[132px] z-30 w-full shadow md:top-[141.9px]">
         <div
           className={`fixed top-[60px] w-full transition-opacity duration-150 ease-in-out md:top-[69.6px] ${
             isScrolled ? "opacity-100" : "opacity-0"

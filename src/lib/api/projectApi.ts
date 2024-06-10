@@ -1,5 +1,4 @@
 import axios from "axios";
-import { CreateUserDto } from "../model/user/user.dto";
 import { CreateProjectDto } from "../model/project/project.dto";
 import { BackendRoutesEnum } from "../routes";
 
@@ -31,6 +30,6 @@ export async function createProjectMutationFn(createProject: CreateProjectDto) {
   return await projectApi.post("/", formData);
 }
 
-export async function findOrganizerProjects(organizerId: string){
-  return await projectApi.get(`/organizer/${organizerId}`)
+export async function findOrganizerProjects(organizerId: string) {
+  return await projectApi.get(`/organizer/${organizerId}`);
 }

@@ -7,25 +7,25 @@ import { Flag } from "lucide-react";
 import Image from "next/image";
 
 export enum ProjectPhaseEnum {
-  DONATING = 'Donating Phase',
-  VOLUNTEERING = 'Volunteering Phase',
-  COMPLETED = 'Completed'
+  DONATING = "Donating Phase",
+  VOLUNTEERING = "Volunteering Phase",
+  COMPLETED = "Completed",
 }
 
-export default function Project({ params }: { params: { id: string } }) {
+export default function Project() {
   return (
-    <main className={"w-full pt-24 pb-8 flex justify-center"}>
+    <main className={"flex w-full justify-center pb-8 pt-24"}>
       <div className={"container flex flex-col gap-y-4"}>
-        <div className={"text-light-text-100 font-medium text-2xl"}>
-          {params.id}
+        <div className={"text-2xl font-medium text-light-text-100"}>
+          MK Ultra
         </div>
-        <div className={"w-full flex gap-x-8 relative flex-col lg:flex-row"}>
-          <div className={"flex flex-col gap-y-8 w-full lg:w-2/3"}>
+        <div className={"relative flex w-full flex-col gap-x-8 lg:flex-row"}>
+          <div className={"flex w-full flex-col gap-y-8 lg:w-2/3"}>
             <Image
               width={0}
               height={0}
               sizes={"100vw"}
-              className={`w-full h-auto rounded border`}
+              className={`h-auto w-full rounded border`}
               src={
                 "https://images.unsplash.com/photo-1680868543815-b8666dba60f7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2532&q=80"
               }

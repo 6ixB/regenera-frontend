@@ -1,13 +1,15 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/query";
 import updateUserProfileDtoReducer from "./features/users/updateUserProfileSlice";
-import fetchCreatedTabSlice from "./features/profiles/fetchCreatedTabSlice";
+import fetchCreatedTabReducer from "./features/profiles/fetchCreatedTabSlice";
+import searchReducer from "./features/search/searchSlice";
 
 export const makeStore = () => {
   const store = configureStore({
     reducer: {
+      search: searchReducer,
       updateUserProfileDto: updateUserProfileDtoReducer,
-      fetchCreatedTabSlice: fetchCreatedTabSlice,
+      fetchCreatedTab: fetchCreatedTabReducer,
     },
   });
 

@@ -11,7 +11,7 @@ interface NavbarMobileProps {
 export default function NavbarMobile({ toggleSidebar }: NavbarMobileProps) {
   return (
     <nav
-      className={`max-w-[67rem] w-full py-3 flex items-center justify-between md:hidden gap-x-6 group
+      className={`group flex w-full max-w-[67rem] items-center justify-between gap-x-6 py-3 md:hidden
         `}
     >
       <CollapsedInputGroup
@@ -19,12 +19,12 @@ export default function NavbarMobile({ toggleSidebar }: NavbarMobileProps) {
         placeholder={"Search projects, creators, and categories"}
         variant={"no-outlined"}
         className={
-          "flex w-0 max-w-full group-focus-within:w-full transition-all ease-out duration-500"
+          "flex w-0 max-w-full transition-all duration-500 ease-out group-focus-within:w-full"
         }
       />
       <div
         className={
-          "w-[16rem] flex items-center justify-center gap-x-4 group-focus-within:hidden"
+          "flex w-[16rem] items-center justify-center gap-x-4 group-focus-within:hidden"
         }
       >
         <Link
@@ -39,7 +39,7 @@ export default function NavbarMobile({ toggleSidebar }: NavbarMobileProps) {
       </div>
       <Menu
         className={
-          "min-w-6 text-light-text-100 cursor-pointer group-focus-within:block"
+          "min-w-6 cursor-pointer text-light-text-100 group-focus-within:block"
         }
         onClick={toggleSidebar}
       />

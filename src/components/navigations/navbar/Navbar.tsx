@@ -2,7 +2,7 @@
 
 import Regenera from "../../vector-graphics/Regenera";
 import Link from "next/link";
-import { Search, MessageCircleMore, Bell, Router } from "lucide-react";
+import { Search, MessageCircleMore, Bell } from "lucide-react";
 import { useEffect, useState } from "react";
 import NavbarCollapsed from "./NavbarCollapsed";
 import NavbarMobile from "./NavbarMobile";
@@ -11,6 +11,10 @@ import { FrontendRoutesEnum } from "@/lib/routes";
 import { useSession } from "next-auth/react";
 import NavbarUserDropdown from "./NavbarUserDropdown";
 import { usePathname, useRouter } from "next/navigation";
+import { useWindowScroll } from "@uidotdev/usehooks";
+import { useAppDispatch, useAppSelector } from "@/lib/state/hooks";
+import { RootState } from "@/lib/state/store";
+import { setSearchValue } from "@/lib/state/features/search/searchSlice";
 
 function isStaticPage(pathname: string) {
   const staticPages = [
@@ -42,9 +46,17 @@ function isNotCentered(pathname: string) {
 export default function Navbar() {
   const router = useRouter();
   const pathname = usePathname();
+
   const { status, data: session } = useSession();
+
   const [isShrinked, setIsShrinked] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  const [{ x, y }, scrollTo] = useWindowScroll();
+
+  const searchValue = useAppSelector((state: RootState) => state.search.value);
+
+  const dispatch = useAppDispatch();
 
   const pill = isStaticPage(pathname);
   const centered = !isNotCentered(pathname);
@@ -54,28 +66,25 @@ export default function Navbar() {
   };
 
   useEffect(() => {
-    window.scrollTo(0, 0);
+    scrollTo({ left: 0, top: 0, behavior: "smooth" });
+  }, [scrollTo]);
 
-    if (pill) {
-      const handleScroll = () => {
-        const scrollTop = window.scrollY;
+  useEffect(() => {
+    if (searchValue) {
+      setIsShrinked(false);
+      return;
+    }
 
-        setIsShrinked(scrollTop > 0);
-      };
-
-      window.addEventListener("scroll", handleScroll);
-
-      return () => {
-        window.removeEventListener("scroll", handleScroll);
-      };
+    if (pill && y && y > 0) {
+      setIsShrinked(true);
     } else {
       setIsShrinked(false);
     }
-  }, [pill]);
+  }, [pill, searchValue, y]);
 
   return (
     <header
-      className={`user-select-none fixed top-0 z-50 flex items-center justify-center bg-light-background-100 px-8 shadow
+      className={`user-select-none fixed top-0 z-50 flex items-center justify-center bg-light-background-100 px-8 ${!searchValue && "shadow"}
     transition-all duration-200
     ${isShrinked ? "top-0 w-full rounded-none lg:container md:top-4 md:w-10/12 md:rounded-full lg:px-8 lg:py-0" : "top-0 w-full"}`}
     >
@@ -86,7 +95,6 @@ export default function Navbar() {
         {/* Left Section */}
         <div className={"flex w-[16rem] items-center justify-start gap-x-4"}>
           <Link
-            prefetch={false}
             href={FrontendRoutesEnum.HOME.toString()}
             className={"flex items-center gap-2"}
           >
@@ -116,6 +124,12 @@ export default function Navbar() {
         <InputGroup
           icon={<Search className={"text-light-text-100"} />}
           placeholder={"Search projects, creators, and categories"}
+          value={searchValue}
+          onChange={(e) => {
+            const value = e.target.value;
+
+            dispatch(setSearchValue(value));
+          }}
         />
 
         {/* Right Section */}
