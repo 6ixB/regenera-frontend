@@ -74,8 +74,6 @@ export default function DonateProjectForm({ id }: DonateProjectFormProps) {
 
     };
 
-    console.log(getValues('donation.amount'), errors.donation?.amount?.message
-    );
     return (
 
         <form className="w-full md:w-9/12 h-fit flex flex-col gap-y-4 items-start" onSubmit={handleSubmit(onSubmit)}>

@@ -1,19 +1,11 @@
-import Button from "@/components/base/Button";
-import Progress from "@/components/base/Progress";
-import { Clock } from "lucide-react";
-import ProjectTopDonation from "./ProjectTopDonation";
 import {
-  ProjectDonationEntity,
   ProjectEntity,
 } from "@/lib/model/project/project.entity";
 import {
   ProjectEntityPhaseEnum,
-  getProjectDaysLeft,
-  getProjectPercentage,
 } from "@/lib/utils/projectUtils";
 import { useQuery } from "@tanstack/react-query";
-import { getProjectTopDonationsFn } from "@/lib/api/projectApi";
-import { AxiosResponse } from "axios";
+
 import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import { getUserProfileByIdQueryFn } from "@/lib/api/usersApi";
@@ -25,6 +17,7 @@ import IncompleteProfileNoticeModal, {
 import { ProjectSideCardDonation } from "./ProjectSideCardDonation";
 import { ProjectSideCardVolunteer } from "./ProjectSideCardVolunteer";
 
+
 interface ProjectSideCardProps {
   projectData: ProjectEntity;
 }
@@ -34,7 +27,7 @@ export default function ProjectSideCard({ projectData }: ProjectSideCardProps) {
 
   const { data: session } = useSession();
 
-  const { data: userProfileData, refetch } = useQuery({
+  const { data: userProfileData, refetch: refetchProfile } = useQuery({
     queryKey: ["userProfile"],
     queryFn: () => getUserProfileByIdQueryFn(session?.user.id as string),
     enabled: false,
@@ -47,9 +40,10 @@ export default function ProjectSideCard({ projectData }: ProjectSideCardProps) {
     setIsOpenIncompleteProfileDataModal,
   ] = useState(false);
 
+
   const handleButtonClick = () => {
     setIsButtonClicked(!isButtonClicked);
-    refetch();
+    refetchProfile();
   };
 
   useEffect(() => {
@@ -66,13 +60,26 @@ export default function ProjectSideCard({ projectData }: ProjectSideCardProps) {
       return;
     }
 
-    router.push(`/projects/donate/${projectData.id}`);
-    router.refresh();
+    switch (projectData.phase) {
+
+      case ProjectEntityPhaseEnum.DONATING: {
+
+        router.push(`/projects/donate/${projectData.id}`);
+        router.refresh()
+        return
+      }
+      case ProjectEntityPhaseEnum.VOLUNTEERING: {
+
+        router.push(`/projects/volunteer/${projectData.id}`);
+        return
+      }
+
+    }
   }, [userProfileData, isButtonClicked, router]);
 
-  const modalNotice =(() => {
+  const modalNotice = (() => {
 
-    switch(projectData.phase){
+    switch (projectData.phase) {
 
       case ProjectEntityPhaseEnum.DONATING:
         return IncompleteProfileNoticeModalEnum.DONATE_PROJECT
@@ -86,18 +93,20 @@ export default function ProjectSideCard({ projectData }: ProjectSideCardProps) {
   return (
     <div
       className={
-        "right-0 top-24 flex h-fit w-full rounded bg-light-background-200 p-4 lg:sticky lg:w-1/3"
+        "right-0 top-24 flex h-fit w-full rounded  lg:sticky lg:w-1/3 flex-col gap-y-4"
       }
     >
-      {projectData.phase === ProjectEntityPhaseEnum.DONATING && (
-        <ProjectSideCardDonation
-          projectData={projectData}
-          onClick={handleButtonClick}
-        />
+      {ProjectEntityPhaseEnum.DONATING !== projectData.phase && (
+
+        <ProjectSideCardVolunteer session={session} projectData={projectData} isOngoing={ProjectEntityPhaseEnum.VOLUNTEERING === projectData.phase} onClick={handleButtonClick} />
+
       )}
-      {projectData.phase === ProjectEntityPhaseEnum.VOLUNTEERING && (
-        <ProjectSideCardVolunteer />
-      )}
+      <ProjectSideCardDonation
+        projectData={projectData}
+        isOngoing={ProjectEntityPhaseEnum.DONATING === projectData.phase}
+        onClick={handleButtonClick}
+      />
+
       {isOpenIncompleteProfileDataModal && (
         <ClientOnlyPortal selector="body">
           <IncompleteProfileNoticeModal
