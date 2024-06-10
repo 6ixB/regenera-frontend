@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import DonateProjectFormAmount from "./DonateProjectFormAmount"
 import Input from "@/components/forms/Input"
 import Button from "@/components/base/Button"
@@ -9,11 +9,10 @@ import { UpdateProjectDto, UpdateProjectDtoSchema } from "@/lib/model/project/pr
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useSession } from "next-auth/react"
 import { useMutation } from "@tanstack/react-query"
-import { updateProjectMutationFn } from "@/lib/api/projectApi"
+import { updateProjectByIdMutationFn } from "@/lib/api/projectApi"
 import { useRouter } from "next/navigation"
 import { FrontendRoutesEnum } from "@/lib/routes"
 import toast from "react-hot-toast"
-import { watch } from "fs"
 
 interface DonateProjectFormProps {
     id: string
@@ -34,8 +33,6 @@ export default function DonateProjectForm({ id }: DonateProjectFormProps) {
         handleSubmit,
         formState: { errors },
         setValue,
-        getValues,
-        watch
     } = useForm<UpdateProjectDto>({
         resolver: zodResolver(UpdateProjectDtoSchema),
     });
@@ -50,8 +47,8 @@ export default function DonateProjectForm({ id }: DonateProjectFormProps) {
 
     }, [session, id])
 
-    const createProject = useMutation({
-        mutationFn: updateProjectMutationFn,
+    const updateProject = useMutation({
+        mutationFn: updateProjectByIdMutationFn,
         onSuccess: () => {
             router.push(
                 `${FrontendRoutesEnum.PROJECTS.toString()}/${id}`
@@ -65,7 +62,7 @@ export default function DonateProjectForm({ id }: DonateProjectFormProps) {
 
     const onSubmit: SubmitHandler<UpdateProjectDto> = async (data) => {
 
-        toast.promise(createProject.mutateAsync({ id: id, updateProjectDto: data, accessToken: session?.accessToken! }),
+        toast.promise(updateProject.mutateAsync({ id: id, updateProjectDto: data, accessToken: session?.accessToken! }),
             {
                 loading: 'Processing your donation...',
                 success: 'Donation has been made',
@@ -105,7 +102,7 @@ export default function DonateProjectForm({ id }: DonateProjectFormProps) {
                 <div className="hs-accordion-group">
 
                     <div className="hs-accordion" id="hs-basic-heading-two">
-                        <button className="hs-accordion-toggle hs-accordion-active:text-light-text-200  px-6 py-3 inline-flex items-center gap-x-3 text-sm w-full font-semibold text-start text-gray-800 hover:text-gray-500 rounded-lg disabled:opacity-50 disabled:pointer-events-none dark:hs-accordion-active:text-blue-500 dark:text-neutral-200 dark:hover:text-neutral-400" aria-controls="hs-basic-collapse-two">
+                        <div className="hs-accordion-toggle hs-accordion-active:text-light-text-200  px-6 py-3 inline-flex items-center gap-x-3 text-sm w-full font-semibold text-start text-gray-800 hover:text-gray-500 rounded-lg disabled:opacity-50 disabled:pointer-events-none dark:hs-accordion-active:text-blue-500 dark:text-neutral-200 dark:hover:text-neutral-400" aria-controls="hs-basic-collapse-two">
                             <svg className="hs-accordion-active:hidden hs-accordion-active:text-light-text-200  hs-accordion-active:group-hover:text-light-text-200  block size-4 text-gray-600 group-hover:text-gray-500 dark:text-neutral-400" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                                 <path d="M5 12h14"></path>
                                 <path d="M12 5v14"></path>
@@ -114,7 +111,7 @@ export default function DonateProjectForm({ id }: DonateProjectFormProps) {
                                 <path d="M5 12h14"></path>
                             </svg>
                             BCA
-                        </button>
+                        </div>
                         <div id="hs-basic-collapse-two" className="hs-accordion-content hidden w-full overflow-hidden transition-[height] duration-300" aria-labelledby="hs-basic-heading-two">
                             <div className="pb-4 px-6">
                                 <div className="w-full flex border b shadow-md px-4 py-4">
@@ -125,7 +122,7 @@ export default function DonateProjectForm({ id }: DonateProjectFormProps) {
                     </div>
 
                     <div className="hs-accordion" id="hs-basic-heading-two">
-                        <button className="hs-accordion-toggle hs-accordion-active:text-light-text-200  px-6 py-3 inline-flex items-center gap-x-3 text-sm w-full font-semibold text-start text-gray-800 hover:text-gray-500 rounded-lg disabled:opacity-50 disabled:pointer-events-none dark:hs-accordion-active:text-blue-500 dark:text-neutral-200 dark:hover:text-neutral-400" aria-controls="hs-basic-collapse-two">
+                        <div  className="hs-accordion-toggle hs-accordion-active:text-light-text-200  px-6 py-3 inline-flex items-center gap-x-3 text-sm w-full font-semibold text-start text-gray-800 hover:text-gray-500 rounded-lg disabled:opacity-50 disabled:pointer-events-none dark:hs-accordion-active:text-blue-500 dark:text-neutral-200 dark:hover:text-neutral-400" aria-controls="hs-basic-collapse-two">
                             <svg className="hs-accordion-active:hidden hs-accordion-active:text-light-text-200  hs-accordion-active:group-hover:text-light-text-200  block size-4 text-gray-600 group-hover:text-gray-500 dark:text-neutral-400" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                                 <path d="M5 12h14"></path>
                                 <path d="M12 5v14"></path>
@@ -134,7 +131,7 @@ export default function DonateProjectForm({ id }: DonateProjectFormProps) {
                                 <path d="M5 12h14"></path>
                             </svg>
                             GoPay
-                        </button>
+                        </div>
                         <div id="hs-basic-collapse-two" className="hs-accordion-content hidden w-full overflow-hidden transition-[height] duration-300" aria-labelledby="hs-basic-heading-two">
                             <div className="pb-4 px-6">
                                 <div className="w-full flex border b shadow-md px-4 py-4">
@@ -145,7 +142,7 @@ export default function DonateProjectForm({ id }: DonateProjectFormProps) {
                     </div>
 
                     <div className="hs-accordion" id="hs-basic-heading-two">
-                        <button className="hs-accordion-toggle hs-accordion-active:text-light-text-200  px-6 py-3 inline-flex items-center gap-x-3 text-sm w-full font-semibold text-start text-gray-800 hover:text-gray-500 rounded-lg disabled:opacity-50 disabled:pointer-events-none dark:hs-accordion-active:text-blue-500 dark:text-neutral-200 dark:hover:text-neutral-400" aria-controls="hs-basic-collapse-two">
+                        <div className="hs-accordion-toggle hs-accordion-active:text-light-text-200  px-6 py-3 inline-flex items-center gap-x-3 text-sm w-full font-semibold text-start text-gray-800 hover:text-gray-500 rounded-lg disabled:opacity-50 disabled:pointer-events-none dark:hs-accordion-active:text-blue-500 dark:text-neutral-200 dark:hover:text-neutral-400" aria-controls="hs-basic-collapse-two">
                             <svg className="hs-accordion-active:hidden hs-accordion-active:text-light-text-200  hs-accordion-active:group-hover:text-light-text-200  block size-4 text-gray-600 group-hover:text-gray-500 dark:text-neutral-400" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                                 <path d="M5 12h14"></path>
                                 <path d="M12 5v14"></path>
@@ -154,7 +151,7 @@ export default function DonateProjectForm({ id }: DonateProjectFormProps) {
                                 <path d="M5 12h14"></path>
                             </svg>
                             OVO
-                        </button>
+                        </div>
                         <div id="hs-basic-collapse-two" className="hs-accordion-content hidden w-full overflow-hidden transition-[height] duration-300" aria-labelledby="hs-basic-heading-two">
                             <div className="pb-4 px-6">
                                 <div className="w-full flex border b shadow-md px-4 py-4">

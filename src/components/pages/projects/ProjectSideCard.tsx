@@ -1,3 +1,5 @@
+"use client"
+
 import {
   ProjectEntity,
 } from "@/lib/model/project/project.entity";
@@ -16,6 +18,8 @@ import IncompleteProfileNoticeModal, {
 } from "@/components/modal/IncompleteProfileNoticeModal";
 import { ProjectSideCardDonation } from "./ProjectSideCardDonation";
 import { ProjectSideCardVolunteer } from "./ProjectSideCardVolunteer";
+import { ProjectSideCardPending } from "./ProjectSideCardPending";
+import { ProjectSideCardOngoing } from "./ProjectSideCardOngoing";
 
 
 interface ProjectSideCardProps {
@@ -26,6 +30,14 @@ export default function ProjectSideCard({ projectData }: ProjectSideCardProps) {
   const router = useRouter();
 
   const { data: session } = useSession();
+
+  const [isOrganizer, setIsOrganizer] = useState(session?.user.id === projectData.organizer.id)
+
+  useEffect(() => {
+
+    setIsOrganizer(session?.user.id === projectData.organizer.id)
+
+  }, [session, projectData])
 
   const { data: userProfileData, refetch: refetchProfile } = useQuery({
     queryKey: ["userProfile"],
@@ -73,6 +85,11 @@ export default function ProjectSideCard({ projectData }: ProjectSideCardProps) {
         router.push(`/projects/volunteer/${projectData.id}`);
         return
       }
+      case ProjectEntityPhaseEnum.ONGOING: {
+
+        router.push(`/projects/submission/${projectData.id}`);
+        return
+      }
 
     }
   }, [userProfileData, isButtonClicked, router]);
@@ -96,10 +113,15 @@ export default function ProjectSideCard({ projectData }: ProjectSideCardProps) {
         "right-0 top-24 flex h-fit w-full rounded  lg:sticky lg:w-1/3 flex-col gap-y-4"
       }
     >
+      {ProjectEntityPhaseEnum.ONGOING === projectData.phase && (
+        <ProjectSideCardOngoing session={session} projectData={projectData} isOrganizer={isOrganizer} isOngoing={ProjectEntityPhaseEnum.ONGOING === projectData.phase} onClick={handleButtonClick} />
+      )}
+      {ProjectEntityPhaseEnum.PENDING === projectData.phase && (
+        <ProjectSideCardPending session={session} projectData={projectData} isOrganizer={isOrganizer} isOngoing={ProjectEntityPhaseEnum.PENDING === projectData.phase} />
+      )}
+
       {ProjectEntityPhaseEnum.DONATING !== projectData.phase && (
-
         <ProjectSideCardVolunteer session={session} projectData={projectData} isOngoing={ProjectEntityPhaseEnum.VOLUNTEERING === projectData.phase} onClick={handleButtonClick} />
-
       )}
       <ProjectSideCardDonation
         projectData={projectData}
