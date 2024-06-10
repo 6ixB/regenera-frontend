@@ -16,7 +16,7 @@ import { getUserProfileByIdQueryFn } from "@/lib/api/usersApi";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import ClientOnlyPortal from "@/components/ClientOnlyPortal";
-import CreateProjectIncompleteProfileNoticeModal from "@/components/pages/create-project/CreateProjectIncompleteProfileNoticeModal";
+import IncompleteProfileNoticeModal, { IncompleteProfileNoticeModalEnum } from "@/components/modal/IncompleteProfileNoticeModal";
 
 export default function DashboardSidebar() {
   const router = useRouter();
@@ -170,11 +170,11 @@ export default function DashboardSidebar() {
       </div>
       {isOpenIncompleteProfileDataModal && (
         <ClientOnlyPortal selector="body">
-          <CreateProjectIncompleteProfileNoticeModal
+          <IncompleteProfileNoticeModal
             onClose={() => {
               setIsOpenIncompleteProfileDataModal(false);
             }}
-          />
+          notice={IncompleteProfileNoticeModalEnum.CREATE_PROJECT} />
         </ClientOnlyPortal>
       )}
     </>

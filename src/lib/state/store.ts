@@ -1,7 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/query";
 import updateUserProfileDtoReducer from "./features/users/updateUserProfileSlice";
-import fetchCreatedTabReducer from "./features/profiles/fetchCreatedTabSlice";
 import searchReducer from "./features/search/searchSlice";
 
 export const makeStore = () => {
@@ -9,7 +8,6 @@ export const makeStore = () => {
     reducer: {
       search: searchReducer,
       updateUserProfileDto: updateUserProfileDtoReducer,
-      fetchCreatedTab: fetchCreatedTabReducer,
     },
   });
 

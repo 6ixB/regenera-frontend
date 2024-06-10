@@ -35,7 +35,7 @@ export default function ProfileTabs({ profileData }: ProfileTabsProps) {
     ProfileTabEnum.ABOUT,
   );
   const handleActiveTab = (tab: ProfileTabEnum) => {
-    window.scrollTo(0, 352);
+    window.scrollTo({ top: 352, behavior: "smooth" });
     setActiveTab(tab);
   };
 
@@ -60,9 +60,8 @@ export default function ProfileTabs({ profileData }: ProfileTabsProps) {
     <div className="h-full w-full">
       <div className="sticky top-[132px] z-30 w-full shadow md:top-[141.9px]">
         <div
-          className={`fixed top-[60px] w-full transition-opacity duration-150 ease-in-out md:top-[69.6px] ${
-            isScrolled ? "opacity-100" : "opacity-0"
-          }`}
+          className={`fixed top-[60px] w-full transition-opacity duration-150 ease-in-out md:top-[69.6px] ${isScrolled ? "opacity-100" : "opacity-0"
+            }`}
         >
           <div className="flex w-full items-center justify-center bg-light-background-100">
             <div className="container m-auto bg-light-background-100">
@@ -94,9 +93,8 @@ export default function ProfileTabs({ profileData }: ProfileTabsProps) {
             </div>
           </div>
           <hr
-            className={`border-light-background-300 transition-opacity duration-0 ease-in-out ${
-              isScrolled ? "opacity-100" : "opacity-0"
-            }`}
+            className={`border-light-background-300 transition-opacity duration-0 ease-in-out ${isScrolled ? "opacity-100" : "opacity-0"
+              }`}
           />
         </div>
         <div className="flex w-full items-center justify-center bg-light-background-100">

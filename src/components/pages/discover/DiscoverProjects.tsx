@@ -1,6 +1,5 @@
 'use client'
 
-import { ProjectPhaseEnum } from "@/app/(general)/projects/[id]/page";
 import Card from "@/components/base/Card";
 import Pagination from "@/components/navigations/pagination/Pagination";
 import DiscoverProjectsCards from "./DiscoverProjectsCards";

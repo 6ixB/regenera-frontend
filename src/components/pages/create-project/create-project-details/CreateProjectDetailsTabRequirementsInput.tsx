@@ -3,6 +3,7 @@
 import Input from "@/components/forms/Input";
 import { ProjectRequirement } from "./CreateProjectDetailsTabRequirementsItem";
 import { useState } from "react";
+import { useForm } from "react-hook-form";
 import { ProjectRequirementDtoSchema } from "@/lib/model/project/project.dto";
 
 interface CreateProjectDetailsTabRequirementsInputProps {
