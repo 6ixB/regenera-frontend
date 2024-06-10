@@ -81,7 +81,11 @@ export const ProjectDonationDtoSchema = z.object({
 
 export const UpdateProjectDtoSchema = z.object({
   donation: ProjectDonationDtoSchema.nullable().optional(),
-  volunteerId: z.string().min(1).nullable().optional()
+  volunteerId: z.string().min(1).nullable().optional(),
+  meetupDate: z.date().min(new Date(), "Start date must be in the future").nullable().optional(),
+  submissionObjectiveIds: z.string().array().nullable().optional(),
+  submissionSubmitterIds: z.string().array().nullable().optional(),
+  submissionImages: z.instanceof(File).array().nullable().optional()
 });
 
 export const VolunteerProjectDtoSchema = z.object({

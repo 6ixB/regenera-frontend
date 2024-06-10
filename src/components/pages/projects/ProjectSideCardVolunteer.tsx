@@ -7,28 +7,35 @@ import { useQuery } from "@tanstack/react-query"
 import { AxiosResponse } from "axios"
 import { Clock, Users } from "lucide-react"
 import { Session } from "next-auth"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
-interface ProjectSideCardVolunteer {
+interface ProjectSideCardVolunteerProps {
     projectData: ProjectEntity,
     isOngoing: boolean,
     session: Session | null,
     onClick: () => void
 }
 
-export function ProjectSideCardVolunteer({ session, projectData, isOngoing, onClick }: ProjectSideCardVolunteer) {
+export function ProjectSideCardVolunteer({ session, projectData, isOngoing, onClick }: ProjectSideCardVolunteerProps) {
 
     const { data: volunteeredProjects, isFetching, isSuccess, refetch: refetchVolunteeredProjects } = useQuery<AxiosResponse<ProjectEntity[]>>
         ({
             queryKey: ["volunteeredProjects"],
             queryFn: () => getProjectsByVolunteerFn(session?.user.id as string),
-            enabled: false,
             refetchOnWindowFocus: false,
         });
 
-    const [isVolunteered, setIsVolunteered] = useState(volunteeredProjects?.data.some((project) => {
-        project.id === projectData.id
-    }))
+
+    const [isVolunteered, setIsVolunteered] = useState(
+        volunteeredProjects?.data.some((project) => project.id === projectData.id)
+    );
+
+    useEffect(() => {
+
+        setIsVolunteered(
+            volunteeredProjects?.data.some((project) => project.id === projectData.id)
+        );
+    }, [volunteeredProjects, projectData]);
 
     return (
         <div className={"w-full text-light-text-100 flex flex-col gap-y-4 bg-light-background-200 p-4"}>
@@ -56,7 +63,7 @@ export function ProjectSideCardVolunteer({ session, projectData, isOngoing, onCl
                         <div className={"text-base"}>Ends in {getProjectDaysLeft(projectData.volunteerGoalDeadline)} days</div>
                     </div>
                     {
-                        isVolunteered ?
+                        !isVolunteered ?
                             <Button
                                 variant="solid"
                                 className={

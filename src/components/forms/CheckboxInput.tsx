@@ -27,7 +27,7 @@ const CheckboxInput = React.forwardRef<HTMLInputElement, CheckboxInputProps>(
                             ref={ref}
                         />
                     </div>
-                    <p className="font-medium text-xs text-gray-500">{desc}</p>
+                    <p className="font-medium text-sm text-gray-500">{desc}</p>
                 </div>
 
                 {error && <p className="text-sm text-light-accent-100 absolute bottom-0 translate-y-full">{error}</p>}

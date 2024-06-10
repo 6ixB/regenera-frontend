@@ -6,20 +6,12 @@ import { useQuery } from "@tanstack/react-query";
 import { AxiosResponse } from "axios";
 import Image from "next/image";
 
-interface VolunteerProjectInformationProps {
-    id: string
+interface SubmissionProjectInformationProps {
+    projectData: ProjectEntity
 }
 
-export default function VolunteerProjectInformation({ id }: VolunteerProjectInformationProps) {
-    const { data, isFetching, isSuccess } = useQuery<AxiosResponse<ProjectEntity>>
-        ({
-            queryKey: ["projectDetail"],
-            queryFn: () => getProjectByIdFn(id),
-        });
-
-    const projectData = data?.data
-
-    if (!projectData) return
+export default function SubmissionProjectInformation({ projectData }: SubmissionProjectInformationProps) {
+    
 
     return (
         <div className="w-full md:w-6/12 h-fit flex flex-col border rounded-lg shadow bg-light-background-100 ">
@@ -36,13 +28,8 @@ export default function VolunteerProjectInformation({ id }: VolunteerProjectInfo
             </div>
             <div className="w-full flex flex-col px-4 py-6 gap-y-2">
 
-                <p className="text-base text-start">Volunteer to support <b>{projectData.title}</b></p>
-                {projectData.donations?.length > 0
-                    ?
-                    <p className="text-md text-light-text-200 font-medium text-start">Join {projectData.donations?.length} other on this project!</p>
-                    :
-                    <p className="text-md text-light-text-200 font-medium text-start">Be the first volunteer for this project!</p>
-                }
+                <p className="text-base text-end">Complete <b>{projectData.title}&apos;s objective</b></p>
+                <p className="text-md text-light-text-200 font-medium text-end">Complete the {projectData.objectives.length} objectives!</p>
             </div>
 
         </div>

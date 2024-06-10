@@ -21,7 +21,7 @@ export default function ProfileCreatedTab({ profileData }: ProfileCreatedTabProp
       queryFn: () => getProjectsByOrganizerFn(profileData.user?.id!),
       refetchOnWindowFocus: false,
       staleTime: 1000 * 60 * 5,
-      refetchOnMount: true
+      refetchOnMount: "always"
     });
 
   return (

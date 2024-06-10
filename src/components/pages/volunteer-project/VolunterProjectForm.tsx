@@ -8,7 +8,7 @@ import { UpdateProjectDto, UpdateProjectDtoSchema, VolunteerProjectDto, Voluntee
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useSession } from "next-auth/react"
 import { useMutation } from "@tanstack/react-query"
-import { updateProjectMutationFn } from "@/lib/api/projectApi"
+import { updateProjectByIdMutationFn } from "@/lib/api/projectApi"
 import { useRouter } from "next/navigation"
 import { FrontendRoutesEnum } from "@/lib/routes"
 import toast from "react-hot-toast"
@@ -36,8 +36,8 @@ export default function VolunteerProjectForm({ id }: VolunteerProjectForm) {
         resolver: zodResolver(VolunteerProjectDtoSchema),
     });
 
-    const createProject = useMutation({
-        mutationFn: updateProjectMutationFn,
+    const updateProject = useMutation({
+        mutationFn: updateProjectByIdMutationFn,
         onSuccess: () => {
             router.push(
                 `${FrontendRoutesEnum.PROJECTS.toString()}/${id}`
@@ -55,7 +55,7 @@ export default function VolunteerProjectForm({ id }: VolunteerProjectForm) {
             volunteerId: session?.user.id
         }
 
-        toast.promise(createProject.mutateAsync({ id: id, updateProjectDto: data, accessToken: session?.accessToken! }),
+        toast.promise(updateProject.mutateAsync({ id: id, updateProjectDto: data, accessToken: session?.accessToken! }),
             {
                 loading: 'Processing...',
                 success: 'You are a volunteer now!',
