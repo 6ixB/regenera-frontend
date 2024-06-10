@@ -13,6 +13,7 @@ import { updateProjectMutationFn } from "@/lib/api/projectApi"
 import { useRouter } from "next/navigation"
 import { FrontendRoutesEnum } from "@/lib/routes"
 import toast from "react-hot-toast"
+import { watch } from "fs"
 
 interface DonateProjectFormProps {
     id: string
@@ -33,12 +34,11 @@ export default function DonateProjectForm({ id }: DonateProjectFormProps) {
         handleSubmit,
         formState: { errors },
         setValue,
-        getValues
+        getValues,
+        watch
     } = useForm<UpdateProjectDto>({
         resolver: zodResolver(UpdateProjectDtoSchema),
     });
-
-
 
     useEffect(() => {
 
@@ -91,8 +91,10 @@ export default function DonateProjectForm({ id }: DonateProjectFormProps) {
 
                 </div>
 
-                <Input placeholder={"Other amount"} type={"number"} min={0} className={"text-light-text-100 font-medium"}
-                    {...register('donation.amount')}
+                <Input placeholder={"Other amount"} type="number" min={0} className={"text-light-text-100 font-medium"}
+                    {...register('donation.amount', {
+                        valueAsNumber: true
+                    })}
                     error={errors.donation?.amount?.message}
                 />
             </div>
