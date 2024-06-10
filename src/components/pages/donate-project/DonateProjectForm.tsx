@@ -88,7 +88,7 @@ export default function DonateProjectForm({ id }: DonateProjectFormProps) {
 
                 </div>
 
-                <Input placeholder={"Other amount"} type="number" min={0} className={"text-light-text-100 font-medium"}
+                <Input placeholder={"Other amount"} type="number" step={10000} min={0} className={"text-light-text-100 font-medium"}
                     {...register('donation.amount', {
                         valueAsNumber: true
                     })}
