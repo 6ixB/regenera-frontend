@@ -4,7 +4,7 @@ interface ProjectDescriptionProps{
 
 export default function ProjectDescription({description}: ProjectDescriptionProps) {
   return (
-    <div className={"flex flex-col gap-4"}>
+    <div className={"flex flex-col gap-4 break-words"}>
       <p>
         {description}
       </p>

@@ -14,7 +14,7 @@ interface CreateProjectObjectiveCardProps {
 const CreateProjectObjectiveCard = React.memo(function CreateProjectObjectiveCard({
     objective, idx, handleRemoveObjectives, handleObjectiveDescriptions
 }: CreateProjectObjectiveCardProps) {
-    
+
     const [displayDescription, setDisplayDescription] = useState(objective.objective || "");
     const [imageUrl, setImageUrl] = useState<string>('');
 
@@ -36,7 +36,7 @@ const CreateProjectObjectiveCard = React.memo(function CreateProjectObjectiveCar
     return (
         <div key={idx} className="flex flex-col h-full w-full rounded-md border relative gap-0 shadow-sm">
             <div className="w-full h-[14rem]">
-                <Image
+                {imageUrl && <Image
                     width={0}
                     height={0}
                     sizes={"100vw"}
@@ -44,7 +44,7 @@ const CreateProjectObjectiveCard = React.memo(function CreateProjectObjectiveCar
                     alt=""
                     key={idx}
                     className={`h-full w-full object-cover rounded-md rounded-b-none`}
-                />
+                />}
             </div>
             <div className="cursor-pointer h-fit w-fit bg-light-background-100 aspect-square border rounded-full absolute top-2 right-2 transition-all hover:bg-light-background-200" onClick={() => handleRemoveObjectives(idx)}>
                 <X className="p-1 text-light-accent-100" />

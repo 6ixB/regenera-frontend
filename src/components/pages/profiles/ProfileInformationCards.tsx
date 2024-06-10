@@ -11,10 +11,7 @@ export default function ProfileInformationCards({
   type,
   projects
 }: ProfileInformationCardsProps) {
-  if (type === ProfileTabEnum.ABOUT) return;
-
-  console.log(projects);
-  
+  if (type === ProfileTabEnum.ABOUT) return;  
 
   return (
     <div className="w-full">

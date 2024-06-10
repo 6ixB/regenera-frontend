@@ -47,6 +47,8 @@ export const ProjectEntitySchema = z.object({
   volunteers: ProjectVolunteerEntitySchema.array(),
   funding: z.number(),
   phase: z.string(),
+  donationsCount: z.number().optional().default(0),
+  volunteersCount: z.number().optional().default(0)
 });
 
 export type ProjectEntity = z.infer<typeof ProjectEntitySchema>;

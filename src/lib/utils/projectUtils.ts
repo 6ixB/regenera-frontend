@@ -8,7 +8,7 @@ export const enum ProjectPhaseEnum {
   COMPLETED = 'Completed'
 }
 
-const enum ProjectEntityPhaseEnum {
+export const enum ProjectEntityPhaseEnum {
   DONATING = "DONATING",
   VOLUNTEERING = "VOLUNTEERING",
   PENDING = "PENDING",
@@ -30,7 +30,8 @@ export function getProjectDaysLeft(deadline: Date) {
 
 export function getProjectPercentage(goal: number, current: number) {
   const percentage = (current / goal) * 100;
-  return percentage;
+   
+  return Math.round(percentage);
 }
 
 export function getProjectPhase(phase: string) {
@@ -61,7 +62,7 @@ export function getProjectPhaseInformation(data: ProjectEntity) {
       return `${getProjectDaysLeft(data.fundingGoalDeadline)} days left | ${getProjectPercentage(data.fundingGoal, data.funding)}%`;
 
     case ProjectEntityPhaseEnum.VOLUNTEERING:
-      return `${getProjectDaysLeft(data.volunteerGoalDeadline)} days left| ${data.volunteers.length} joined`;
+      return `${getProjectDaysLeft(data.volunteerGoalDeadline)} days left | ${data.volunteersCount ?? 0} joined`;
 
     case ProjectEntityPhaseEnum.PENDING:
       return ProjectPhaseEnum.PENDING;
@@ -83,7 +84,7 @@ export function getProjectProgressByPhase(data: ProjectEntity) {
       return getProjectPercentage(data.fundingGoal, data.funding);
 
     case ProjectEntityPhaseEnum.VOLUNTEERING:
-      return getProjectPercentage(data.volunteerGoal, data.volunteers.length);
+      return getProjectPercentage(data.volunteerGoal, data.volunteersCount ?? 0);
 
     case ProjectEntityPhaseEnum.PENDING:
       return 100;
