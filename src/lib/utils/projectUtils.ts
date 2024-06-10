@@ -8,7 +8,7 @@ export const enum ProjectPhaseEnum {
   COMPLETED = 'Completed'
 }
 
-const enum ProjectEntityPhaseEnum {
+export const enum ProjectEntityPhaseEnum {
   DONATING = "DONATING",
   VOLUNTEERING = "VOLUNTEERING",
   PENDING = "PENDING",
