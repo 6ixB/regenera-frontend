@@ -32,7 +32,7 @@ export default function DiscoverPopularProjects() {
             <div className="w-full h-[40rem] md:h-full flex flex-col gap-2 md:flex-row pb-8">
 
                 {(isSuccess && projects.data) && projects.data.map((projectData, idx) => (
-                    <DiscoverPopularProjectSlide projectData={projectData} number={idx} activeNumber={activeNumber} onClick={handleExpandSlide} key={idx} />
+                    <DiscoverPopularProjectSlide projectData={projectData} number={idx + 1} activeNumber={activeNumber} onClick={handleExpandSlide} key={idx} />
                 ))}
             </div>
         </>
