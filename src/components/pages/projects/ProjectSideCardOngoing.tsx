@@ -34,28 +34,16 @@ export function ProjectSideCardOngoing({ session, projectData, isOngoing, isOrga
 
             {isOngoing &&
                 <>
-                    {
-                        isOrganizer ?
-                            <Button
-                                variant="solid"
-                                className={
-                                    "bg-gradient-to-r from-light-primary-200 to-light-primary-100 border-none hover:opacity-75"
-                                }
-                                onClick={onClick}
-                            >
-                                Submission
-                            </Button>
-                            :
-                            <Button
-                                variant="solid"
-                                className={
-                                    "bg-gradient-to-r from-light-primary-200 to-light-primary-100 border-none opacity-75 hover:opacity-75 "
-                                }
+                    <Button
+                        variant="solid"
+                        className={
+                            "bg-gradient-to-r from-light-primary-200 to-light-primary-100 border-none hover:opacity-75"
+                        }
+                        onClick={onClick}
+                    >
+                        Submission
+                    </Button>
 
-                            >
-                                Submission
-                            </Button>
-                    }
                     <div className={"text-light-text-100 text-sm"}>
                         <span className={"underline"}>Submission is verified by the organizer</span>
                     </div>
