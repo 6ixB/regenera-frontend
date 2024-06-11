@@ -1,3 +1,4 @@
+import { ProjectEntity } from "@/lib/model/project/project.entity"
 import cn from "@/lib/utils/cn"
 import { MapPin } from "lucide-react"
 import Image from "next/image"
@@ -6,11 +7,12 @@ import Link from "next/link"
 interface DiscoverPopularProjectSlideProps {
     number: number,
     activeNumber: number,
+    projectData: ProjectEntity,
     className?: string,
     onClick: (number: number) => void
 }
 
-export default function DiscoverPopularProjectSlide({ number, activeNumber, className, onClick }: DiscoverPopularProjectSlideProps) {
+export default function DiscoverPopularProjectSlide({ number, activeNumber, projectData, className, onClick }: DiscoverPopularProjectSlideProps) {
 
     const isActive = number === activeNumber
 
@@ -20,7 +22,7 @@ export default function DiscoverPopularProjectSlide({ number, activeNumber, clas
             , className
         )} onClick={() => onClick(number)}>
 
-            <Link href="/projects/mk-ultra" className={`${isActive ? 'pointer-events-auto' : 'pointer-events-none'}`}>
+            <Link href={`/projects/${projectData.id}`} className={`${isActive ? 'pointer-events-auto' : 'pointer-events-none'}`}>
                 <Image
                     width={0}
                     height={0}
@@ -29,7 +31,7 @@ export default function DiscoverPopularProjectSlide({ number, activeNumber, clas
                         , { 'scale-110 group-hover:scale-100': isActive }
                     )}
                     src={
-                        "https://images.unsplash.com/photo-1680868543815-b8666dba60f7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2532&q=80"
+                        projectData.imageUrl || ''
                     }
                     alt={"Image Description"}
 
@@ -48,10 +50,10 @@ export default function DiscoverPopularProjectSlide({ number, activeNumber, clas
                     <div className="w-full h-full p-8 flex flex-col justify-between gap-1 z-20 absolute top-0 left-0 group-hover:opacity-100">
                         <div className="w-full flex gap-2 items-center transition-transform  duration-[600ms] -translate-y-[500%] group-hover:translate-y-0 group-hover:delay-300">
                             <MapPin className="text-light-accent-100 scale-110" />
-                            <p className="text-xl text-light-background-100 whitespace-nowrap drop-shadow-sm">Kemanggisan, Jakarta Barat</p>
+                            <p className="text-xl text-light-background-100 whitespace-nowrap drop-shadow-sm">{projectData?.address || "Kemanggisan, Jakarta Barat"}</p>
                         </div>
                         <div className="w-full transition-transform duration-[600ms] translate-y-[500%] group-hover:translate-y-0">
-                            <h3 className="text-4xl font-medium text-light-background-100 drop-shadow-md whitespace-nowrap">Card Title</h3>
+                            <h3 className="text-4xl font-medium text-light-background-100 drop-shadow-md whitespace-nowrap">{projectData?.title}</h3>
                         </div>
                     </div>
                 }

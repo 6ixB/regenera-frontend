@@ -1,10 +1,17 @@
 import { z } from "zod";
 import { UserEntitySchema } from "../user/user.entity";
 
+export const ProjectSubmissionEntitySchema = z.object({
+  id: z.string(),
+  imageUrl: z.string(),
+  submitter: UserEntitySchema,
+});
+
 export const ProjectObjectiveEntitySchema = z.object({
   id: z.string(),
   objective: z.string(),
   imageUrl: z.string(),
+  submission: ProjectSubmissionEntitySchema,
 });
 
 export const ProjectRequirementEntitySchema = z.object({
@@ -42,11 +49,16 @@ export const ProjectEntitySchema = z.object({
   id: z.string(),
   ...CreateProjectTitleEntitySchema.shape,
   ...CreateProjectDetailsEntitySchema.shape,
+  createdAt: z.date(),
+  updatedAt: z.date(),
+  meetupDate: z.date().nullable(),
   organizer: UserEntitySchema,
   donations: ProjectDonationEntitySchema.array(),
   volunteers: ProjectVolunteerEntitySchema.array(),
   funding: z.number(),
   phase: z.string(),
+  donationsCount: z.number().optional().default(0),
+  volunteersCount: z.number().optional().default(0),
 });
 
 export type ProjectEntity = z.infer<typeof ProjectEntitySchema>;

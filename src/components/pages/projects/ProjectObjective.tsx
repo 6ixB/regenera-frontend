@@ -12,13 +12,13 @@ export default function ProjectObjective({objective}: ProjectObjectiveProps) {
         width={0}
         height={0}
         sizes={"100vw"}
-        className={`w-full h-auto rounded border`}
+        className={`w-full h-32 md:h-40 rounded border object-cover`}
         src={
           objective.imageUrl
         }
         alt={"Image Description"}
       />
-      <div className={"text-sm text-light-text-100"}>
+      <div className={"text-sm text-light-text-100 font-medium"}>
         {objective.objective}
       </div>
     </div>

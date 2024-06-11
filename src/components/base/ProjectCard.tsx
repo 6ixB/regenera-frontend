@@ -75,22 +75,18 @@ export default function ProjectCard({
                 />
               </div>
 
-              <div className={"max-w-9/12 flex w-full flex-col truncate"}>
-                <h3
-                  className={
-                    "truncate text-lg font-semibold text-light-text-100"
-                  }
-                >
-                  {data.title}
-                </h3>
-                <p className={"truncate text-base text-light-text-200"}>
-                  {data.address}
-                </p>
-                <h3 className={"text-base font-semibold text-light-text-200"}>
-                  {getProjectPhaseInformation(data)}
-                </h3>
-              </div>
-            </div>
+                            <div className={"max-w-9/12 w-full flex flex-col truncate"}>
+                                <h3 className={"text-lg font-semibold text-light-text-100 truncate"}>
+                                    {data?.title}
+                                </h3>
+                                <p className={"text-light-text-200 text-base truncate"}>
+                                    {data?.address || "Kemanggisan, Jakarta Barat"}
+                                </p>
+                                <h3 className={"text-base font-semibold text-light-text-200"}>
+                                    {getProjectPhaseInformation(data)}
+                                </h3>
+                            </div>
+                        </div>
 
             <Progress
               progress={getProjectProgressByPhase(data)}

@@ -4,6 +4,7 @@ import {
   UpdateProjectDto,
 } from "../model/project/project.dto";
 import { BackendRoutesEnum } from "../routes";
+import { ProjectEntity } from "../model/project/project.entity";
 
 const projectApi = axios.create({
   baseURL: `${process.env.NEXT_PUBLIC_BACKEND_SERVER_URL}/${BackendRoutesEnum.PROJECTS}`,
@@ -53,7 +54,7 @@ export async function createProjectMutationFn({
   });
 }
 
-export async function updateProjectMutationFn({
+export async function updateProjectByIdMutationFn({
   id,
   updateProjectDto,
   accessToken,
@@ -62,9 +63,32 @@ export async function updateProjectMutationFn({
   updateProjectDto: UpdateProjectDto;
   accessToken: string;
 }) {
-  return await projectApi.patch(`/${id}`, updateProjectDto, {
+  const formData = new FormData();
+
+  for (const key in updateProjectDto) {
+    const value = updateProjectDto[key as keyof UpdateProjectDto];
+
+    if (value !== undefined) {
+      if (value instanceof Blob) {
+        formData.append(key, value);
+      } else if (
+        typeof value === "object" &&
+        value !== null &&
+        !(value instanceof Date)
+      ) {
+        formData.append(key, JSON.stringify(value));
+      } else {
+        const stringValue = value === null ? "" : String(value);
+
+        formData.append(key, stringValue);
+      }
+    }
+  }
+
+  return await projectApi.patch(`/${id}`, formData, {
     headers: {
       Authorization: `Bearer ${accessToken}`,
+      "Content-Type": "multipart/form-data",
     },
   });
 }
@@ -95,4 +119,20 @@ export async function getProjectTopDonationsFn(id: string) {
 
 export async function getPopularProjectsFn() {
   return await projectApi.get(`/popular`);
+}
+
+export async function getProjectData(
+  id: string,
+): Promise<ProjectEntity | null> {
+  try {
+    const res = await getProjectByIdFn(id);
+
+    if (res.status === 200) {
+      return res.data as ProjectEntity;
+    }
+  } catch (error) {
+    return null;
+  }
+
+  return null;
 }

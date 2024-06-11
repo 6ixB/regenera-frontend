@@ -1,30 +1,34 @@
-'use client'
-
 import ProjectDescription from "@/components/pages/projects/ProjectDescription";
 import ProjectObjectives from "@/components/pages/projects/ProjectObjectives";
 import ProjectOrganizer from "@/components/pages/projects/ProjectOrganizer";
 import ProjectRequirements from "@/components/pages/projects/ProjectRequirements";
-import ProjectSideCard from "@/components/pages/projects/ProjectSideCard";
-import { getProjectByIdFn } from "@/lib/api/projectApi";
+import { getProjectByIdFn, getProjectData } from "@/lib/api/projectApi";
 import { ProjectEntity } from "@/lib/model/project/project.entity";
-import { useQuery } from "@tanstack/react-query";
-import { AxiosResponse } from "axios";
+import { getProjectCreatedDaysAgo } from "@/lib/utils/projectUtils";
 import { Flag } from "lucide-react";
+import dynamic from "next/dynamic";
 import Image from "next/image";
+import { notFound } from "next/navigation";
 
-export default function Project({ params }: { params: { id: string } }) {
+const ProjectSideCard = dynamic(
+  () => import("@/components/pages/projects/ProjectSideCard"),
+  {
+    ssr: false,
+  }
+);
 
-  const { data, isFetching, isSuccess } = useQuery<AxiosResponse<ProjectEntity>>
-    ({
-      queryKey: ["projectDetail"],
-      queryFn: () => getProjectByIdFn(params.id),
-    });
 
-  const projectData = data?.data
+export default async function Project({ params }: { params: { id: string } }) {
+
+  const projectData = await getProjectData(params.id);
+
+  if (!projectData) {
+    notFound();
+  }
 
   return (
     <main className={"w-full pt-24 pb-8 flex justify-center"}>
-      {(isSuccess && projectData) &&
+      {projectData &&
         <div className={"container flex flex-col gap-y-4"}>
           <div className={"text-light-text-100 font-medium text-2xl"}>
             {projectData.title}
@@ -35,7 +39,7 @@ export default function Project({ params }: { params: { id: string } }) {
                 width={0}
                 height={0}
                 sizes={"100vw"}
-                className={`w-full h-auto rounded border`}
+                className={`w-full h-auto rounded border object-cover`}
                 src={
                   projectData.imageUrl
                 }
@@ -43,12 +47,12 @@ export default function Project({ params }: { params: { id: string } }) {
               />
               <ProjectOrganizer organizer={projectData.organizer} />
               <hr className={"border-light-background-300"} />
-              <ProjectDescription description={projectData.description}/>
+              <ProjectDescription description={projectData.description} />
               <hr className={"border-light-background-300"} />
-              <ProjectObjectives objectives={projectData.objectives}/>
+              <ProjectObjectives objectives={projectData.objectives} />
               <hr className={"border-light-background-300"} />
               <ProjectRequirements requirements={projectData.requirements} />
-              <div className={"text-sm text-light-text-100"}>Created 2d ago</div>
+              <div className={"text-sm text-light-text-100"}>Created {getProjectCreatedDaysAgo(projectData.createdAt)}</div>
               <div className={"flex items-center gap-x-2 cursor-pointer"}>
                 <Flag size={20} />
                 <div className={"text-base text-light-text-100"}>
@@ -56,7 +60,7 @@ export default function Project({ params }: { params: { id: string } }) {
                 </div>
               </div>
             </div>
-            <ProjectSideCard projectData={projectData}/>
+            <ProjectSideCard projectData={projectData} />
           </div>
         </div>
       }

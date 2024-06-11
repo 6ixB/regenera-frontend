@@ -6,20 +6,12 @@ import { useQuery } from "@tanstack/react-query";
 import { AxiosResponse } from "axios";
 import Image from "next/image";
 
-interface DonateProjectInformationProps {
-    id: string
+interface SubmissionProjectInformationProps {
+    projectData: ProjectEntity
 }
 
-export default function DonateProjectInformation({ id }: DonateProjectInformationProps) {
-    const { data, isFetching, isSuccess } = useQuery<AxiosResponse<ProjectEntity>>
-        ({
-            queryKey: ["projectDetail"],
-            queryFn: () => getProjectByIdFn(id),
-        });
-
-    const projectData = data?.data
-
-    if (!projectData) return
+export default function SubmissionProjectInformation({ projectData }: SubmissionProjectInformationProps) {
+    
 
     return (
         <div className="w-full md:w-6/12 h-fit flex flex-col border rounded-lg shadow bg-light-background-100 ">
@@ -36,8 +28,8 @@ export default function DonateProjectInformation({ id }: DonateProjectInformatio
             </div>
             <div className="w-full flex flex-col px-4 py-6 gap-y-2">
 
-                <p className="text-base text-end">Donate to support <b>{projectData.title}</b></p>
-                <p className="text-md text-light-text-200 font-medium text-end">{projectData.donationsCount} donations has been made!</p>
+                <p className="text-base text-end">Complete <b>{projectData.title}&apos;s objective</b></p>
+                <p className="text-md text-light-text-200 font-medium text-end">Complete the {projectData.objectives.length} objectives!</p>
             </div>
 
         </div>

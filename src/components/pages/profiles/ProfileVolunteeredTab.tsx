@@ -19,7 +19,7 @@ export default function ProfileVolunteeredTab({ profileData }: ProfileVolunteere
       queryFn: () => getProjectsByVolunteerFn(profileData.user?.id!),
       refetchOnWindowFocus: false,
       staleTime: 1000 * 60 * 5,
-      refetchOnMount: true
+      refetchOnMount: "always"
     });
 
   return (

@@ -81,8 +81,24 @@ export const ProjectDonationDtoSchema = z.object({
 
 export const UpdateProjectDtoSchema = z.object({
   donation: ProjectDonationDtoSchema.nullable().optional(),
-  volunteerId: z.string().min(1).nullable().optional()
+  volunteerId: z.string().min(1).nullable().optional(),
+  meetupDate: z.date().min(new Date(), "Start date must be in the future").nullable().optional(),
+  submissionObjectiveIds: z.string().array().nullable().optional(),
+  submissionSubmitterIds: z.string().array().nullable().optional(),
+  submissionImages: z.instanceof(File).array().nullable().optional()
 });
+
+export const VolunteerProjectDtoSchema = z.object({
+  agreeProjectObjective: z.boolean().refine(val => val === true, {
+    message: "You must acknowledge the project’s objective",
+  }),
+  agreeParticipationCommitment: z.boolean().refine(val => val === true, {
+    message: "You must agree to attend the project location and participate",
+  }),
+  agreeTermsAcceptance: z.boolean().refine(val => val === true, {
+    message: "You must accept the terms and conditions",
+  }),
+})
 
 export type CreateProjectTitleDto = z.infer<typeof CreateProjectTitleDtoSchema>;
 export type CreateProjectDetailsDto = z.infer<
@@ -92,3 +108,4 @@ export type CreateProjectDto = z.infer<typeof CreateProjectDtoSchema>;
 export type ProjectObjectiveDto = z.infer<typeof ProjectObjectiveDtoSchema>;
 export type ProjectRequirementDto = z.infer<typeof ProjectRequirementDtoSchema>;
 export type UpdateProjectDto = z.infer<typeof UpdateProjectDtoSchema>;
+export type VolunteerProjectDto = z.infer<typeof VolunteerProjectDtoSchema>
