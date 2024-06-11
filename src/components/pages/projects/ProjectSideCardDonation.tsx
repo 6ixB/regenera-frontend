@@ -68,7 +68,7 @@ export function ProjectSideCardDonation({ projectData, isOngoing, onClick }: Pro
           <div className={"text-light-text-100 text-sm"}>
             <span className={"underline"}>All or nothing.</span>
             &nbsp;This project will
-            only be funded if it reaches its goal by ${(new Date(projectData.fundingGoalDeadline)).toUTCString()}.
+            only be funded if it reaches its goal by {(new Date(projectData.fundingGoalDeadline)).toUTCString()}.
 
           </div>
         </>

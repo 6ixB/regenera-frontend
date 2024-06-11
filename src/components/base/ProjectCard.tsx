@@ -72,10 +72,10 @@ export default function ProjectCard({
 
                             <div className={"max-w-9/12 w-full flex flex-col truncate"}>
                                 <h3 className={"text-lg font-semibold text-light-text-100 truncate"}>
-                                    {data.title}
+                                    {data?.title}
                                 </h3>
                                 <p className={"text-light-text-200 text-base truncate"}>
-                                    {data.address}
+                                    {data?.address || "Kemanggisan, Jakarta Barat"}
                                 </p>
                                 <h3 className={"text-base font-semibold text-light-text-200"}>
                                     {getProjectPhaseInformation(data)}
