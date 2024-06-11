@@ -14,6 +14,7 @@ export enum FrontendRoutesEnum {
   SETTINGS_PROFILE = "/settings/profile",
   PROJECTS = "/projects",
   PROJECTS_CREATE = "/projects/create",
+  PROFILES = "/profiles",
 }
 
 export enum BackendRoutesEnum {

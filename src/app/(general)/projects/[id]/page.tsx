@@ -3,7 +3,6 @@ import ProjectObjectives from "@/components/pages/projects/ProjectObjectives";
 import ProjectOrganizer from "@/components/pages/projects/ProjectOrganizer";
 import ProjectRequirements from "@/components/pages/projects/ProjectRequirements";
 import { getProjectByIdFn, getProjectData } from "@/lib/api/projectApi";
-import { ProjectEntity } from "@/lib/model/project/project.entity";
 import { getProjectCreatedDaysAgo } from "@/lib/utils/projectUtils";
 import { Flag } from "lucide-react";
 import dynamic from "next/dynamic";

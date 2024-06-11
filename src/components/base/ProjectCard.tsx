@@ -1,3 +1,5 @@
+'use client'
+
 import cn from "@/lib/utils/cn";
 import Image from "next/image";
 import Link from "next/link";
@@ -6,6 +8,7 @@ import Badge from "./Badge";
 import { ProjectEntity } from "@/lib/model/project/project.entity";
 import { FrontendRoutesEnum } from "@/lib/routes";
 import { getProjectPercentage, getProjectPhase, getProjectPhaseInformation, getProjectProgressByPhase } from "@/lib/utils/projectUtils";
+import { useState } from "react";
 
 interface ProjectCardProps {
     data: ProjectEntity
@@ -18,6 +21,12 @@ export default function ProjectCard({
     variant = "no-outlined",
     className,
 }: ProjectCardProps) {
+
+    const [isImageLoading, setIsImageLoading] = useState(true);
+
+    const handleImageLoad = () => {
+        setIsImageLoading(false);
+    };
 
     return (
         <Link href={`${FrontendRoutesEnum.PROJECTS}/${data.id}`}>
@@ -45,11 +54,12 @@ export default function ProjectCard({
                                 width={0}
                                 height={0}
                                 sizes={"100vw"}
-                                className={`w-full lg:h-52 h-36 rounded-t-xl object-cover`}
+                                className={`w-full lg:h-52 h-36 rounded-t-xl object-cover ${isImageLoading ? 'bg-gray-300 animate-pulse duration-200' : ''}`}
                                 src={
                                     data.imageUrl
                                 }
                                 alt={"Image Description"}
+                                onLoad={handleImageLoad}
                             />
                             <Badge text={getProjectPhase(data.phase)} className="absolute bottom-2 right-2" />
                         </div>

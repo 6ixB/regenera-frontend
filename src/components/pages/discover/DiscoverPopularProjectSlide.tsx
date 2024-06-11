@@ -1,8 +1,11 @@
+'use client'
+
 import { ProjectEntity } from "@/lib/model/project/project.entity"
 import cn from "@/lib/utils/cn"
 import { MapPin } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
+import { useState } from "react"
 
 interface DiscoverPopularProjectSlideProps {
     number: number,
@@ -15,6 +18,12 @@ interface DiscoverPopularProjectSlideProps {
 export default function DiscoverPopularProjectSlide({ number, activeNumber, projectData, className, onClick }: DiscoverPopularProjectSlideProps) {
 
     const isActive = number === activeNumber
+
+    const [isImageLoading, setIsImageLoading] = useState(true);
+
+    const handleImageLoad = () => {
+        setIsImageLoading(false);
+    };
 
     return (
         <div className={cn('w-full h-1/5 md:w-2/12 lg:w-1/12 md:h-[30rem] relative rounded-3xl cursor-pointer transition-all duration-[600ms] ease-in-out shadow-[0_6px_14px_-8px_rgba(0,0,0,0.8)] overflow-hidden group select-none'
@@ -29,12 +38,13 @@ export default function DiscoverPopularProjectSlide({ number, activeNumber, proj
                     sizes={"100vw"}
                     className={cn(`w-full h-full rounded-2xl object-cover transition-all duration-300`
                         , { 'scale-110 group-hover:scale-100': isActive }
+                        , { 'bg-gray-400 animate-pulse duration-200': isImageLoading }
                     )}
                     src={
                         projectData.imageUrl || ''
                     }
                     alt={"Image Description"}
-
+                    onLoad={handleImageLoad}
                 />
 
             </Link>
