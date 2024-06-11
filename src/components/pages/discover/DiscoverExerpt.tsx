@@ -5,7 +5,7 @@ export default function DiscoverExerpt(){
     return (
         <div className="w-full h-full">
 
-            <div className="container flex flex-col gap-y-4 pt-8 m-auto items-center">
+            <div className="container flex flex-col gap-y-4 m-auto items-center">
                 <div className=" w-3/4 flex justify-center items-center gap-x-4">
 
                     <hr className={"w-full border-light-background-300"} />
