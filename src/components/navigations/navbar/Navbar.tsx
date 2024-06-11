@@ -130,6 +130,15 @@ export default function Navbar() {
 
             dispatch(setSearchValue(value));
           }}
+          onKeyDown={(e) => {
+            const { key } = e;
+
+            if (key === "Enter" && searchValue.trim()) {
+              window.location.assign(
+                `/search?query=${searchValue.trim()}&page=1&limit=5`,
+              );
+            }
+          }}
         />
 
         {/* Right Section */}

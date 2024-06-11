@@ -39,7 +39,10 @@ export async function createProjectMutationFn({
     formData.append("objectiveDescriptions", object.objective!);
   });
 
-  formData.append("requirements", JSON.stringify(createProjectDto.requirements));
+  formData.append(
+    "requirements",
+    JSON.stringify(createProjectDto.requirements),
+  );
   formData.append("organizerId", createProjectDto.organizerId);
 
   return await projectApi.post("/", formData, {
@@ -55,11 +58,10 @@ export async function updateProjectMutationFn({
   updateProjectDto,
   accessToken,
 }: {
-  id: string
+  id: string;
   updateProjectDto: UpdateProjectDto;
   accessToken: string;
 }) {
- 
   return await projectApi.patch(`/${id}`, updateProjectDto, {
     headers: {
       Authorization: `Bearer ${accessToken}`,
@@ -75,8 +77,8 @@ export async function getProjectByIdFn(id: string) {
   return await projectApi.get(`/${id}`);
 }
 
-export async function getProjectsByOrganizerFn(organizerId: string)  {
-  return await projectApi.get(`/organizer/${organizerId}`);;
+export async function getProjectsByOrganizerFn(organizerId: string) {
+  return await projectApi.get(`/organizer/${organizerId}`);
 }
 
 export async function getProjectsByVolunteerFn(volunteerId: string) {

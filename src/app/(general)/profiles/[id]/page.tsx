@@ -15,7 +15,7 @@ async function getProfileData(
       return res.data as UserProfileEntity;
     }
   } catch (error) {
-    return null;
+    console.log(error);
   }
 
   return null;

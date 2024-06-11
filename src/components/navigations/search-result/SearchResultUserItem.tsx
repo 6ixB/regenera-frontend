@@ -11,7 +11,7 @@ export default function SearchResultUserItem({
   return (
     <a
       href={`/profiles/${user.id}`}
-      className="flex w-full cursor-pointer items-center gap-x-4 rounded-md p-3 text-light-text-100 hover:bg-light-background-200"
+      className="flex w-full cursor-pointer items-center gap-x-4 rounded-md bg-light-background-100 p-3 text-light-text-100 hover:bg-light-background-200"
     >
       {user.imageUrl ? (
         <Image

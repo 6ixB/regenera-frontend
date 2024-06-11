@@ -9,6 +9,8 @@ import { useDebounce, useLockBodyScroll } from "@uidotdev/usehooks";
 import SearchResultUserItem from "./SearchResultUserItem";
 import { SearchEntity } from "@/lib/model/search/search.entity";
 import Link from "next/link";
+import { ProjectEntity } from "@/lib/model/project/project.entity";
+import SearchResultProjectItem from "./SearchResultProjectItem";
 
 export default function SearchResult() {
   useLockBodyScroll();
@@ -29,7 +31,11 @@ export default function SearchResult() {
 
   if (!debouncedSearchValue) return null;
 
-  if (!isFetching && !searchEntity.users.length) {
+  if (
+    !isFetching &&
+    !searchEntity.users.length &&
+    !searchEntity.projects.length
+  ) {
     return (
       <div className="flex w-full flex-col items-center pb-6 pt-2 text-light-text-100">
         <div className="font-medium">
@@ -53,19 +59,35 @@ export default function SearchResult() {
               <span className="sr-only">Loading...</span>
             </div>
           ) : (
-            <div className="flex w-full flex-col items-center">
+            <div className="flex w-full flex-col items-center gap-y-3">
               <div className="mb-4 w-full text-base font-medium text-light-text-100">
                 Search Results
               </div>
-              <div className="flex w-full flex-col items-center gap-y-2">
-                <div className="w-full text-sm font-semibold text-light-text-100">
-                  Users
+              {searchEntity.users.length > 0 && (
+                <div className="flex w-full flex-col items-center gap-y-2">
+                  <div className="w-full text-sm font-semibold text-light-text-100">
+                    Users
+                  </div>
+                  {searchEntity.users.map((user: UserEntity) => (
+                    <SearchResultUserItem key={user.id} user={user} />
+                  ))}
                 </div>
-                {data?.data.users.map((user: UserEntity) => (
-                  <SearchResultUserItem key={user.id} user={user} />
-                ))}
-              </div>
-              {searchEntity.users.length > 1 && (
+              )}
+              {searchEntity.projects.length > 0 && (
+                <div className="flex w-full flex-col items-center gap-y-2">
+                  <div className="w-full text-sm font-semibold text-light-text-100">
+                    Projects
+                  </div>
+                  {data?.data.projects.map((project: ProjectEntity) => (
+                    <SearchResultProjectItem
+                      key={project.id}
+                      project={project}
+                    />
+                  ))}
+                </div>
+              )}
+              {searchEntity.users.length + searchEntity.projects.length >
+                limit && (
                 <div className="mt-2 flex w-full items-center justify-center">
                   <Link
                     href={`/search?query=${debouncedSearchValue.trim()}&page=${page}&limit=${limit}`}
