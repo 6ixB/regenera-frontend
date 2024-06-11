@@ -50,6 +50,6 @@ export function ProjectSideCardOngoing({ session, projectData, isOngoing, isOrga
                 </>
             }
 
-        </div >
+    </div >
     )
 }

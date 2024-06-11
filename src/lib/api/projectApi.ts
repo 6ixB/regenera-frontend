@@ -137,3 +137,17 @@ export async function getProjectData(
 
   return null;
 }
+
+export async function getPopularProjects(): Promise<ProjectEntity[] | null> {
+  try {
+    const res = await getPopularProjectsFn();
+
+    if (res.status === 200) {
+      return res.data as ProjectEntity[];
+    }
+  } catch (error) {
+    return null;
+  }
+
+  return null;
+}
