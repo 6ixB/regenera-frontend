@@ -134,9 +134,7 @@ export default function Navbar() {
             const { key } = e;
 
             if (key === "Enter" && searchValue.trim()) {
-              window.location.assign(
-                `/search?query=${searchValue.trim()}&page=1&limit=5`,
-              );
+              window.location.assign(`/search?query=${searchValue.trim()}`);
             }
           }}
         />

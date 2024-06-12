@@ -22,6 +22,16 @@ export async function getUserProfileByIdQueryFn(userId: string) {
   return usersApi.get(`/profiles/${userId}`);
 }
 
+export async function getAllUsersByRatingFn({
+  page,
+  limit,
+}: {
+  page: number;
+  limit: number;
+}) {
+  return await usersApi.get(`/leaderboard?page=${page}&limit=${limit}`);
+}
+
 export async function updateUserByIdMutationFn({
   userId,
   updateUserDto,

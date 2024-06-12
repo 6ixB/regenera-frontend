@@ -4,16 +4,12 @@ import { ProjectEntity } from "@/lib/model/project/project.entity";
 import { useState } from "react";
 
 interface SearchProjectCardsProps {
-  initialProjects: ProjectEntity[];
-  activePage: number;
+  projects: ProjectEntity[];
 }
 
 export default function SearchProjectCards({
-  initialProjects,
-  activePage,
+  projects,
 }: SearchProjectCardsProps) {
-  const [projects, setProjects] = useState<ProjectEntity[]>(initialProjects);
-
   return (
     <div className="grid h-fit w-full grid-cols-2 gap-4 md:grid-cols-3">
       {projects.map((project) => (

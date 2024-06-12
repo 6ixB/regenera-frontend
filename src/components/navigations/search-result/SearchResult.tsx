@@ -90,7 +90,7 @@ export default function SearchResult() {
                 limit && (
                 <div className="mt-2 flex w-full items-center justify-center">
                   <Link
-                    href={`/search?query=${debouncedSearchValue.trim()}&page=${page}&limit=${limit}`}
+                    href={`/search?query=${debouncedSearchValue.trim()}`}
                     className="text-sm font-semibold text-light-text-100"
                   >
                     View more

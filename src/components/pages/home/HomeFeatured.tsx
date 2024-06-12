@@ -1,14 +1,39 @@
 import Link from "next/link";
-import Card from "../../base/Card";
 import { ChevronRight } from "lucide-react";
-import { ProjectPhaseEnum } from "@/lib/utils/projectUtils";
+import { getPopularProjectsFn } from "@/lib/api/projectApi";
+import { ProjectEntity } from "@/lib/model/project/project.entity";
+import ProjectCard from "@/components/base/ProjectCard";
 
-export default function HomeFeatured() {
+async function getFeaturedProjects() {
+  try {
+    const res = await getPopularProjectsFn();
+
+    if (res.status === 200) {
+      return res.data as ProjectEntity[];
+    }
+  } catch (error) {
+    console.log(error);
+  }
+
+  return null;
+}
+
+export default async function HomeFeatured() {
+  const featuredProjects = await getFeaturedProjects();
+
+  if (!featuredProjects) {
+    throw new Error("Failed to fetch featured projects");
+  }
+
   return (
-    <div className={"w-full bg-light-background-100 py-8 flex justify-center h-fit"}>
+    <div
+      className={
+        "flex h-fit w-full justify-center bg-light-background-100 py-8"
+      }
+    >
       <div className={"container flex flex-col gap-2"}>
         <div className={"flex items-end gap-x-4"}>
-          <div className={"font-medium text-light-text-100 text-2xl"}>
+          <div className={"text-2xl font-medium text-light-text-100"}>
             Featured projects
           </div>
           <Link
@@ -19,15 +44,16 @@ export default function HomeFeatured() {
             <ChevronRight />
           </Link>
         </div>
-        <div className={"w-full flex gap-4 flex-col lg:flex-row"}>
-           <div className={"w-full lg:w-1/2 "}>
-            <Card phase={ProjectPhaseEnum.DONATING} variant={"big"} />
+        <div className={"flex w-full flex-col gap-4 lg:flex-row"}>
+          <div className={"w-full lg:w-1/2 "}>
+            <ProjectCard data={featuredProjects[0]} />
           </div>
-          <div className={"w-full flex-1 grid grid-cols-2 gap-4 lg:grid-cols-2"}>
-            <Card phase={ProjectPhaseEnum.DONATING} variant={"no-outlined"} />
-            <Card phase={ProjectPhaseEnum.VOLUNTEERING} variant={"no-outlined"} />
-            <Card phase={ProjectPhaseEnum.COMPLETED} variant={"no-outlined"}/>
-            <Card phase={ProjectPhaseEnum.COMPLETED} variant={"no-outlined"} />
+          <div
+            className={"grid w-full flex-1 grid-cols-2 gap-4 lg:grid-cols-2"}
+          >
+            {featuredProjects.slice(1).map((project) => (
+              <ProjectCard key={project.id} data={project} />
+            ))}
           </div>
         </div>
       </div>
