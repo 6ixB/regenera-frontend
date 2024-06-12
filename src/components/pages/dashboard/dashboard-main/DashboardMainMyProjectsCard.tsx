@@ -1,7 +1,31 @@
 import { Leaf } from "lucide-react";
 import DashboardMainMyProjectsListItem from "./DashboardMainMyProjectsListItem";
+import { ProjectEntity } from "@/lib/model/project/project.entity";
+import { getProjectsByOrganizerFn } from "@/lib/api/projectApi";
+import { auth } from "@/lib/next-auth/auth";
 
-export default function DashboardMainMyProjectsCard() {
+async function getCreatedProjects(userId: string) {
+  try {
+    const res = await getProjectsByOrganizerFn(userId);
+
+    if (res.status === 200) {
+      return res.data as ProjectEntity[];
+    }
+  } catch (error) {
+    console.log(error);
+  }
+
+  return null;
+}
+
+export default async function DashboardMainMyProjectsCard() {
+  const session = await auth();
+  const createdProjects = await getCreatedProjects(session?.user.id as string);
+
+  if (!createdProjects) {
+    throw new Error("Failed to fetch created projects");
+  }
+
   return (
     <div
       className={
@@ -18,13 +42,9 @@ export default function DashboardMainMyProjectsCard() {
         }
         style={{ scrollbarGutter: "stable" }}
       >
-        <DashboardMainMyProjectsListItem />
-        <DashboardMainMyProjectsListItem />
-        <DashboardMainMyProjectsListItem />
-        <DashboardMainMyProjectsListItem />
-        <DashboardMainMyProjectsListItem />
-        <DashboardMainMyProjectsListItem />
-        <DashboardMainMyProjectsListItem />
+        {createdProjects.map((project) => (
+          <DashboardMainMyProjectsListItem key={project.id} project={project} />
+        ))}
       </div>
     </div>
   );

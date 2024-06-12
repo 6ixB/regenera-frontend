@@ -22,8 +22,6 @@ async function getTop10Users() {
 export default async function HomeLeaderboard() {
   const top10Users = await getTop10Users();
 
-  console.log(top10Users);
-
   if (!top10Users) {
     throw new Error("Failed to fetch top 10 users");
   }
