@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import Input from "@/components/forms/Input"
 import Button from "@/components/base/Button"
 import { SubmitHandler, useForm } from "react-hook-form"
@@ -23,6 +23,8 @@ interface SubmissionProjectFormProps {
 
 export default function SubmissionProjectForm({ projectData, session }: SubmissionProjectFormProps) {
 
+    const [files, setFiles] = useState<(File | null)[]>(projectData.objectives.map(() => null));
+
     const {
         register,
         handleSubmit,
@@ -41,7 +43,24 @@ export default function SubmissionProjectForm({ projectData, session }: Submissi
         },
     })
 
+    const handleFileChange = (idx: number, file: File) => {
+        setFiles(prevFiles => {
+            const newFiles = [...prevFiles];
+            newFiles[idx] = file;
+            return newFiles;
+        });
+    };
+
     const onSubmit: SubmitHandler<UpdateProjectDto> = async (data) => {
+
+        const userId = session?.user?.id || "";
+
+        
+
+        data.submissionObjectiveIds = projectData.objectives.map(objective => objective.id);
+        data.submissionImages = files.filter(file => file !== null) as File[];
+        data.submissionSubmitterIds = files.map(file => (file !== null ? userId : null)).filter(id => id !== null) as string[];
+        
 
         toast.promise(updateProject.mutateAsync({ id: projectData.id, updateProjectDto: data, accessToken: session?.accessToken! }),
             {
@@ -61,7 +80,8 @@ export default function SubmissionProjectForm({ projectData, session }: Submissi
 
             <div className="w-full h-fit grid grid-cols-3 gap-4 p-4">
                 {projectData.objectives.map((objective, idx) => (
-                    <SubmissionProjectFormCard objective={objective} idx={idx} key={idx} />
+                    <SubmissionProjectFormCard objective={objective} idx={idx} key={idx} 
+                    onFileChange={handleFileChange} />
                 ))}
             </div>
 
