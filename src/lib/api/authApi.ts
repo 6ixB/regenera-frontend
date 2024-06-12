@@ -8,8 +8,6 @@ export const authApi = axios.create({
   withCredentials: true,
 });
 
-// For edge cases where the refresh token is expired,
-// we need to signout the user from the backend and invalidate the tokens
 async function refreshAuthLogic(failedRequest: any) {
   const refreshToken = failedRequest.response.config.headers["RefreshToken"];
 

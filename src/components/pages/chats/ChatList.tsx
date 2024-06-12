@@ -1,11 +1,33 @@
+'use client'
+
 import { Search } from "lucide-react";
 import SquareInputGroup from "@/components/forms/SquareInputGroup";
 import ChatBox from "./ChatBox";
+import { useEffect, useState } from "react";
+import { findAllByUserId } from "@/lib/api/chatRoomRelationApi";
+import { useQuery } from "@tanstack/react-query";
+import { AxiosResponse } from "axios";
+import { ChatRoomEntity } from "@/lib/model/chat/chat.entity";
+import { auth } from "@/lib/next-auth/auth";
+import { useSession } from "next-auth/react";
 
 interface ChatListProps {
     id: string;
+    title: string;
 }
 const ChatList : React.FC<ChatListProps> = ({ id })=>{
+    const session = useSession();
+    const userid = session.data?.user.id as string;
+
+    const { data, isLoading, isError } = useQuery<AxiosResponse<ChatRoomEntity[]>>
+    ({
+        queryKey: ['chatRoom'],
+        queryFn: () => findAllByUserId(userid)
+    });
+
+    const chatRooms = data?.data;
+
+    console.log(chatRooms);
 
     return(
         <div className={"w-full bg-light-background-100 pt-2 px-2 flex flex-col gap-2 border-r"}>
@@ -13,18 +35,16 @@ const ChatList : React.FC<ChatListProps> = ({ id })=>{
                 <SquareInputGroup icon={<Search className="text-light-text-100"/>} placeholder="Search chat..." />
             </div>
             <hr className="border-light-background-300" />
-            <div className={"flex flex-col w-full px-1 gap-y-1 pt-2 overflow-y-auto"}>
-                <ChatBox message="Jeremy Saputra Tatuil" id="1" idFromURL={id}/>
-                <ChatBox message="Anthonio Obert" id="2" idFromURL={id}/>
-                <ChatBox message="Mr. Tatuil Ganteng Max Pls Marry Me Pls Pls Pls" id="3" idFromURL={id}/>
-                <ChatBox message="Tuan Jeremy" id="4" idFromURL={id}/>
-                <ChatBox message="Yang Mulia Jeremy" id="5" idFromURL={id}/>
-                <ChatBox message="Jeremy-chan" id="6" idFromURL={id}/>
-                <ChatBox message="Tatuil Mixtape" id="7" idFromURL={id}/>
-                <ChatBox message="Yang Terhormat Sheryl" id="8" idFromURL={id}/>
-                <ChatBox message="Sir. Teresa Sheryl" id="9" idFromURL={id}/>
-                <ChatBox message="Naruto" id="10" idFromURL={id}/>
-            </div>
+            <div className={"flex flex-col w-full px-1 gap-y-1 pt-2 overflow-y-auto"}>             
+            {chatRooms && chatRooms.map((chatRoom) => (
+                <ChatBox
+                    key={chatRoom.id} 
+                    message={chatRoom.title} 
+                    id={chatRoom.id} 
+                    idFromURL={id}
+                />
+            ))}
+            </div>  
         </div>
     )
 }

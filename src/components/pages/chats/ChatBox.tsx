@@ -28,8 +28,7 @@ const ChatBox: React.FC<ChatBoxProps> = ({ message, id, idFromURL }) => {
                     {message}
                 </h3>
                 <p className={`text-md truncate ${id === idFromURL ? 'text-light-background-200' : 'text-light-background-300'}`}>
-                    {id}    
-                     - this is a test message aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                    
                 </p>
             </div>
         </div>

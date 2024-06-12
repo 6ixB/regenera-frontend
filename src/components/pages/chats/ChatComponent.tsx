@@ -53,7 +53,7 @@ export default function ChatComponent({session} : ChatComponentProps) {
 
     return (
         <div id="chat-container" className="chat-container mt-16 mb-20 overflow-y-auto">
-            <ChatPreview chats={chats} session={session} />
+            <ChatPreview chats={chats}/>
         </div>
     )
 }

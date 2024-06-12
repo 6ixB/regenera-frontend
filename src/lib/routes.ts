@@ -14,4 +14,10 @@ export enum FrontendRoutesEnum {
 export enum BackendRoutesEnum {
   AUTH = "auth",
   USERS = "users",
+<<<<<<< Updated upstream
+=======
+  PROJECTS = "projects",
+  CHATROOMRELATION = "chat-room-relation",
+  CHATROOM = "chat-room"
+>>>>>>> Stashed changes
 }
