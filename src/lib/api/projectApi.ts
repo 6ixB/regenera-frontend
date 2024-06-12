@@ -69,7 +69,11 @@ export async function updateProjectByIdMutationFn({
     const value = updateProjectDto[key as keyof UpdateProjectDto];
 
     if (value !== undefined) {
-      if (value instanceof Blob) {
+      if (Array.isArray(value)) {
+        value.forEach((val) => {
+          formData.append(key, val);
+        });
+      } else if (value instanceof Blob) {
         formData.append(key, value);
       } else if (
         typeof value === "object" &&
