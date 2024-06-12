@@ -1,5 +1,4 @@
 import axios from "axios";
-import { CreateUserDto } from "../model/user/user.dto";
 import {
   CreateProjectDto,
   UpdateProjectDto,
@@ -98,8 +97,14 @@ export async function updateProjectByIdMutationFn({
   });
 }
 
-export async function getAllProjectsFn() {
-  return await projectApi.get(`/`);
+export async function getAllProjectsFn({
+  page,
+  limit,
+}: {
+  page: number;
+  limit: number;
+}) {
+  return await projectApi.get(`?page=${page}&limit=${limit}`);
 }
 
 export async function getProjectByIdFn(id: string) {
@@ -124,6 +129,10 @@ export async function getProjectTopDonationsFn(id: string) {
 
 export async function getPopularProjectsFn() {
   return await projectApi.get(`/popular`);
+}
+
+export async function getLatestProjectsFn() {
+  return await projectApi.get(`/latest`);
 }
 
 export async function getProjectData(

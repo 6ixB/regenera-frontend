@@ -2,14 +2,38 @@ import { Trophy } from "lucide-react";
 import HomeLeaderboardItem from "./HomeLeaderboardItem";
 import Link from "next/link";
 import { FrontendRoutesEnum } from "@/lib/routes";
+import { getAllUsersByRatingFn } from "@/lib/api/usersApi";
+import { UserEntity } from "@/lib/model/user/user.entity";
 
-export default function HomeLeaderboard() {
+async function getTop10Users() {
+  try {
+    const res = await getAllUsersByRatingFn({ page: 1, limit: 5 });
+
+    if (res.status === 200) {
+      return res.data.userEntities as UserEntity[];
+    }
+  } catch (error) {
+    console.log(error);
+  }
+
+  return null;
+}
+
+export default async function HomeLeaderboard() {
+  const top10Users = await getTop10Users();
+
+  console.log(top10Users);
+
+  if (!top10Users) {
+    throw new Error("Failed to fetch top 10 users");
+  }
+
   return (
-    <div className={"w-full bg-light-primary-100 flex justify-center py-16"}>
+    <div className={"flex w-full justify-center bg-light-primary-100 py-16"}>
       <div
-        className={"container text-light-background-100 flex flex-col gap-y-8"}
+        className={"container flex flex-col gap-y-8 text-light-background-100"}
       >
-        <div className={"flex justify-between items-end"}>
+        <div className={"flex items-end justify-between"}>
           <div className={"flex flex-col gap-4"}>
             <div className={"text-2xl font-medium"}>Global Ranking</div>
             <div className={"flex gap-2"}>
@@ -22,11 +46,14 @@ export default function HomeLeaderboard() {
           </div>
         </div>
         <div className={"flex flex-col gap-y-2"}>
-          <HomeLeaderboardItem isTop3={true} />
-          <HomeLeaderboardItem isTop3={true} />
-          <HomeLeaderboardItem isTop3={true} />
-          <HomeLeaderboardItem />
-          <HomeLeaderboardItem />
+          {top10Users.slice(0, 5).map((user, index) => (
+            <HomeLeaderboardItem
+              key={user.id}
+              position={index + 1}
+              isTop3={index < 3}
+              user={user}
+            />
+          ))}
         </div>
         <Link href={FrontendRoutesEnum.LEADERBOARD.toString()}>
           <div

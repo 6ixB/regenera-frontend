@@ -21,4 +21,5 @@ export enum BackendRoutesEnum {
   AUTH = "auth",
   USERS = "users",
   PROJECTS = "projects",
+  SEARCH = "search",
 }

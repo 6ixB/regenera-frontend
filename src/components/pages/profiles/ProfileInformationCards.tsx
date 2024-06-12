@@ -4,23 +4,20 @@ import ProjectCard from "@/components/base/ProjectCard";
 
 interface ProfileInformationCardsProps {
   type: ProfileTabEnum;
-  projects: ProjectEntity[]
+  projects: ProjectEntity[];
 }
 
 export default function ProfileInformationCards({
   type,
-  projects
+  projects,
 }: ProfileInformationCardsProps) {
   if (type === ProfileTabEnum.ABOUT) return;  
 
   return (
     <div className="w-full">
-      <div className="w-full grid gap-6 grid-cols-2 md:grid-cols-3 ">
-        {projects && projects.map((data, idx) => (
-
-          <ProjectCard data={data} key={idx} />
-        ))}
-
+      <div className="grid w-full grid-cols-2 gap-6 md:grid-cols-3 ">
+        {projects &&
+          projects.map((data, idx) => <ProjectCard data={data} key={idx} />)}
       </div>
     </div>
   );

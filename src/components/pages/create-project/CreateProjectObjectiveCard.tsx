@@ -1,14 +1,14 @@
-import Input from "@/components/forms/Input"
-import { ProjectObjectiveDto } from "@/lib/model/project/project.dto"
-import { X } from "lucide-react"
-import Image from "next/image"
-import React, { useEffect, useState } from "react"
+import Input from "@/components/forms/Input";
+import { ProjectObjectiveDto } from "@/lib/model/project/project.dto";
+import { X } from "lucide-react";
+import Image from "next/image";
+import React, { useEffect, useState } from "react";
 
 interface CreateProjectObjectiveCardProps {
-    objective: ProjectObjectiveDto,
-    idx: number,
-    handleRemoveObjectives: (idx: number) => void
-    handleObjectiveDescriptions: (idx: number, description: string) => void
+  objective: ProjectObjectiveDto;
+  idx: number;
+  handleRemoveObjectives: (idx: number) => void;
+  handleObjectiveDescriptions: (idx: number, description: string) => void;
 }
 
 const CreateProjectObjectiveCard = React.memo(function CreateProjectObjectiveCard({
@@ -19,18 +19,17 @@ const CreateProjectObjectiveCard = React.memo(function CreateProjectObjectiveCar
     const [imageUrl, setImageUrl] = useState<string>('');
 
     useEffect(() => {
-        const url = URL.createObjectURL(objective.objectiveImage);
-        setImageUrl(url);
+      const url = URL.createObjectURL(objective.objectiveImage);
+      setImageUrl(url);
 
-        return () => {
-            URL.revokeObjectURL(url);
-        };
+      return () => {
+        URL.revokeObjectURL(url);
+      };
     }, [objective.objectiveImage]);
 
     const handleChange = (idx: number, description: string) => {
-
-        setDisplayDescription(description);
-        handleObjectiveDescriptions(idx, description)
+      setDisplayDescription(description);
+      handleObjectiveDescriptions(idx, description);
     };
 
     return (

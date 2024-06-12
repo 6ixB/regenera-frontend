@@ -1,12 +1,12 @@
 import { UpdateUserProfileDto } from "@/lib/model/user/user.dto";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-interface UpdateUserProfileState {
+interface UpdateUserProfileDtoState {
   original: UpdateUserProfileDto;
   current: UpdateUserProfileDto;
 }
 
-const initialState: UpdateUserProfileState = {
+const initialState: UpdateUserProfileDtoState = {
   original: {},
   current: {},
 };

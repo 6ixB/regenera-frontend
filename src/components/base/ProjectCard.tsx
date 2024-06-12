@@ -11,15 +11,15 @@ import { getProjectPercentage, getProjectPhase, getProjectPhaseInformation, getP
 import { useState } from "react";
 
 interface ProjectCardProps {
-    data: ProjectEntity
-    variant?: "outlined" | "no-outlined" | "big";
-    className?: string;
+  data: ProjectEntity;
+  variant?: "outlined" | "no-outlined" | "big";
+  className?: string;
 }
 
 export default function ProjectCard({
-    data,
-    variant = "no-outlined",
-    className,
+  data,
+  variant = "no-outlined",
+  className,
 }: ProjectCardProps) {
 
     const [isImageLoading, setIsImageLoading] = useState(true);
@@ -64,21 +64,19 @@ export default function ProjectCard({
                             <Badge text={getProjectPhase(data.phase)} className="absolute bottom-2 right-2" />
                         </div>
 
-                        <div
-                            className={"h-fit flex flex-row items-center gap-1 p-4 md:p-5"}
-                        >
-                            <div className="flex m-auto w-3/12 flex-shrink-0">
-                                <Image
-                                    width={0}
-                                    height={0}
-                                    sizes={"100vw"}
-                                    className={`w-full h-auto aspect-square rounded-full object-cover p-2`}
-                                    src={
-                                        data.organizer.imageUrl || ''
-                                    }
-                                    alt={"User Profile"}
-                                />
-                            </div>
+            <div
+              className={"flex h-fit flex-row items-center gap-1 p-4 md:p-5"}
+            >
+              <div className="m-auto flex w-3/12 flex-shrink-0">
+                <Image
+                  width={0}
+                  height={0}
+                  sizes={"100vw"}
+                  className={`aspect-square h-auto w-full rounded-full object-cover p-2`}
+                  src={data.organizer.imageUrl || ""}
+                  alt={"User Profile"}
+                />
+              </div>
 
                             <div className={"max-w-9/12 w-full flex flex-col truncate"}>
                                 <h3 className={"text-lg font-semibold text-light-text-100 truncate"}>
@@ -93,23 +91,23 @@ export default function ProjectCard({
                             </div>
                         </div>
 
-                        <Progress
-                            progress={getProjectProgressByPhase(data)}
-                            color={"green"}
-                            background={false}
-                            className="absolute bottom-0 rounded-b-full rounded-t-sm -translate-x-1/2 left-1/2"
-                        />
+            <Progress
+              progress={getProjectProgressByPhase(data)}
+              color={"green"}
+              background={false}
+              className="absolute bottom-0 left-1/2 -translate-x-1/2 rounded-b-full rounded-t-sm"
+            />
 
-                        {variant !== "big" && (
-                            <div className="hidden group-hover:flex pt-0 pb-6 px-8 ">
-                                <p className="text-base text-light-text-100 break-words flex-wrap overflow-hidden">
-                                    {data.description}
-                                </p>
-                            </div>
-                        )}
-                    </div>
-                </div>
-            </div>
-        </Link>
-    );
+            {variant !== "big" && (
+              <div className="hidden px-8 pb-6 pt-0 group-hover:flex ">
+                <p className="flex-wrap overflow-hidden break-words text-base text-light-text-100">
+                  {data.description}
+                </p>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    </Link>
+  );
 }

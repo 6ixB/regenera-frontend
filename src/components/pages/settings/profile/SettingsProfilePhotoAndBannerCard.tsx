@@ -89,8 +89,6 @@ export default function SettingsProfilePhotoAndBannerCard({}: SettingsProfilePho
     isSuccess,
   } = useUpdateUserProfileMutation({
     session,
-    currentUpdateUserProfileDto,
-    originalUpdateUserProfileDto,
     onSuccess: (res) => {
       if (res.user) session.update({ ...res });
       dispatch(setOriginalUpdateProfileDto(currentUpdateUserProfileDto));

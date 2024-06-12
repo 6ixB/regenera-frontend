@@ -45,17 +45,17 @@ export default function Pagination({
   const endPageBatch = Math.ceil(endPage / 3);
 
   return (
-    <div className="grid justify-center sm:flex sm:justify-end sm:items-center gap-4 py-4">
+    <div className="grid justify-center gap-4 py-4 sm:flex sm:items-center sm:justify-end">
       <nav className="flex items-center gap-x-1">
         <button
           type="button"
-          className="min-h-[38px] min-w-[38px] py-2 px-2.5 inline-flex justify-center items-center gap-x-2 text-sm rounded-lg text-gray-800 hover:bg-gray-100 focus:outline-none
-                focus:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none"
+          className="inline-flex min-h-[38px] min-w-[38px] items-center justify-center gap-x-2 rounded-lg px-2.5 py-2 text-sm text-gray-800 hover:bg-gray-100 focus:bg-gray-100
+                focus:outline-none disabled:pointer-events-none disabled:opacity-50"
           onClick={() => onClick(activePage - 1)}
           disabled={activePage <= 1}
         >
           <svg
-            className="flex-shrink-0 size-3.5"
+            className="size-3.5 flex-shrink-0"
             xmlns="http://www.w3.org/2000/svg"
             width="24"
             height="24"
@@ -86,12 +86,12 @@ export default function Pagination({
               <div className="hs-tooltip inline-block">
                 <button
                   type="button"
-                  className="hs-tooltip-toggle group min-h-[38px] min-w-[38px] flex justify-center items-center text-gray-400 hover:text-blue-600 p-2 text-sm rounded-lg focus:outline-none focus:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none"
+                  className="hs-tooltip-toggle group flex min-h-[38px] min-w-[38px] items-center justify-center rounded-lg p-2 text-sm text-gray-400 hover:text-blue-600 focus:bg-gray-100 focus:outline-none disabled:pointer-events-none disabled:opacity-50"
                   onClick={() => onClick(activePage + 3)}
                 >
-                  <span className="group-hover:hidden text-xs">•••</span>
+                  <span className="text-xs group-hover:hidden">•••</span>
                   <svg
-                    className="group-hover:block hidden flex-shrink-0 size-5"
+                    className="hidden size-5 flex-shrink-0 group-hover:block"
                     xmlns="http://www.w3.org/2000/svg"
                     width="24"
                     height="24"
@@ -106,7 +106,7 @@ export default function Pagination({
                     <path d="m13 17 5-5-5-5"></path>
                   </svg>
                   <span
-                    className="hs-tooltip-content group-hover:opacity-100 group-hover:visible opacity-0 transition-opacity inline-block absolute -translate-y-8 invisible z-10 py-1 px-2 bg-gray-900 text-xs font-medium text-white rounded shadow-sm"
+                    className="hs-tooltip-content invisible absolute z-10 inline-block -translate-y-8 rounded bg-gray-900 px-2 py-1 text-xs font-medium text-white opacity-0 shadow-sm transition-opacity group-hover:visible group-hover:opacity-100"
                     role="tooltip"
                   >
                     Next {endPage - activePage - 1} pages
@@ -119,8 +119,8 @@ export default function Pagination({
         </div>
         <button
           type="button"
-          className="min-h-[38px] min-w-[38px] py-2 px-2.5 inline-flex justify-center items-center gap-x-2 text-sm rounded-lg text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100
-                disabled:opacity-50 disabled:pointer-events-none"
+          className="inline-flex min-h-[38px] min-w-[38px] items-center justify-center gap-x-2 rounded-lg px-2.5 py-2 text-sm text-gray-800 hover:bg-gray-100 focus:bg-gray-100 focus:outline-none
+                disabled:pointer-events-none disabled:opacity-50"
           onClick={() => onClick(activePage + 1)}
           disabled={activePage >= endPage}
         >
@@ -128,7 +128,7 @@ export default function Pagination({
             Next
           </span>
           <svg
-            className="flex-shrink-0 size-3.5"
+            className="size-3.5 flex-shrink-0"
             xmlns="http://www.w3.org/2000/svg"
             width="24"
             height="24"
@@ -143,17 +143,17 @@ export default function Pagination({
           </svg>
         </button>
       </nav>
-      <div className="flex justify-center sm:justify-start items-center gap-x-2">
-        <span className="text-sm text-gray-800 whitespace-nowrap">Go to</span>
+      <div className="flex items-center justify-center gap-x-2 sm:justify-start">
+        <span className="whitespace-nowrap text-sm text-gray-800">Go to</span>
         <input
           type="number"
           max={endPage}
-          className="min-h-[38px] py-2 px-2.5 block w-12 border-gray-200 rounded-md text-sm text-center focus:border-blue-500 focus:ring-blue-500 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none disabled:opacity-50 disabled:pointer-events-none"
+          className="block min-h-[38px] w-12 rounded-md border-gray-200 px-2.5 py-2 text-center text-sm focus:border-blue-500 focus:ring-blue-500 disabled:pointer-events-none disabled:opacity-50 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
           style={{ MozAppearance: "textfield" }}
           onChange={handleExceedingPageInput}
           onKeyDown={handleKeyDown}
         />
-        <span className="text-sm text-gray-800 whitespace-nowrap">page</span>
+        <span className="whitespace-nowrap text-sm text-gray-800">page</span>
       </div>
     </div>
   );
